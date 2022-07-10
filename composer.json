@@ -1,0 +1,73 @@
+{
+    "name": "yormy/laravel-footsteps",
+    "description": "",
+    "keywords": [
+        "yormy",
+        "footsteps"
+    ],
+    "homepage": "https://gitlab.com/yormy/laravel-footsteps",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yormy",
+            "email": "dev@yormy.com",
+            "homepage": "https://yormy.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "ext-zip": "*",
+        "php": "^8.1",
+        "laravel/framework": "^9",
+        "orchestra/testbench": "^7",
+        "linkorb/xuid": "^1.4.0",
+        "mews/purifier" : "^3.3"
+    },
+    "require-dev": {
+        "jaschilz/php-coverage-badger": "^2.0",
+        "phpmd/phpmd": "^2.12",
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^9.5",
+        "psalm/plugin-laravel": "^2.0",
+        "squizlabs/php_codesniffer": "^3.7",
+        "thibautselingue/local-php-security-checker-installer": "^1",
+        "vimeo/psalm": "^4.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yormy\\LaravelFootsteps\\": "src",
+            "Yormy\\LaravelFootsteps\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yormy\\LaravelFootsteps\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "cs-fixer" : "phpcbf",
+        "md": "vendor/bin/phpmd . html cleancode --reportfile report.html",
+        "phpcs": "phpcs --standard=PSR2 -s --exclude=Generic.Files.LineLength --standard=./phpcs.xml --report-file=phpcs-report.txt",
+        "phpstan": "vendor/bin/phpstan analyze src --error-format=raw --level=4",
+        "psalm": "vendor/bin/psalm --no-diff --no-cache --report-show-info=false --report=psalm-report.txt",
+        "psalm-debug": "vendor/bin/psalm --no-cache --debug --debug-by-line",
+        "test": "vendor/bin/phpunit --colors=always --testdox",
+        "test-browser": "vendor/bin/phpunit tests/Browser --colors=always --testdox",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yormy\\LaravelFootsteps\\FootstepsServiceProvider"
+            ],
+            "aliases": {
+                "footsteps": "Yormy\\LaravelFootsteps\\FootstepsFacade"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
