@@ -39,5 +39,7 @@ return [
     'log_response' => [
         'enabled' => true,
         'max_characters' => 200,
-    ]
+    ],
+
+    'log_geoip' => true
 ];

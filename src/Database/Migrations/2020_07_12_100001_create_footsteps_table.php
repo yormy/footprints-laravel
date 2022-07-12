@@ -29,11 +29,13 @@ return new class extends Migration
 
             $table->string('ip')->nullable();
             $table->string('user_agent')->nullable();
+            $table->json('location')->nullable();
 
             $table->text('payload_base64')->nullable();
             $table->string('request_id')->index()->nullable();
             $table->double('request_start')->nullable();
             $table->double('request_duration')->nullable();
+
 
             $table->json('location')->nullable();
 

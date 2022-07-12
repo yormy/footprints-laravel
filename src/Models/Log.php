@@ -14,6 +14,7 @@ class Log extends Model
         'route',
         'url',
         'ip',
+        'location',
         'request_id',
         'request_start',
         'payload_base64',

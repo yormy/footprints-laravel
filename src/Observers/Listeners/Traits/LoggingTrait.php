@@ -36,8 +36,11 @@ trait LoggingTrait
         $data['ip'] = $request->ip();
         $data['user_agent'] = $request->userAgent();
 
+        if (config('footsteps.log_geoip')) {
+            $location = geoip()->getLocation($request->ip());
+            $data['location'] = json_encode($location->toArray());
+        }
 
-        ray($data)->color('blue');
         $logModel->create($data);
     }
 }
