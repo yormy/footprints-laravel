@@ -9,9 +9,11 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Routing\Events\RouteMatched;
 
 use Illuminate\Routing\Events\Routing;
+use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\CustomListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelCreatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelDeletedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelUpdatedListener;
@@ -56,6 +58,10 @@ class EventServiceProvider extends ServiceProvider
 
         ModelDeletedEvent::class => [
             ModelDeletedListener::class
+        ],
+
+        CustomFootstepEvent::class => [
+            CustomListener::class
         ]
     ];
 }
