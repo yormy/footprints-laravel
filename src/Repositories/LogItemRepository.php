@@ -9,21 +9,18 @@ class LogItemRepository
 {
     public function createLogEntry(?Model $user, $request, array $props)
     {
-        $data = $props;
         $userFields = $this->getUserData($user);
-        $data =  array_merge($data, ...$userFields);
 
-        ray($data);
+        $requestFields['request_id'] = $request->get('request_id');
+        $requestFields['request_start'] = $request->get('request_start');
 
+        $payload = $request->getContent();
+        $payload = $this->cleanPayload($payload);
 
+        $props['payload_base64'] = $payload;
 
-        $data['ip'] = $request->ip();
-        $data['user_agent'] = $request->userAgent();
-
-        if (config('footsteps.log_geoip')) {
-            $location = geoip()->getLocation($request->ip());
-            $data['location'] = json_encode($location->toArray());
-        }
+        $remoteFields = $this->getRemoteDetails($request);
+        $data =  array_merge($props, $userFields, $requestFields, $remoteFields);
 
         $logModel = $this->getLogItemModel();
         $logModel->create($data);
@@ -35,6 +32,7 @@ class LogItemRepository
 
         $logModel = $this->getLogItemModel();
         $table = $logModel->getTable();
+
         $userUpdate = $this->getUserUpdateStatement($table);
 
         $statement = "UPDATE $table
@@ -50,6 +48,19 @@ class LogItemRepository
     {
         $logModelClass = config('footsteps.log_model');
         return new $logModelClass;
+    }
+
+    private function getRemoteDetails($request): array
+    {
+        $data['ip'] = $request->ip();
+        $data['user_agent'] = $request->userAgent();
+
+        if (config('footsteps.log_geoip')) {
+            $location = geoip()->getLocation($request->ip());
+            $data['location'] = json_encode($location->toArray());
+        }
+
+        return $data;
     }
 
     private function getUserData(?Model $user): array

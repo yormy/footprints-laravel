@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'enabled' => true,
+
     /*
      activated => enabled
      */
