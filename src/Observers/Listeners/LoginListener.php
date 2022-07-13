@@ -4,6 +4,7 @@ namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 
 use Illuminate\Auth\Events\Login;
+use LogType;
 
 class LoginListener extends BaseListener
 {
@@ -21,7 +22,7 @@ class LoginListener extends BaseListener
             $user,
             $this->request,
             [
-            'log_type'   => 'login',
+            'log_type'   => LogType::LOGIN,
         ]);
     }
 }

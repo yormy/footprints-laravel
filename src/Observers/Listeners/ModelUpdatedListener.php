@@ -2,6 +2,7 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
+use LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
 use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
@@ -24,7 +25,7 @@ class ModelUpdatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type' => 'updatoie ?',
+            'log_type' => LogType::UPDATED,
             'model_changes' => BlacklistFilter::filter($model->getChanges()),
             'model_old' => BlacklistFilter::filter($model->getRawOriginal()),
             'data' => json_encode($data),

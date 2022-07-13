@@ -4,6 +4,7 @@ namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 
 use Illuminate\Auth\Events\Logout;
+use LogType;
 
 class LogoutListener extends BaseListener
 {
@@ -21,7 +22,7 @@ class LogoutListener extends BaseListener
             $user,
             $this->request,
             [
-                'log_type'   => 'logout',
+                'log_type'   => LogType::LOGOUT,
             ]);
     }
 }

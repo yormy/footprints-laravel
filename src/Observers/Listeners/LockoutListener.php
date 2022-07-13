@@ -4,6 +4,7 @@ namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Auth\Authenticatable;
+use LogType;
 
 class LockoutListener extends BaseListener
 {
@@ -20,7 +21,7 @@ class LockoutListener extends BaseListener
         $this->logItemRepository->createLogEntry(
             $user,
             $this->request,
-            ['log_type'   => 'lockout']
+            ['log_type'   => LogType::LOCKEDOUT]
         );
     }
 

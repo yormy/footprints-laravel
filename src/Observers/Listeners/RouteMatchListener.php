@@ -3,6 +3,7 @@
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Illuminate\Routing\Events\RouteMatched;
+use LogType;
 
 class RouteMatchListener extends BaseListener
 {
@@ -30,7 +31,7 @@ class RouteMatchListener extends BaseListener
             [
                 'route' => $route,
                 'url' => $url,
-                'log_type'   => 'route',
+                'log_type'   => LogType::ROUTE,
                 'data'       => json_encode($data)
             ]);
     }

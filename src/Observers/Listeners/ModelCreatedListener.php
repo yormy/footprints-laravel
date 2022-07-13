@@ -2,6 +2,7 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
+use LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
 use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
@@ -24,7 +25,7 @@ class ModelCreatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type'   => 'Created ?',
+            'log_type'   => LogType::CREATED,
             'model_old' => BlacklistFilter::filter($model->toArray()),
             'data' => json_encode($data),
         ];

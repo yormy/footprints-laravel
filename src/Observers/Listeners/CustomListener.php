@@ -2,30 +2,28 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
-use LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
-use Yormy\LaravelFootsteps\Services\BlacklistFilter;
+use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
 
-class ModelDeletedListener extends BaseListener
+class CustomListener extends BaseListener
 {
-    public function handle(ModelDeletedEvent $event)
+    public function handle(CustomFootstepEvent $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_deleted')
+            !config('footsteps.log_events.on_custom')
         ) {
             return;
         }
 
         $model = $event->getModel();
-        $tableName = $model->getTable();
 
+        $data = $event->getData();
         $request = $event->getRequest();
         $data['request_id'] = $request->get('request_id');
 
+
         $fields = [
-            'table_name' => $tableName,
-            'log_type'   => LogType::DELETED,
-            'model_old' => BlacklistFilter::filter($model->toArray()),
+            'table_name' => $event->getTableName(),
+            'log_type' => $event->getLogType(),
             'data' => json_encode($data),
         ];
 
