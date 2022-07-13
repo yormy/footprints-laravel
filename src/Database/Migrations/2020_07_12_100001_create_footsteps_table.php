@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('route')->nullable();
             $table->string('url')->nullable();
 
-            $table->longText('data')->nullable();
+            $table->json('data')->nullable();
+            $table->json('model_old')->nullable();
+            $table->json('model_changes')->nullable();
 
             $table->string('ip')->nullable();
             $table->string('user_agent')->nullable();

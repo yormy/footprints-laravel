@@ -23,7 +23,9 @@ class Log extends Model
         'log_date',
         'table_name',
         'log_type',
-        'data'
+        'data',
+        'model_old',
+        'model_changes',
     ];
 
     public function getDateHumanizeAttribute()
