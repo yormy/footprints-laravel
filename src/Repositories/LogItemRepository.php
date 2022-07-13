@@ -80,6 +80,9 @@ class LogItemRepository
         return $data;
     }
 
+    /**
+     * @psalm-suppress NoInterfaceProperties
+     */
     private function getUserData(?Authenticatable $user): array
     {
         $userFields = [];
@@ -104,6 +107,9 @@ class LogItemRepository
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
 
+    /**
+     * @psalm-suppress NoInterfaceProperties
+     */
     private function getUserUpdateStatement(string $table): string
     {
         $userUpdate = '';
