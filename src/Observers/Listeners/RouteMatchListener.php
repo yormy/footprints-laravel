@@ -30,7 +30,6 @@ class RouteMatchListener extends BaseListener
             [
                 'route' => $route,
                 'url' => $url,
-                'table_name' => '',
                 'log_type'   => 'route',
                 'data'       => json_encode($data)
             ]);
