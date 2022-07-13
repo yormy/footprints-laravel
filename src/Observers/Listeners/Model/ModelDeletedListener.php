@@ -24,6 +24,7 @@ class ModelDeletedListener extends BaseListener
         $tableName = $model->getTable();
 
         $request = $event->getRequest();
+        $data = [];
         $data['request_id'] = $request->get('request_id');
 
         $fields = [

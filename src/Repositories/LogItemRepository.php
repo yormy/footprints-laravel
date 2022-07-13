@@ -5,6 +5,7 @@ namespace Yormy\LaravelFootsteps\Repositories;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LogItemRepository
@@ -13,10 +14,11 @@ class LogItemRepository
     {
         $userFields = $this->getUserData($user);
 
+        $requestFields = [];
         $requestFields['request_id'] = $request->get('request_id');
         $requestFields['request_start'] = $request->get('request_start');
 
-        $payload = $request->getContent();
+        $payload = (string)$request->getContent();
         $payload = $this->cleanPayload($payload);
 
         $props['payload_base64'] = $payload;
@@ -46,6 +48,10 @@ class LogItemRepository
         DB::statement($statement);
     }
 
+    /**
+     * @psalm-suppress MoreSpecificReturnType
+     * @psalm-suppress LessSpecificReturnStatement
+     */
     private function getLogItemModel(): Model
     {
         $logModelClass = config('footsteps.log_model');
@@ -55,6 +61,7 @@ class LogItemRepository
 
     private function getRemoteDetails(Request $request): array
     {
+        $data = [];
         $data['ip'] = $request->ip();
         $data['user_agent'] = $request->userAgent();
 
@@ -95,8 +102,10 @@ class LogItemRepository
     {
         $userUpdate = '';
         /** @var Authenticatable $user */
-        $user = auth()->user();
+        $user = Auth::user();
         if ($user) {
+
+            /** @var int $userId */
             $userId = $user->id;
             $userType = addslashes(get_class($user));
 
