@@ -3,6 +3,7 @@
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
+use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelDeletedListener extends BaseListener
 {
@@ -15,17 +16,16 @@ class ModelDeletedListener extends BaseListener
         }
 
         $model = $event->getModel();
-        $originalData = json_encode($model);
         $tableName = $model->getTable();
 
-        $originalData = json_decode($originalData, true);
-        $originalData['request_id'] = request()->get('request_id');
-        $originalData = json_encode($originalData);
+        $request = $event->getRequest();
+        $data['request_id'] = $request->get('request_id');
 
         $fields = [
             'table_name' => $tableName,
             'log_type'   => 'deleted ?',
-            'data'       => $originalData
+            'model_old' => BlacklistFilter::filter($model->toArray()),
+            'data' => json_encode($data),
         ];
 
         $this->logItemRepository->createLogEntry(
@@ -34,19 +34,4 @@ class ModelDeletedListener extends BaseListener
             $fields
         );
     }
-
-//    private function getOriginalData()
-//    {
-//        if ($logType == 'create') ;
-//        else {
-//            if (version_compare(app()->version(), '7.0.0', '>='))
-//                $originalData = json_encode($model->getRawOriginal()); // getRawOriginal available from Laravel 7.x
-//            else
-//                $originalData = json_encode($model->getOriginal());
-//        }
-//
-//
-//
-//
-//    }
 }

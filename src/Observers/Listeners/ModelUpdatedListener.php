@@ -3,6 +3,7 @@
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
+use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelUpdatedListener extends BaseListener
 {
@@ -20,11 +21,12 @@ class ModelUpdatedListener extends BaseListener
         $request = $event->getRequest();
         $data['request_id'] = $request->get('request_id');
 
+
         $fields = [
             'table_name' => $tableName,
             'log_type' => 'updatoie ?',
-            'model_changes' => json_encode($model->getChanges()),
-            'model_old' => json_encode($model->getRawOriginal()),
+            'model_changes' => BlacklistFilter::filter($model->getChanges()),
+            'model_old' => BlacklistFilter::filter($model->getRawOriginal()),
             'data' => json_encode($data),
         ];
 
