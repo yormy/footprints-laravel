@@ -1,10 +1,10 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
-
+namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Login;
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
+use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 
 class OtherDeviceLogoutListener extends BaseListener
 {

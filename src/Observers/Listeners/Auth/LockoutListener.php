@@ -1,10 +1,11 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Auth\Authenticatable;
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
+use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 
 class LockoutListener extends BaseListener
 {

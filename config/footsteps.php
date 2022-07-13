@@ -21,9 +21,9 @@ return [
     ],
 
     'log_events' => [
-        'model_create'=> true,
-        'model_update' => true,
-        'model_delete' => true,
+        'model_created'=> true,
+        'model_updated' => true,
+        'model_deleted' => true,
         'auth_login' => true,
         'auth_logout' => true,
         'auth_lockout' => true,

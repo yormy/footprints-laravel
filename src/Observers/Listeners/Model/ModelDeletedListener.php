@@ -1,9 +1,10 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
 
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelDeletedListener extends BaseListener

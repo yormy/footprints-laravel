@@ -1,9 +1,10 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
 
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelUpdatedListener extends BaseListener
@@ -11,7 +12,7 @@ class ModelUpdatedListener extends BaseListener
     public function handle(ModelUpdatedEvent $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.model_update')
+            !config('footsteps.log_events.model_updated')
         ) {
             return;
         }

@@ -1,16 +1,16 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
 
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelCreatedListener extends BaseListener
 {
     public function handle(ModelCreatedEvent $event)
     {
-        ray('listen');
         if (!config('footsteps.enabled') ||
             !config('footsteps.log_events.model_created')
         ) {

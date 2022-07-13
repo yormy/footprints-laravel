@@ -3,7 +3,7 @@
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Illuminate\Routing\Events\RouteMatched;
-use LogType;
+use Yormy\LaravelFootsteps\Enums\LogType;
 
 class RouteMatchListener extends BaseListener
 {

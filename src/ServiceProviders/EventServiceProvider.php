@@ -7,26 +7,24 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Routing\Events\RouteMatched;
-
 use Illuminate\Auth\Events\Failed;
 use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\Auth\FailedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Auth\LockoutListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Auth\LoginListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Auth\LogoutListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Auth\OtherDeviceLogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\CustomListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\FailedListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\ModelCreatedListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\ModelDeletedListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\ModelUpdatedListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\OtherDeviceLogoutListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelCreatedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelDeletedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelUpdatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RequestTerminatedListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\LockoutListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\LoginListener;
-use Yormy\LaravelFootsteps\Observers\Listeners\LogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RouteMatchListener;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
 use Illuminate\Auth\Events\OtherDeviceLogout;
-
 
 class EventServiceProvider extends ServiceProvider
 {
