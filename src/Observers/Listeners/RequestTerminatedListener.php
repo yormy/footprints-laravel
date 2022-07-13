@@ -29,7 +29,7 @@ class RequestTerminatedListener
 
         $duration = null;
         if ($requestStart > 0) {
-            $duration = microtime(true) - $requestStart;
+            $duration = round(microtime(true) - $requestStart,3);
         }
 
         $payload = $event->getResponse()->getContent();
@@ -42,7 +42,7 @@ class RequestTerminatedListener
         $userUpdate = $this->getUserUpdateStatement($table);
 
         $statement = "UPDATE $table
-            SET {$table}.request_duration = $duration,
+            SET {$table}.request_duration_sec = $duration,
                 {$table}.payload_base64 = '$payload'
                 $userUpdate
             WHERE {$table}.request_id = '$requestId'";
