@@ -3,6 +3,7 @@
 namespace Yormy\LaravelFootsteps\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Yormy\LaravelFootsteps\Traits\Footsteps;
 
 class Log extends Model
 {

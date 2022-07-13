@@ -9,6 +9,12 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Routing\Events\RouteMatched;
 
 use Illuminate\Routing\Events\Routing;
+use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
+use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
+use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
+use Yormy\LaravelFootsteps\Observers\Listeners\ModelCreatedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\ModelDeletedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\ModelUpdatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RequestTerminatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\LockoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\LoginListener;
@@ -38,11 +44,18 @@ class EventServiceProvider extends ServiceProvider
 
         RequestTerminatedEvent::class => [
             RequestTerminatedListener::class
+        ],
+
+        ModelCreatedEvent::class => [
+            ModelCreatedListener::class
+        ],
+
+        ModelUpdatedEvent::class => [
+            ModelUpdatedListener::class
+        ],
+
+        ModelDeletedEvent::class => [
+            ModelDeletedListener::class
         ]
     ];
-//
-//    public function boot()
-//    {
-//        parent::boot();
-//    }
 }
