@@ -3,10 +3,12 @@
 namespace Yormy\LaravelFootsteps\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Yormy\LaravelFootsteps\Traits\Footsteps;
+use Illuminate\Database\Eloquent\Prunable;
 
 class Log extends Model
 {
+    use Prunable;
+
     protected $table = 'footsteps';
 
     protected $fillable = [
@@ -28,14 +30,10 @@ class Log extends Model
         'model_changes',
     ];
 
-    public function getDateHumanizeAttribute()
+    public function prunable()
     {
-        return $this->log_date->diffForHumans();
-    }
-
-    public function getJsonDataAttribute()
-    {
-        return json_decode($this->data,true);
+        $days = config('footsteps.prune_logs_after_days', 100);
+        return static::where('created_at', '<=', now()->subDays($days));
     }
 
     public function user()

@@ -13,9 +13,14 @@ This package allows you to track a users journey through your system.
 
 
 
-
-
-
+## Model Pruning
+add the following to your kernel
+```
+    $schedule->command('model:prune', [
+        '--model' => '\Yormy\LaravelFootsteps\Models\Log::class'
+    ])->monthly();
+```
+and in your footsteps config specify the number of days on that needs to be kept
 
 
 ## Installation

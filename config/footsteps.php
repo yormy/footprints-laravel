@@ -51,5 +51,7 @@ return [
         'title'
     ],
 
-    'log_geoip' => true
+    'log_geoip' => true,
+
+    'prune_logs_after_days' => 1,
 ];
