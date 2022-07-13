@@ -22,6 +22,9 @@ class RouteMatchListener extends BaseListener
             return;
         }
 
+        /**
+         * @psalm-suppress MixedArgumentTypeCoercion
+         */
         $data = [
             'methods' => implode(',', $event->route->methods),
         ];
@@ -42,6 +45,10 @@ class RouteMatchListener extends BaseListener
     private function shouldIgnore(RouteMatched $event): bool
     {
         $url = $this->getUrl($event);
+
+        /**
+         * @var array $ignoreUrls
+         */
         $ignoreUrls = config('footsteps.ignore_urls');
         if ($this->shouldIgnoreRule($url, $ignoreUrls)) {
             return true;
@@ -49,6 +56,9 @@ class RouteMatchListener extends BaseListener
 
         $route = $this->getRouteName($event);
         if ($route) {
+            /**
+             * @var array $ignoreRoutes
+             */
             $ignoreRoutes = config('footsteps.ignore_routes');
             if ($this->shouldIgnoreRule($route, $ignoreRoutes)) {
                 return true;
@@ -62,7 +72,7 @@ class RouteMatchListener extends BaseListener
     {
         $route = '';
         if (array_key_exists('as', $event->route->action)) {
-            $route = $event->route->action['as'];
+            $route = (string)$event->route->action['as'];
         }
 
         return $route;
@@ -75,6 +85,9 @@ class RouteMatchListener extends BaseListener
 
     private function shouldIgnoreRule(string $route, array $ignoreRoutes): bool
     {
+        /**
+         * @var array<array-key, string> $ignoreRoutes
+         */
         foreach ($ignoreRoutes as $ignorePattern) {
             if (fnmatch($ignorePattern, $route)) {
                 return true;

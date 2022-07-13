@@ -20,6 +20,7 @@ class AddTracking
 
     /**
      * @psalm-suppress UndefinedPropertyFetch
+     * @psalm-suppress MixedMethodCall
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

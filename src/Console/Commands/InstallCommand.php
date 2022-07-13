@@ -22,9 +22,16 @@ class InstallCommand extends Command
         $this->runMigrations();
     }
 
+    /**
+     * @psalm-suppress MixedArgument
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress InvalidStringClass
+     */
     private function runMigrations(): void
     {
-        $logModelClass = config('footsteps.log_model');
+        $logModelClass = (string)config('footsteps.log_model');
+
         $table = (new $logModelClass)->getTable();
 
         $this->line('-----------------------------');

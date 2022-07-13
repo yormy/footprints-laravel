@@ -25,7 +25,7 @@ class ModelCreatedListener extends BaseListener
 
         $request = $event->getRequest();
         $data = [];
-        $data['request_id'] = $request->get('request_id');
+        $data['request_id'] = (string)$request->get('request_id');
 
         $fields = [
             'table_name' => $tableName,

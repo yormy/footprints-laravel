@@ -28,6 +28,9 @@ class FootstepsServiceProvider extends ServiceProvider
         $this->registerCommands();
     }
 
+    /**
+     * @psalm-suppress MixedArgument
+     */
     public function register()
     {
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footsteps');
@@ -73,7 +76,7 @@ class FootstepsServiceProvider extends ServiceProvider
     private function loadMigrations(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(static::MIGRATION_PATH);
+            $this->loadMigrationsFrom((string)static::MIGRATION_PATH);
         }
     }
 }

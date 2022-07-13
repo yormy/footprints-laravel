@@ -19,7 +19,7 @@ class CustomListener extends BaseListener
 
         $data = $event->getData();
         $request = $event->getRequest();
-        $data['request_id'] = $request->get('request_id');
+        $data['request_id'] = (string)$request->get('request_id');
 
         $fields = [
             'table_name' => $event->getTableName(),

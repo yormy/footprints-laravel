@@ -15,8 +15,8 @@ class LogItemRepository
         $userFields = $this->getUserData($user);
 
         $requestFields = [];
-        $requestFields['request_id'] = $request->get('request_id');
-        $requestFields['request_start'] = $request->get('request_start');
+        $requestFields['request_id'] = (string)$request->get('request_id');
+        $requestFields['request_start'] = (float)$request->get('request_start');
 
         $payload = (string)$request->getContent();
         $payload = $this->cleanPayload($payload);
@@ -51,6 +51,8 @@ class LogItemRepository
     /**
      * @psalm-suppress MoreSpecificReturnType
      * @psalm-suppress LessSpecificReturnStatement
+     * @psalm-suppress MixedMethodCall
+     * @psalm-suppress MixedAssignment
      */
     private function getLogItemModel(): Model
     {
@@ -59,6 +61,11 @@ class LogItemRepository
         return new $logModelClass;
     }
 
+    /**
+     * @psalm-suppress UndefinedFunction
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedMethodCall
+     */
     private function getRemoteDetails(Request $request): array
     {
         $data = [];
@@ -66,7 +73,6 @@ class LogItemRepository
         $data['user_agent'] = $request->userAgent();
 
         if (config('footsteps.log_geoip')) {
-            /** @psalm-suppress UndefinedFunction */
             $location = geoip()->getLocation($request->ip());
             $data['location'] = json_encode($location->toArray());
         }
@@ -93,7 +99,7 @@ class LogItemRepository
             return '';
         }
 
-        $truncated = substr($payload, 0, config('footsteps.log_response.max_characters'));
+        $truncated = substr($payload, 0, (int)config('footsteps.log_response.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
