@@ -22,7 +22,7 @@ return [
 
     'log_events' => [
         'on_create'     => true,
-        'on_edit'       => true,
+        'on_update'       => true,
         'on_delete'     => true,
         'on_login'      => true,
         'on_logout'     => true,
