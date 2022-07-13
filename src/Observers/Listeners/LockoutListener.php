@@ -2,45 +2,32 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
-use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Yormy\LaravelFootsteps\Observers\Listeners\Traits\LoggingTrait;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class LockoutListener
+class LockoutListener extends BaseListener
 {
-    use LoggingTrait;
 
-    private $userInstance = "\App\User";
-
-    public function __construct(Request $request)
+    public function handle(Lockout $event)
     {
-        $this->request = $request;
+        if (!config('footsteps.enabled') ||
+            !config('footsteps.log_events.on_login')
+        ) {
+            return;
+        }
 
-        $userInstance = config('footsteps.model.user');
-        if(!empty($userInstance)) $this->userInstance = $userInstance;
-    }
-
-
-    public function handle($event)
-    {
-        if (!config('footsteps.log_events.on_lockout', false)
-            || !config('footsteps.activated', true)) return;
-
-        if (!$event->request->has('email')) return;
-        $user = $this->userInstance::where('email', $event->request->input('email'))->first();
-        if (!$user) return;
-
-        $user = $event->user;
-
-        static::createLogEntry(
+        $user = $this->findUser();
+        $this->logItemRepository->createLogEntry(
             $user,
             $this->request,
-            [
-                'table_name' => '',
-                'log_type'   => 'lockout',
-            ]);
-
-
+            ['log_type'   => 'lockout']
+        );
     }
+
+    private function findUser() : ?Authenticatable
+    {
+        // how to locate the locked out user ?
+        return null;
+    }
+
 }

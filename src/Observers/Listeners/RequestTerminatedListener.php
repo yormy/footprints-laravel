@@ -4,12 +4,9 @@ namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Illuminate\Http\Request;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
-use Yormy\LaravelFootsteps\Observers\Listeners\Traits\LoggingTrait;
 
 class RequestTerminatedListener extends BaseListener
 {
-    use LoggingTrait;
-
     public function handle(RequestTerminatedEvent $event)
     {
         $request = $event->getRequest();
