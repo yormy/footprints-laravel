@@ -8,6 +8,7 @@ class BlacklistFilter
         $filtered = $values;
         $blacklistedKeys = config('footsteps.blacklisted_keys');
         foreach ($blacklistedKeys as $blacklistedKey) {
+            $blacklistedKey = (string)$blacklistedKey;
             if (array_key_exists($blacklistedKey, $filtered)) {
                 $filtered[$blacklistedKey] = "******";
             }

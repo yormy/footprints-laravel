@@ -24,7 +24,8 @@ class AddTracking
 
     private function generateKey()
     {
-        return md5(uniqid(mt_rand(), true));
+        $bytes = random_bytes(20);
+        return bin2hex($bytes);
     }
 
     public function terminate($request, $response)

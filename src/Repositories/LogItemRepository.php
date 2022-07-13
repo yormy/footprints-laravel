@@ -57,6 +57,7 @@ class LogItemRepository
         $data['user_agent'] = $request->userAgent();
 
         if (config('footsteps.log_geoip')) {
+            /** @psalm-suppress UndefinedFunction */
             $location = geoip()->getLocation($request->ip());
             $data['location'] = json_encode($location->toArray());
         }
@@ -64,7 +65,7 @@ class LogItemRepository
         return $data;
     }
 
-    private function getUserData(?Model $user): array
+    private function getUserData(?Authenticatable $user): array
     {
         $userFields = [];
         if ($user) {
@@ -77,7 +78,7 @@ class LogItemRepository
         return $userFields;
     }
 
-    private static function cleanPayload(string $payload)
+    private static function cleanPayload(string $payload): string
     {
         if (!config('footsteps.log_response.enabled')) {
             return '';
@@ -88,9 +89,10 @@ class LogItemRepository
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
 
-    private function getUserUpdateStatement(string $table)
+    private function getUserUpdateStatement(string $table): string
     {
         $userUpdate = '';
+        /** @var Authenticatable $user */
         $user = auth()->user();
         if ($user) {
             $userId = $user->id;

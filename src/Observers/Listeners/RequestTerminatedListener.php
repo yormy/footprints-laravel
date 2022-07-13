@@ -20,7 +20,7 @@ class RequestTerminatedListener extends BaseListener
         $this->logItemRepository->updateLogEntry($requestId, $duration, $response);
     }
 
-    private function getDuration(Request $request): float
+    private function getDuration(Request $request): ?float
     {
         $requestStart = $request->get('request_start');
 

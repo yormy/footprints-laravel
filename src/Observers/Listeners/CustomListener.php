@@ -14,8 +14,6 @@ class CustomListener extends BaseListener
             return;
         }
 
-        $model = $event->getModel();
-
         $data = $event->getData();
         $request = $event->getRequest();
         $data['request_id'] = $request->get('request_id');
