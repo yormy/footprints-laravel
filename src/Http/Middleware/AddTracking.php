@@ -3,15 +3,26 @@
 namespace Yormy\LaravelFootsteps\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Client\Request;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+use \Illuminate\Http\Response;
 
 class AddTracking
 {
-    protected $requestId;
+    protected string $requestId;
 
-    protected $startTime;
+    protected float $startTime = 0;
 
-    public function handle($request, Closure $next)
+    public function __construct()
+    {
+        $this->requestId = $this->generateKey();
+    }
+
+    /**
+     * @psalm-suppress UndefinedPropertyFetch
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
     {
         $this->startTime = microtime(true);
         $this->requestId = $this->generateKey();
@@ -29,7 +40,7 @@ class AddTracking
         return bin2hex($bytes);
     }
 
-    public function terminate($request, $response): void
+    public function terminate(Request $request, Response $response): void
     {
         event(new RequestTerminatedEvent($request, $response));
     }

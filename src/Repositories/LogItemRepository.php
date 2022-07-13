@@ -101,7 +101,6 @@ class LogItemRepository
     private function getUserUpdateStatement(string $table): string
     {
         $userUpdate = '';
-        /** @var Authenticatable $user */
         $user = Auth::user();
         if ($user) {
 

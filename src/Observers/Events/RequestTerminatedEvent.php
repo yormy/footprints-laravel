@@ -3,29 +3,26 @@
 namespace Yormy\LaravelFootsteps\Observers\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Http\Client\Request;
 use Illuminate\Queue\SerializesModels;
+use \Illuminate\Http\Response;
 
 class RequestTerminatedEvent
 {
     use Dispatchable;
     use SerializesModels;
 
-    protected $request;
-
-    protected $response;
-
-    public function __construct($request, $response)
+    public function __construct(protected Request $request, protected Response $response)
     {
-        $this->request = $request;
-        $this->response = $response;
+        //
     }
 
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->request;
     }
 
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->response;
     }
