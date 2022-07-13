@@ -12,7 +12,7 @@ class LogoutListener extends BaseListener
     public function handle(Logout $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_logout')
+            !config('footsteps.log_events.auth_logout')
         ) {
             return;
         }

@@ -11,7 +11,7 @@ class ModelDeletedListener extends BaseListener
     public function handle(ModelDeletedEvent $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_deleted')
+            !config('footsteps.log_events.model_deleted')
         ) {
             return;
         }

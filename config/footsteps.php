@@ -21,15 +21,16 @@ return [
     ],
 
     'log_events' => [
-        'on_create'     => true,
-        'on_update'       => true,
-        'on_delete'     => true,
-        'on_login'      => true,
-        'on_logout'     => true,
-        'on_lockout'    => true,
-        'on_route'      => true,
-        'on_custom'      => true,
-        'on_auth_failed' => true,
+        'model_create'=> true,
+        'model_update' => true,
+        'model_delete' => true,
+        'auth_login' => true,
+        'auth_logout' => true,
+        'auth_lockout' => true,
+        'route_visit' => true,
+        'on_custom' => true,
+        'auth_failed' => true,
+        'auth_other_device_logout' => true
     ],
 
     'ignore_routes' => [

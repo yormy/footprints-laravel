@@ -12,7 +12,7 @@ class FailedListener extends BaseListener
     public function handle(Login $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_auth_failed')
+            !config('footsteps.log_events.auth_failed')
         ) {
             return;
         }

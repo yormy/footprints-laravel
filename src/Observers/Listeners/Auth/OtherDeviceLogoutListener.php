@@ -12,7 +12,7 @@ class OtherDeviceLogoutListener extends BaseListener
     public function handle(Login $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_login')
+            !config('footsteps.log_events.auth_other_device_logout')
         ) {
             return;
         }

@@ -12,7 +12,7 @@ class ModelCreatedListener extends BaseListener
     {
         ray('listen');
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_created')
+            !config('footsteps.log_events.model_created')
         ) {
             return;
         }

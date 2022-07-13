@@ -12,7 +12,7 @@ class LoginListener extends BaseListener
     public function handle(Login $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_login')
+            !config('footsteps.log_events.auth_login')
         ) {
             return;
         }

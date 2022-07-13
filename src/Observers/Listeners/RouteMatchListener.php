@@ -10,7 +10,7 @@ class RouteMatchListener extends BaseListener
     public function handle(RouteMatched $event)
     {
         if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_route')
+            !config('footsteps.log_events.route_visit')
         ) {
             return;
         }
@@ -31,7 +31,7 @@ class RouteMatchListener extends BaseListener
             [
                 'route' => $route,
                 'url' => $url,
-                'log_type'   => LogType::ROUTE,
+                'log_type'   => LogType::ROUTE_VISIT,
                 'data'       => json_encode($data)
             ]);
     }
