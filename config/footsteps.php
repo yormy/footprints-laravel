@@ -28,6 +28,7 @@ return [
         'on_logout'     => true,
         'on_lockout'    => true,
         'on_route'      => true,
+        'on_custom'      => true,
     ],
 
     'ignore_routes' => [
@@ -41,6 +42,13 @@ return [
     'log_response' => [
         'enabled' => true,
         'max_characters' => 200,
+    ],
+
+    // do not log the following keys in the database
+    'blacklisted_keys' => [
+        'id',
+        'password',
+        'title'
     ],
 
     'log_geoip' => true
