@@ -3,7 +3,6 @@
 namespace Yormy\LaravelFootsteps;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Yormy\LaravelFootsteps\Console\InstallCommand;
 use Yormy\LaravelFootsteps\Models\Log;
@@ -65,7 +64,7 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                InstallCommand::class
+                InstallCommand::class,
             ]);
         }
     }
