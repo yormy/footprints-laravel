@@ -52,7 +52,7 @@ class LogItemRepository
         return new $logModelClass;
     }
 
-    private function getRemoteDetails($request): array
+    private function getRemoteDetails(Request $request): array
     {
         $data['ip'] = $request->ip();
         $data['user_agent'] = $request->userAgent();
