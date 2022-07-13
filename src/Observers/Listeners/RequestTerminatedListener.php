@@ -7,7 +7,7 @@ use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
 
 class RequestTerminatedListener extends BaseListener
 {
-    public function handle(RequestTerminatedEvent $event)
+    public function handle(RequestTerminatedEvent $event): void
     {
         $request = $event->getRequest();
 

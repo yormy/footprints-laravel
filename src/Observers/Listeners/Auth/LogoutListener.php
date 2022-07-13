@@ -9,6 +9,9 @@ use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 class LogoutListener extends BaseListener
 {
 
+    /**
+     * @return void
+     */
     public function handle(Logout $event)
     {
         if (!config('footsteps.enabled') ||

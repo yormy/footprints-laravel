@@ -14,7 +14,7 @@ class InstallCommand extends Command
 
     protected string $migrationFile = "2020_07_12_100001_create_footsteps_table.php";
 
-    public function handle()
+    public function handle(): void
     {
         $this->checkAndPublishConfig();
         $this->checkAndPublishMigrations();
@@ -22,7 +22,7 @@ class InstallCommand extends Command
         $this->runMigrations();
     }
 
-    private function runMigrations()
+    private function runMigrations(): void
     {
         $logModelClass = config('footsteps.log_model');
         $table = (new $logModelClass)->getTable();
@@ -35,7 +35,7 @@ class InstallCommand extends Command
         }
     }
 
-    private function checkAndPublishConfig()
+    private function checkAndPublishConfig(): void
     {
         if (File::exists(config_path('footsteps.php'))) {
             $confirm = $this->confirm("footsteps.php config file already exist. Do you want to overwrite?");
@@ -51,7 +51,7 @@ class InstallCommand extends Command
         }
     }
 
-    private function checkAndPublishMigrations()
+    private function checkAndPublishMigrations(): void
     {
 
         if (File::exists(database_path("migrations/$this->migrationFile"))) {
@@ -68,7 +68,7 @@ class InstallCommand extends Command
         }
     }
 
-    private function publishConfig()
+    private function publishConfig(): void
     {
         $this->call('vendor:publish', [
             '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",
@@ -77,7 +77,7 @@ class InstallCommand extends Command
         ]);
     }
 
-    private function publishMigration()
+    private function publishMigration(): void
     {
         $this->call('vendor:publish', [
             '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",

@@ -7,6 +7,9 @@ use Yormy\LaravelFootsteps\Enums\LogType;
 
 class RouteMatchListener extends BaseListener
 {
+    /**
+     * @return void
+     */
     public function handle(RouteMatched $event)
     {
         if (!config('footsteps.enabled') ||

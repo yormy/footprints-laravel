@@ -30,13 +30,16 @@ class Log extends Model
         'model_changes',
     ];
 
-    public function prunable()
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Builder<static>
+     */
+    public function prunable(): \Illuminate\Database\Eloquent\Builder
     {
         $days = config('footsteps.prune_logs_after_days', 100);
         return static::where('created_at', '<=', now()->subDays($days));
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo(__FUNCTION__, 'user_type', 'user_id');
     }

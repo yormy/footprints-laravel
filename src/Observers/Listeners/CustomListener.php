@@ -6,6 +6,9 @@ use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
 
 class CustomListener extends BaseListener
 {
+    /**
+     * @return void
+     */
     public function handle(CustomFootstepEvent $event)
     {
         if (!config('footsteps.enabled') ||

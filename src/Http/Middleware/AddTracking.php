@@ -22,13 +22,13 @@ class AddTracking
         return $next($request);
     }
 
-    private function generateKey()
+    private function generateKey(): string
     {
         $bytes = random_bytes(20);
         return bin2hex($bytes);
     }
 
-    public function terminate($request, $response)
+    public function terminate($request, $response): void
     {
         event(new RequestTerminatedEvent($request, $response));
     }

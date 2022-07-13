@@ -10,6 +10,9 @@ use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 class LockoutListener extends BaseListener
 {
 
+    /**
+     * @return void
+     */
     public function handle(Lockout $event)
     {
         if (!config('footsteps.enabled') ||

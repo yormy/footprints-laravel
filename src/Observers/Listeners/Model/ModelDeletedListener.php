@@ -9,6 +9,9 @@ use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelDeletedListener extends BaseListener
 {
+    /**
+     * @return void
+     */
     public function handle(ModelDeletedEvent $event)
     {
         if (!config('footsteps.enabled') ||

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class LogItemRepository
 {
-    public function createLogEntry(?Authenticatable $user, $request, array $props)
+    public function createLogEntry(?Authenticatable $user, $request, array $props): void
     {
         $userFields = $this->getUserData($user);
 
@@ -27,7 +27,7 @@ class LogItemRepository
         $logModel->create($data);
     }
 
-    public function updateLogEntry(string $requestId, float $duration, string $payload)
+    public function updateLogEntry(string $requestId, float $duration, string $payload): void
     {
         $payload = $this->cleanPayload($payload);
 

@@ -9,6 +9,9 @@ use Yormy\LaravelFootsteps\Services\BlacklistFilter;
 
 class ModelCreatedListener extends BaseListener
 {
+    /**
+     * @return void
+     */
     public function handle(ModelCreatedEvent $event)
     {
         if (!config('footsteps.enabled') ||

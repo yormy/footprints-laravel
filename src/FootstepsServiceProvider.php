@@ -34,7 +34,7 @@ class FootstepsServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
     }
 
-    private function schedule()
+    private function schedule(): void
     {
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('model:prune', [
@@ -47,7 +47,7 @@ class FootstepsServiceProvider extends ServiceProvider
         });
     }
 
-    private function publish()
+    private function publish(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([

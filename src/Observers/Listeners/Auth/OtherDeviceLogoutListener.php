@@ -9,6 +9,9 @@ use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 class OtherDeviceLogoutListener extends BaseListener
 {
 
+    /**
+     * @return void
+     */
     public function handle(Login $event)
     {
         if (!config('footsteps.enabled') ||
