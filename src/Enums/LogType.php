@@ -6,7 +6,7 @@
         case MODEL_DELETED = 'MODEL_DELETED';
         case MODEL_UPDATED = 'MODEL_UPDATED';
 
-        case ROUTE = 'ROUTE';
+        case ROUTE_VISIT = 'ROUTE_VISIT';
 
         case AUTH_LOGIN = 'AUTH_LOGIN';
         case AUTH_LOGOUT = 'AUTH_LOGOUT';
