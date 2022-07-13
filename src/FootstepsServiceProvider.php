@@ -2,8 +2,11 @@
 
 namespace Yormy\LaravelFootsteps;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Yormy\LaravelFootsteps\Console\InstallCommand;
+use Yormy\LaravelFootsteps\Models\Log;
 use Yormy\LaravelFootsteps\ServiceProviders\EventServiceProvider;
 
 class FootstepsServiceProvider extends ServiceProvider
@@ -18,7 +21,9 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         $this->publish();
 
-        $this->loadMigrationsFrom(static::MIGRATION_PATH);
+        $this->schedule();
+
+        $this->loadMigrations();
 
         $this->registerCommands();
     }
@@ -28,6 +33,19 @@ class FootstepsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footsteps');
 
         $this->app->register(EventServiceProvider::class);
+    }
+
+    private function schedule()
+    {
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+            $schedule->command('model:prune', [
+                '--model' => Log::class
+            ])->daily();
+
+            if (config('footsteps.log_geoip')) {
+                $schedule->command('geoip:update')->monthly();
+            }
+        });
     }
 
     private function publish()
@@ -47,7 +65,7 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                //
+                InstallCommand::class
             ]);
         }
     }

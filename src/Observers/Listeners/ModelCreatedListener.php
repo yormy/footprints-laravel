@@ -36,19 +36,4 @@ class ModelCreatedListener extends BaseListener
             $fields
         );
     }
-
-//    private function getOriginalData()
-//    {
-//        if ($logType == 'create') ;
-//        else {
-//            if (version_compare(app()->version(), '7.0.0', '>='))
-//                $originalData = json_encode($model->getRawOriginal()); // getRawOriginal available from Laravel 7.x
-//            else
-//                $originalData = json_encode($model->getOriginal());
-//        }
-//
-//
-//
-//
-//    }
 }
