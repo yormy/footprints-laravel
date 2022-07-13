@@ -3,7 +3,7 @@
 namespace Yormy\LaravelFootsteps\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
 use \Illuminate\Http\Response;
 

@@ -24,6 +24,8 @@ class Log extends Model
         'user_agent',
         'log_date',
         'table_name',
+        'model_type',
+        'model_id',
         'log_type',
         'data',
         'model_old',
