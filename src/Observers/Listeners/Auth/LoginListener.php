@@ -22,7 +22,7 @@ class LoginListener extends BaseListener
             $user,
             $this->request,
             [
-            'log_type'   => LogType::LOGIN,
+            'log_type'   => LogType::AUTH_LOGIN,
         ]);
     }
 }

@@ -2,17 +2,17 @@
 
     enum LogType: string
     {
-        case CREATED = 'CREATED';
-        case DELETED = 'DELETED';
-        case UPDATED = 'UPDATED';
+        case MODEL_CREATED = 'MODEL_CREATED';
+        case MODEL_DELETED = 'MODEL_DELETED';
+        case MODEL_UPDATED = 'MODEL_UPDATED';
 
         case ROUTE = 'ROUTE';
 
-        case LOGIN = 'LOGIN';
-        case LOGOUT = 'LOGOUT';
-        case LOCKEDOUT = 'LOCKEDOUT';
+        case AUTH_LOGIN = 'AUTH_LOGIN';
+        case AUTH_LOGOUT = 'AUTH_LOGOUT';
+        case AUTH_LOCKEDOUT = 'AUTH_LOCKEDOUT';
 
-        case FAILED = 'FAILED';
-        case OTHER_DEVICE_LOGOUT = 'AUTH_OTHER_DEVICE_LOGOUT';
+        case AUTH_FAILED = 'AUTH_FAILED';
+        case AUTH_OTHER_DEVICE_LOGOUT = 'AUTH_OTHER_DEVICE_LOGOUT';
 
     }

@@ -22,7 +22,7 @@ class LogoutListener extends BaseListener
             $user,
             $this->request,
             [
-                'log_type'   => LogType::LOGOUT,
+                'log_type'   => LogType::AUTH_LOGOUT,
             ]);
     }
 }

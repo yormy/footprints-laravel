@@ -25,7 +25,7 @@ class ModelCreatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type'   => LogType::CREATED,
+            'log_type'   => LogType::MODEL_CREATED,
             'model_old' => BlacklistFilter::filter($model->toArray()),
             'data' => json_encode($data),
         ];

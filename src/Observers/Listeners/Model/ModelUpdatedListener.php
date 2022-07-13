@@ -25,7 +25,7 @@ class ModelUpdatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type' => LogType::UPDATED,
+            'log_type' => LogType::MODEL_UPDATED,
             'model_changes' => BlacklistFilter::filter($model->getChanges()),
             'model_old' => BlacklistFilter::filter($model->getRawOriginal()),
             'data' => json_encode($data),

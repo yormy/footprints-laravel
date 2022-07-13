@@ -22,7 +22,7 @@ class OtherDeviceLogoutListener extends BaseListener
             $user,
             $this->request,
             [
-            'log_type'   => LogType::OTHER_DEVICE_LOGOUT,
+            'log_type'   => LogType::AUTH_OTHER_DEVICE_LOGOUT,
         ]);
     }
 }

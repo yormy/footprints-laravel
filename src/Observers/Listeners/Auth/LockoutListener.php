@@ -21,7 +21,7 @@ class LockoutListener extends BaseListener
         $this->logItemRepository->createLogEntry(
             $user,
             $this->request,
-            ['log_type'   => LogType::LOCKEDOUT]
+            ['log_type'   => LogType::AUTH_LOCKEDOUT]
         );
     }
 
