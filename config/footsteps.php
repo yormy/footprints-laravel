@@ -29,6 +29,7 @@ return [
         'on_lockout'    => true,
         'on_route'      => true,
         'on_custom'      => true,
+        'on_auth_failed' => true,
     ],
 
     'ignore_routes' => [
@@ -53,5 +54,6 @@ return [
 
     'log_geoip' => true,
 
+    // When the clean-up command is run, delete old logs greater than `purge` days
     'prune_logs_after_days' => 1,
 ];

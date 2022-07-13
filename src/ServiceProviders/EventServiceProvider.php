@@ -8,21 +8,24 @@ use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Routing\Events\RouteMatched;
 
-use Illuminate\Routing\Events\Routing;
+use Illuminate\Auth\Events\Failed;
 use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
 use Yormy\LaravelFootsteps\Observers\Listeners\CustomListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\FailedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelCreatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelDeletedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\ModelUpdatedListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\OtherDeviceLogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RequestTerminatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\LockoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\LoginListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\LogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RouteMatchListener;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+use Illuminate\Auth\Events\OtherDeviceLogout;
 
 
 class EventServiceProvider extends ServiceProvider
@@ -30,6 +33,14 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Login::class   => [
             LoginListener::class
+        ],
+
+        Failed::class   => [
+            FailedListener::class
+        ],
+
+        OtherDeviceLogout::class   => [
+            OtherDeviceLogoutListener::class
         ],
 
         Logout::class   => [

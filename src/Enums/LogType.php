@@ -11,4 +11,8 @@
         case LOGIN = 'LOGIN';
         case LOGOUT = 'LOGOUT';
         case LOCKEDOUT = 'LOCKEDOUT';
+
+        case FAILED = 'FAILED';
+        case OTHER_DEVICE_LOGOUT = 'AUTH_OTHER_DEVICE_LOGOUT';
+
     }
