@@ -16,8 +16,8 @@ class AddTracking
         $this->startTime = microtime(true);
         $this->requestId = $this->generateKey();
 
-        $request->attributes->add(["request_id" => $this->requestId]);
-        $request->attributes->add(["request_start" => $this->startTime]);
+        $request->attributes->add(['request_id' => $this->requestId]);
+        $request->attributes->add(['request_start' => $this->startTime]);
 
         return $next($request);
     }
@@ -25,6 +25,7 @@ class AddTracking
     private function generateKey(): string
     {
         $bytes = random_bytes(20);
+
         return bin2hex($bytes);
     }
 
@@ -33,6 +34,3 @@ class AddTracking
         event(new RequestTerminatedEvent($request, $response));
     }
 }
-
-
-

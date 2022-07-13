@@ -36,6 +36,7 @@ class Log extends Model
     public function prunable(): \Illuminate\Database\Eloquent\Builder
     {
         $days = config('footsteps.prune_logs_after_days', 100);
+
         return static::where('created_at', '<=', now()->subDays($days));
     }
 

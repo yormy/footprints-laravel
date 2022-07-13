@@ -1,4 +1,5 @@
 <?php
+
 namespace Yormy\LaravelFootsteps\Enums;
 
 enum LogType: string
@@ -15,5 +16,4 @@ enum LogType: string
 
     case AUTH_FAILED = 'AUTH_FAILED';
     case AUTH_OTHER_DEVICE_LOGOUT = 'AUTH_OTHER_DEVICE_LOGOUT';
-
 }

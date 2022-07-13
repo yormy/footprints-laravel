@@ -5,8 +5,8 @@ namespace Yormy\LaravelFootsteps\Observers\Events;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
+use Illuminate\Queue\SerializesModels;
 
 class ModelBaseEvent
 {
@@ -32,5 +32,4 @@ class ModelBaseEvent
     {
         return $this->request;
     }
-
 }

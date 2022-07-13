@@ -14,8 +14,8 @@ class ModelCreatedListener extends BaseListener
      */
     public function handle(ModelCreatedEvent $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.model_created')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.model_created')
         ) {
             return;
         }
@@ -28,7 +28,7 @@ class ModelCreatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type'   => LogType::MODEL_CREATED,
+            'log_type' => LogType::MODEL_CREATED,
             'model_old' => BlacklistFilter::filter($model->toArray()),
             'data' => json_encode($data),
         ];

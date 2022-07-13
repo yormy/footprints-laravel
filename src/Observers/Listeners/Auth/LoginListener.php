@@ -8,14 +8,13 @@ use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 
 class LoginListener extends BaseListener
 {
-
     /**
      * @return void
      */
     public function handle(Login $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.auth_login')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.auth_login')
         ) {
             return;
         }
@@ -25,7 +24,7 @@ class LoginListener extends BaseListener
             $user,
             $this->request,
             [
-            'log_type'   => LogType::AUTH_LOGIN,
-        ]);
+                'log_type' => LogType::AUTH_LOGIN,
+            ]);
     }
 }

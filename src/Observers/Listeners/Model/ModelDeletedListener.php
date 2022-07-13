@@ -14,8 +14,8 @@ class ModelDeletedListener extends BaseListener
      */
     public function handle(ModelDeletedEvent $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.model_deleted')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.model_deleted')
         ) {
             return;
         }
@@ -28,7 +28,7 @@ class ModelDeletedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'log_type'   => LogType::MODEL_DELETED,
+            'log_type' => LogType::MODEL_DELETED,
             'model_old' => BlacklistFilter::filter($model->toArray()),
             'data' => json_encode($data),
         ];

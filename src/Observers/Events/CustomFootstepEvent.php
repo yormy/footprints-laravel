@@ -3,10 +3,9 @@
 namespace Yormy\LaravelFootsteps\Observers\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
+use Illuminate\Queue\SerializesModels;
 
 class CustomFootstepEvent
 {
@@ -18,11 +17,10 @@ class CustomFootstepEvent
         protected Request $request,
         protected string $logType,
         protected array $data = [],
-        protected string $tableName =''
+        protected string $tableName = ''
     ) {
         //
     }
-
 
     public function getUser(): ?Authenticatable
     {
@@ -48,5 +46,4 @@ class CustomFootstepEvent
     {
         return $this->data;
     }
-
 }

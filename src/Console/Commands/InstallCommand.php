@@ -12,7 +12,7 @@ class InstallCommand extends Command
 
     protected $description = 'Publish the configuration and run the migrations';
 
-    protected string $migrationFile = "2020_07_12_100001_create_footsteps_table.php";
+    protected string $migrationFile = '2020_07_12_100001_create_footsteps_table.php';
 
     public function handle(): void
     {
@@ -28,7 +28,7 @@ class InstallCommand extends Command
         $table = (new $logModelClass)->getTable();
 
         $this->line('-----------------------------');
-        if (!Schema::hasTable($table)) {
+        if (! Schema::hasTable($table)) {
             $this->call('migrate');
         } else {
             $this->error('logs table already exist in your database. migration not run successfully');
@@ -38,33 +38,32 @@ class InstallCommand extends Command
     private function checkAndPublishConfig(): void
     {
         if (File::exists(config_path('footsteps.php'))) {
-            $confirm = $this->confirm("footsteps.php config file already exist. Do you want to overwrite?");
+            $confirm = $this->confirm('footsteps.php config file already exist. Do you want to overwrite?');
             if ($confirm) {
                 $this->publishConfig();
-                $this->info("config overwrite finished");
+                $this->info('config overwrite finished');
             } else {
-                $this->info("skipped config publish");
+                $this->info('skipped config publish');
             }
         } else {
             $this->publishConfig();
-            $this->info("config published");
+            $this->info('config published');
         }
     }
 
     private function checkAndPublishMigrations(): void
     {
-
         if (File::exists(database_path("migrations/$this->migrationFile"))) {
-            $confirm = $this->confirm("migration file already exist. Do you want to overwrite?");
+            $confirm = $this->confirm('migration file already exist. Do you want to overwrite?');
             if ($confirm) {
                 $this->publishMigration();
-                $this->info("migration overwrite finished");
+                $this->info('migration overwrite finished');
             } else {
-                $this->info("skipped migration publish");
+                $this->info('skipped migration publish');
             }
         } else {
             $this->publishMigration();
-            $this->info("migration published");
+            $this->info('migration published');
         }
     }
 
@@ -72,8 +71,8 @@ class InstallCommand extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",
-            '--tag'      => 'config',
-            '--force'    => true
+            '--tag' => 'config',
+            '--force' => true,
         ]);
     }
 
@@ -81,9 +80,8 @@ class InstallCommand extends Command
     {
         $this->call('vendor:publish', [
             '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",
-            '--tag'      => 'migrations',
-            '--force'    => true
+            '--tag' => 'migrations',
+            '--force' => true,
         ]);
     }
-
 }

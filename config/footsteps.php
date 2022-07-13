@@ -7,21 +7,20 @@ return [
      activated => enabled
      */
 
-
-    'activated'        => true, // active/inactive all logging
-    'middleware'       => ['web', 'auth'],
-    'route_path'       => 'admin/user-activity',
+    'activated' => true, // active/inactive all logging
+    'middleware' => ['web', 'auth'],
+    'route_path' => 'admin/user-activity',
     'admin_panel_path' => 'admin/dashboard',
-    'delete_limit'     => 7, // default 7 days
+    'delete_limit' => 7, // default 7 days
 
     'log_model' => 'Yormy\LaravelFootsteps\Models\Log',
 
     'model' => [
-        'user' => 'App\Models\User'
+        'user' => 'App\Models\User',
     ],
 
     'log_events' => [
-        'model_created'=> true,
+        'model_created' => true,
         'model_updated' => true,
         'model_deleted' => true,
         'auth_login' => true,
@@ -30,15 +29,15 @@ return [
         'route_visit' => true,
         'on_custom' => true,
         'auth_failed' => true,
-        'auth_other_device_logout' => true
+        'auth_other_device_logout' => true,
     ],
 
     'ignore_routes' => [
-        '*debugbar*'
+        '*debugbar*',
     ],
 
     'ignore_urls' => [
-        '*user-activity*'
+        '*user-activity*',
     ],
 
     'log_response' => [
@@ -50,7 +49,7 @@ return [
     'blacklisted_keys' => [
         'id',
         'password',
-        'title'
+        'title',
     ],
 
     'log_geoip' => true,

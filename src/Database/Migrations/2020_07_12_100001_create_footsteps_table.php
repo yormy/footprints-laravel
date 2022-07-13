@@ -19,8 +19,8 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('user_type')->nullable();
 
-            $table->string('log_type',50);
-            $table->string('table_name',50)->nullable();
+            $table->string('log_type', 50);
+            $table->string('table_name', 50)->nullable();
 
             $table->string('route')->nullable();
             $table->string('url')->nullable();
@@ -39,7 +39,6 @@ return new class extends Migration
             $table->string('request_id')->index()->nullable();
             $table->double('request_start')->nullable();
             $table->double('request_duration_sec')->nullable();
-
 
             $table->json('location')->nullable();
 

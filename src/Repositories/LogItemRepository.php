@@ -4,8 +4,8 @@ namespace Yormy\LaravelFootsteps\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LogItemRepository
 {
@@ -22,7 +22,7 @@ class LogItemRepository
         $props['payload_base64'] = $payload;
 
         $remoteFields = $this->getRemoteDetails($request);
-        $data =  array_merge($props, $userFields, $requestFields, $remoteFields);
+        $data = array_merge($props, $userFields, $requestFields, $remoteFields);
 
         $logModel = $this->getLogItemModel();
         $logModel->create($data);
@@ -49,6 +49,7 @@ class LogItemRepository
     private function getLogItemModel(): Model
     {
         $logModelClass = config('footsteps.log_model');
+
         return new $logModelClass;
     }
 
@@ -81,11 +82,11 @@ class LogItemRepository
 
     private static function cleanPayload(string $payload): string
     {
-        if (!config('footsteps.log_response.enabled')) {
+        if (! config('footsteps.log_response.enabled')) {
             return '';
         }
 
-        $truncated = substr($payload, 0,config('footsteps.log_response.max_characters'));
+        $truncated = substr($payload, 0, config('footsteps.log_response.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }

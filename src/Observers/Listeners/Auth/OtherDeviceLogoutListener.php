@@ -8,14 +8,13 @@ use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 
 class OtherDeviceLogoutListener extends BaseListener
 {
-
     /**
      * @return void
      */
     public function handle(Login $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.auth_other_device_logout')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.auth_other_device_logout')
         ) {
             return;
         }
@@ -25,7 +24,7 @@ class OtherDeviceLogoutListener extends BaseListener
             $user,
             $this->request,
             [
-            'log_type'   => LogType::AUTH_OTHER_DEVICE_LOGOUT,
-        ]);
+                'log_type' => LogType::AUTH_OTHER_DEVICE_LOGOUT,
+            ]);
     }
 }

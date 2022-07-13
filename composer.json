@@ -33,7 +33,8 @@
         "psalm/plugin-laravel": "^2.0",
         "squizlabs/php_codesniffer": "^3.7",
         "thibautselingue/local-php-security-checker-installer": "^1",
-        "vimeo/psalm": "^4.24"
+        "vimeo/psalm": "^4.24",
+        "laravel/pint": "^0.2"
     },
     "autoload": {
         "psr-4": {
@@ -53,6 +54,7 @@
         "phpstan": "vendor/bin/phpstan analyze src --error-format=raw --level=4",
         "psalm": "vendor/bin/psalm --no-diff --no-cache --report-show-info=false --report=psalm-report.txt",
         "psalm-debug": "vendor/bin/psalm --no-cache --debug --debug-by-line",
+        "pint": "vendor/bin/pint",
         "test": "vendor/bin/phpunit --colors=always --testdox",
         "test-browser": "vendor/bin/phpunit tests/Browser --colors=always --testdox",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"

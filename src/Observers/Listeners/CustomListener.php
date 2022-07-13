@@ -11,8 +11,8 @@ class CustomListener extends BaseListener
      */
     public function handle(CustomFootstepEvent $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.on_custom')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.on_custom')
         ) {
             return;
         }
@@ -20,7 +20,6 @@ class CustomListener extends BaseListener
         $data = $event->getData();
         $request = $event->getRequest();
         $data['request_id'] = $request->get('request_id');
-
 
         $fields = [
             'table_name' => $event->getTableName(),

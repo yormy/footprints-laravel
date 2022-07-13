@@ -10,8 +10,9 @@ use Yormy\LaravelFootsteps\ServiceProviders\EventServiceProvider;
 
 class FootstepsServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__ . '/../config/footsteps.php';
-    const MIGRATION_PATH = __DIR__ . '/Database/Migrations';
+    const CONFIG_FILE = __DIR__.'/../config/footsteps.php';
+
+    const MIGRATION_PATH = __DIR__.'/Database/Migrations';
 
     /**
      * @psalm-suppress MissingReturnType
@@ -38,7 +39,7 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('model:prune', [
-                '--model' => Log::class
+                '--model' => Log::class,
             ])->daily();
 
             if (config('footsteps.log_geoip')) {
@@ -51,11 +52,11 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                self::CONFIG_FILE => config_path('footsteps.php')
+                self::CONFIG_FILE => config_path('footsteps.php'),
             ], 'config');
 
             $this->publishes([
-                self::MIGRATION_PATH => database_path('migrations')
+                self::MIGRATION_PATH => database_path('migrations'),
             ], 'migrations');
         }
     }

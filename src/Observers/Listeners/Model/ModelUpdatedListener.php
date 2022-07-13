@@ -14,8 +14,8 @@ class ModelUpdatedListener extends BaseListener
      */
     public function handle(ModelUpdatedEvent $event)
     {
-        if (!config('footsteps.enabled') ||
-            !config('footsteps.log_events.model_updated')
+        if (! config('footsteps.enabled') ||
+            ! config('footsteps.log_events.model_updated')
         ) {
             return;
         }
@@ -25,7 +25,6 @@ class ModelUpdatedListener extends BaseListener
 
         $request = $event->getRequest();
         $data['request_id'] = $request->get('request_id');
-
 
         $fields = [
             'table_name' => $tableName,

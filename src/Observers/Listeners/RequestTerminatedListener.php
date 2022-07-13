@@ -26,10 +26,9 @@ class RequestTerminatedListener extends BaseListener
 
         $duration = null;
         if ($requestStart > 0) {
-            $duration = round(microtime(true) - $requestStart,3);
+            $duration = round(microtime(true) - $requestStart, 3);
         }
 
         return $duration;
     }
-
 }
