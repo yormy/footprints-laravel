@@ -39,7 +39,7 @@ class RouteMatchListener extends BaseListener
             ]);
     }
 
-    private function shouldIgnore($event): bool
+    private function shouldIgnore(RouteMatched $event): bool
     {
         $url = $this->getUrl($event);
         $ignoreUrls = config('footsteps.ignore_urls');
@@ -58,7 +58,7 @@ class RouteMatchListener extends BaseListener
         return false;
     }
 
-    private function getRouteName($event): string
+    private function getRouteName(RouteMatched $event): string
     {
         $route = '';
         if (array_key_exists('as', $event->route->action)) {
@@ -68,7 +68,7 @@ class RouteMatchListener extends BaseListener
         return $route;
     }
 
-    private function getUrl($event): string
+    private function getUrl(RouteMatched $event): string
     {
         return $event->request->fullUrl();
     }

@@ -5,10 +5,11 @@ namespace Yormy\LaravelFootsteps\Repositories;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class LogItemRepository
 {
-    public function createLogEntry(?Authenticatable $user, $request, array $props): void
+    public function createLogEntry(?Authenticatable $user, Request $request, array $props): void
     {
         $userFields = $this->getUserData($user);
 
