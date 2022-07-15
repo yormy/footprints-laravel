@@ -49,7 +49,10 @@ return [
     ],
 
     'content' => [
+        'ip' => true,
+        'user_agent' => true,
         'duration' => true,
+        'geoip' => true,
         'payload' => [
             'enabled' => true,
             'max_characters' => 200,
@@ -58,7 +61,6 @@ return [
             'enabled' => true,
             'max_characters' => 200,
         ],
-        'geoip' => true,
 
         // do not log the following keys in the database
         'blacklisted_keys' => [

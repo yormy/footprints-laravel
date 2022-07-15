@@ -69,10 +69,16 @@ class LogItemRepository
     private function getRemoteDetails(Request $request): array
     {
         $data = [];
-        $data['ip'] = $request->ip();
-        $data['user_agent'] = $request->userAgent();
 
-        if (config('footsteps.content.log_geoip')) {
+        if (config('footsteps.content.ip')) {
+            $data['ip'] = $request->ip();
+        }
+
+        if (config('footsteps.content.user_agent')) {
+            $data['user_agent'] = $request->userAgent();
+        }
+
+        if (config('footsteps.content.geoip')) {
             $location = geoip()->getLocation($request->ip());
             $data['location'] = json_encode($location->toArray());
         }
