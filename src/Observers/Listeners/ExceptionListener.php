@@ -18,12 +18,11 @@ class ExceptionListener extends BaseListener
     {
         $exception = $event->getException();
 
-        $request = $event->getRequest();
-
-        if (! $this->shouldLog($exception))
-        {
+        if (! $this->shouldLog($exception)) {
             return;
         }
+
+        $request = $event->getRequest();
 
         $this->logItemRepository->createLogEntry(
             Auth::user(),
