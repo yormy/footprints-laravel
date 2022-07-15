@@ -1,17 +1,9 @@
-Illuminate\Http\Client\Events\ResponseReceived ipv terminated ?
-Illuminate\Http\Client\Events\ConnectionFailed ?
-Illuminate\Routing\Events\Routing ?
-
 TooManyRequestsHttpException
 
-Middleware to package ?
-
-Include/exclude  - url / route
-
 log settable recordings
-- payload
-- response
-- duragtion
+  // model changes
+  // model org
+- 
 - 
 sql scopes to get resutl
 

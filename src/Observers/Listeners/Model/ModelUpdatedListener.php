@@ -36,13 +36,23 @@ class ModelUpdatedListener extends BaseListener
          */
         $original = $model->getRawOriginal();
 
+        $valuesOld = json_encode([]);
+        if (config('footsteps.model.values_old')) {
+            $valuesOld = BlacklistFilter::filter($model->toArray());
+        }
+
+        $valuesChanged = json_encode([]);
+        if (config('footsteps.model.values_changed')) {
+            $valuesChanged = BlacklistFilter::filter($changes);
+        }
+
         $fields = [
             'table_name' => $tableName,
             'log_type' => LogType::MODEL_UPDATED,
             'model_type' => get_class($model),
             'model_id' => $model->id,
-            'model_changes' => BlacklistFilter::filter($changes),
-            'model_old' => BlacklistFilter::filter($original),
+            'model_changes' => $valuesChanged,
+            'model_old' => $valuesOld,
             'data' => json_encode($data),
         ];
 

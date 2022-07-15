@@ -11,7 +11,7 @@ class BlacklistFilter
         /**
          * @var array<array-key, string> $blacklistedKeys
          */
-        $blacklistedKeys = config('footsteps.blacklisted_keys');
+        $blacklistedKeys = config('footsteps.content.blacklisted_keys');
         foreach ($blacklistedKeys as $blacklistedKey) {
             if (array_key_exists($blacklistedKey, $filtered)) {
                 $filtered[$blacklistedKey] = '******';
