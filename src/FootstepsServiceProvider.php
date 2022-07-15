@@ -4,7 +4,9 @@ namespace Yormy\LaravelFootsteps;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
+use Mexion\BedrockCore\DataObjects\Responses\CoreError;
 use Yormy\LaravelFootsteps\Console\InstallCommand;
+use Yormy\LaravelFootsteps\Exceptions\Handler;
 use Yormy\LaravelFootsteps\Models\Log;
 use Yormy\LaravelFootsteps\ServiceProviders\EventServiceProvider;
 

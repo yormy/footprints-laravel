@@ -30,6 +30,18 @@ composer require yormy/laravel-footsteps
 add to your model 
 ```use Footsteps;```
 
+## Exception logging
+Exceptions can be logged
+add tyo your Exceptions/handler.php
+```
+use use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
+
+    public function report(Throwable $exception)
+    {
+        event(new ExceptionEvent($exception, request()));
+        ...
+    }
+```
 
 ### Response tracking
 To allow response tracking, and response timing tracking you need to do the following

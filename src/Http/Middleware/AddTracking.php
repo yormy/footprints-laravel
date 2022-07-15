@@ -3,9 +3,9 @@
 namespace Yormy\LaravelFootsteps\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
-use \Illuminate\Http\Response;
 
 class AddTracking
 {
@@ -41,8 +41,14 @@ class AddTracking
         return bin2hex($bytes);
     }
 
-    public function terminate(Request $request, Response $response): void
+    public function terminate(Request $request, $response): void
     {
+        if ($response instanceof RedirectResponse) {
+            $response = "redirect";
+        } else {
+            $response = $response->getContent();
+        }
+
         event(new RequestTerminatedEvent($request, $response));
     }
 }

@@ -14,6 +14,7 @@ class ModelUpdatedListener extends BaseListener
      */
     public function handle(ModelUpdatedEvent $event)
     {
+        ray('updated');
         if (! config('footsteps.enabled') ||
             ! config('footsteps.log_events.model_updated')
         ) {

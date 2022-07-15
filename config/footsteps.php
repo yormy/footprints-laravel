@@ -38,6 +38,8 @@ return [
 
     'ignore_urls' => [
         '*user-activity*',
+        '*telescope*',
+        '*_debugbar*'
     ],
 
     'log_response' => [
@@ -56,4 +58,16 @@ return [
 
     // When the clean-up command is run, delete old logs greater than `purge` days
     'prune_logs_after_days' => 1,
+
+    /*
+     * List the exceptions you want to log with the client
+     * or leave empty to log all ?
+     */
+    'log_exceptions' => [
+        'enabled' => true,
+        'exceptions' => [
+            'Illuminate\Database\Eloquent\ModelNotFoundException',
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+        ]
+    ]
 ];

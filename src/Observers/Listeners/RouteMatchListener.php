@@ -4,6 +4,7 @@ namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
 use Illuminate\Routing\Events\RouteMatched;
 use Yormy\LaravelFootsteps\Enums\LogType;
+use Yormy\LaravelFootsteps\Services\RuleService;
 
 class RouteMatchListener extends BaseListener
 {
@@ -12,13 +13,7 @@ class RouteMatchListener extends BaseListener
      */
     public function handle(RouteMatched $event)
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.route_visit')
-        ) {
-            return;
-        }
-
-        if ($this->shouldIgnore($event)) {
+        if ($this->shouldLog($event)) {
             return;
         }
 
@@ -42,6 +37,23 @@ class RouteMatchListener extends BaseListener
             ]);
     }
 
+    private function shouldLog(RouteMatched $event): bool
+    {
+        if (! config('footsteps.enabled') ) {
+            return false;
+        }
+
+        if (! config('footsteps.log_events.route_visit') ) {
+            return false;
+        }
+
+        if ($this->shouldIgnore($event)) {
+            return false;
+        }
+
+        return true;
+    }
+
     private function shouldIgnore(RouteMatched $event): bool
     {
         $url = $this->getUrl($event);
@@ -50,7 +62,7 @@ class RouteMatchListener extends BaseListener
          * @var array $ignoreUrls
          */
         $ignoreUrls = config('footsteps.ignore_urls');
-        if ($this->shouldIgnoreRule($url, $ignoreUrls)) {
+        if (RuleService::shouldIgnore($url, $ignoreUrls)) {
             return true;
         }
 
@@ -60,7 +72,7 @@ class RouteMatchListener extends BaseListener
              * @var array $ignoreRoutes
              */
             $ignoreRoutes = config('footsteps.ignore_routes');
-            if ($this->shouldIgnoreRule($route, $ignoreRoutes)) {
+            if (RuleService::shouldIgnore($route, $ignoreRoutes)) {
                 return true;
             }
         }
@@ -83,17 +95,17 @@ class RouteMatchListener extends BaseListener
         return $event->request->fullUrl();
     }
 
-    private function shouldIgnoreRule(string $route, array $ignoreRoutes): bool
-    {
-        /**
-         * @var array<array-key, string> $ignoreRoutes
-         */
-        foreach ($ignoreRoutes as $ignorePattern) {
-            if (fnmatch($ignorePattern, $route)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+//    private function shouldIgnoreRule(string $route, array $ignoreRoutes): bool
+//    {
+//        /**
+//         * @var array<array-key, string> $ignoreRoutes
+//         */
+//        foreach ($ignoreRoutes as $ignorePattern) {
+//            if (fnmatch($ignorePattern, $route)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 }

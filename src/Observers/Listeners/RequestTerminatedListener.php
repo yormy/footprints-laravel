@@ -2,7 +2,7 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
 
 class RequestTerminatedListener extends BaseListener
@@ -13,10 +13,7 @@ class RequestTerminatedListener extends BaseListener
 
         $duration = $this->getDuration($request);
 
-        $response = $event->getResponse()->getContent();
-        if (!$response) {
-            $response = '';
-        }
+        $response = $event->getResponse();
 
         $requestId = (string)$request->get('request_id');
 

@@ -10,6 +10,7 @@ use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Routing\Events\RouteMatched;
 use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
+use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
 use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
@@ -20,11 +21,13 @@ use Yormy\LaravelFootsteps\Observers\Listeners\Auth\LoginListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\Auth\LogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\Auth\OtherDeviceLogoutListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\CustomListener;
+use Yormy\LaravelFootsteps\Observers\Listeners\ExceptionListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelCreatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelDeletedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\Model\ModelUpdatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RequestTerminatedListener;
 use Yormy\LaravelFootsteps\Observers\Listeners\RouteMatchListener;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -71,6 +74,10 @@ class EventServiceProvider extends ServiceProvider
 
         CustomFootstepEvent::class => [
             CustomListener::class,
+        ],
+
+        ExceptionEvent::class => [
+            ExceptionListener::class,
         ],
     ];
 }
