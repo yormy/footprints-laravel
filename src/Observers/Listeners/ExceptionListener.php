@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Auth;
 use Throwable;
 use Yormy\LaravelFootsteps\Enums\LogType;
 use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
-use Yormy\LaravelFootsteps\Services\RequestParser;
 use Yormy\LaravelFootsteps\Services\RuleService;
 
 class ExceptionListener extends BaseListener
@@ -26,7 +25,7 @@ class ExceptionListener extends BaseListener
 
         $this->logItemRepository->createLogEntry(
             Auth::user(),
-            $this->request,
+            $request,
             [
                 'route' => '',
                 'url' => $request->fullUrl(),

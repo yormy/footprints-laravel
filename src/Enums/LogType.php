@@ -4,6 +4,8 @@ namespace Yormy\LaravelFootsteps\Enums;
 
 enum LogType: string
 {
+    case UNKNOWN = 'UNKNOWN';
+
     case MODEL_CREATED = 'MODEL_CREATED';
     case MODEL_DELETED = 'MODEL_DELETED';
     case MODEL_UPDATED = 'MODEL_UPDATED';

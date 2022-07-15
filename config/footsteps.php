@@ -18,7 +18,12 @@ return [
         'on_custom' => true,
         'auth_failed' => true,
         'auth_other_device_logout' => true,
+        'other_events' => [
+            'Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent' => "CUSTOM EVENT LISTENER"
+        ],
     ],
+
+
 
     /*
      * List the exceptions you want to log with the client
