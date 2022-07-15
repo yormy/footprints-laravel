@@ -45,12 +45,12 @@ use use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
 
 ### Response tracking
 To allow response tracking, and response timing tracking you need to do the following
-
 - add to your app http\kernel
-  ```use Yormy\LaravelFootsteps\Http\Middleware\AddTracking;```
 
 Add the add tracking middleware to the beginning of your request
 ```
+    use Yormy\LaravelFootsteps\Http\Middleware\AddTracking;
+
     protected $middleware = [
         AddTracking::class,
         ...
