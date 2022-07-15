@@ -1,10 +1,5 @@
 TooManyRequestsHttpException
 
-log settable recordings
-  // model changes
-  // model org
-- 
-- 
 sql scopes to get resutl
 
 404 handling

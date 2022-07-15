@@ -1,5 +1,7 @@
 <?php
 
+use Yormy\LaravelFootsteps\Enums\LogType;
+
 return [
     'enabled' => true,
 
@@ -25,8 +27,8 @@ return [
     'log_exceptions' => [
         'enabled' => true,
         'exceptions' => [
-            'Illuminate\Database\Eloquent\ModelNotFoundException',
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+            'Illuminate\Database\Eloquent\ModelNotFoundException' =>'MODEL_NOT_FOUND',
+            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' => LogType::EXCEPTION_PAGE_NOT_FOUND->value,
         ]
     ],
 
