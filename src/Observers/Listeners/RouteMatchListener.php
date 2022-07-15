@@ -47,38 +47,53 @@ class RouteMatchListener extends BaseListener
             return false;
         }
 
-        if ($this->shouldIgnore($event)) {
+        $url = $this->getUrl($event);
+        $route = $this->getRouteName($event);
+
+        if ($url && RuleService::shouldIgnore($url, config('footsteps.log_visits.urls_exclude'))) {
             return false;
         }
 
-        return true;
-    }
+        if ($route && RuleService::shouldIgnore($route, config('footsteps.log_visits.routes_exclude'))) {
+            return false;
+        }
 
-    private function shouldIgnore(RouteMatched $event): bool
-    {
-        $url = $this->getUrl($event);
-
-        /**
-         * @var array $ignoreUrls
-         */
-        $ignoreUrls = config('footsteps.ignore_urls');
-        if (RuleService::shouldIgnore($url, $ignoreUrls)) {
+        if ($route && RuleService::shouldInclude($route, config('footsteps.log_visits.routes_include'))) {
             return true;
         }
 
-        $route = $this->getRouteName($event);
-        if ($route) {
-            /**
-             * @var array $ignoreRoutes
-             */
-            $ignoreRoutes = config('footsteps.ignore_routes');
-            if (RuleService::shouldIgnore($route, $ignoreRoutes)) {
-                return true;
-            }
+        if ($url && RuleService::shouldInclude($route, config('footsteps.log_visits.urls_include'))) {
+            return true;
         }
 
         return false;
     }
+//
+//    private function shouldIgnore(RouteMatched $event): bool
+//    {
+//        $url = $this->getUrl($event);
+//
+//        /**
+//         * @var array $ignoreUrls
+//         */
+//        $ignoreUrls = config('footsteps.ignore_urls');
+//        if (RuleService::shouldIgnore($url, $ignoreUrls)) {
+//            return true;
+//        }
+//
+//        $route = $this->getRouteName($event);
+//        if ($route) {
+//            /**
+//             * @var array $ignoreRoutes
+//             */
+//            $ignoreRoutes = config('footsteps.ignore_routes');
+//            if (RuleService::shouldIgnore($route, $ignoreRoutes)) {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     private function getRouteName(RouteMatched $event): string
     {

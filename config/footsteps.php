@@ -32,14 +32,22 @@ return [
         'auth_other_device_logout' => true,
     ],
 
-    'ignore_routes' => [
-        '*debugbar*',
-    ],
+    'log_visits' => [
+        'routes_include' => [
+            '*',        // * to include all routes
+        ],
+        'routes_exclude' => [
+            '*debugbar*',       // always exclude these routes, even if they are in the include list
+        ],
+        'urls_include' => [
+            '*',        // * to include all urls
+        ],
+        'urls_exclude' => [
+            '*user-activity*',
+            '*telescope*',
+            '*_debugbar*',
+        ],
 
-    'ignore_urls' => [
-        '*user-activity*',
-        '*telescope*',
-        '*_debugbar*'
     ],
 
     'log_response' => [
