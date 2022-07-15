@@ -13,7 +13,7 @@ class RouteMatchListener extends BaseListener
      */
     public function handle(RouteMatched $event)
     {
-        if ($this->shouldLog($event)) {
+        if (!$this->shouldLog($event)) {
             return;
         }
 
@@ -94,18 +94,4 @@ class RouteMatchListener extends BaseListener
     {
         return $event->request->fullUrl();
     }
-
-//    private function shouldIgnoreRule(string $route, array $ignoreRoutes): bool
-//    {
-//        /**
-//         * @var array<array-key, string> $ignoreRoutes
-//         */
-//        foreach ($ignoreRoutes as $ignorePattern) {
-//            if (fnmatch($ignorePattern, $route)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
 }
