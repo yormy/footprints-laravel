@@ -27,12 +27,13 @@ return [
 
     /*
      * List the exceptions you want to log with the client
-     * or leave empty to log all ?
+     * specify the exception to handle with the key to use (either aLogType value or a string "Your Exception Name Indicator"
      */
     'log_exceptions' => [
         'enabled' => true,
         'exceptions' => [
-            'Illuminate\Database\Eloquent\ModelNotFoundException' =>'MODEL_NOT_FOUND',
+            'Illuminate\Database\Eloquent\ModelNotFoundException' => LogType::EXCEPTION_MODEL_NOT_FOUND->value,
+            'Illuminate\Http\Exceptions\ThrottleRequestsException' => LogType::EXCEPTION_TOO_MANY_REQUEST->value,
             'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' => LogType::EXCEPTION_PAGE_NOT_FOUND->value,
         ]
     ],
