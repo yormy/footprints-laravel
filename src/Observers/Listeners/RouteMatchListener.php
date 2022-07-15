@@ -68,32 +68,6 @@ class RouteMatchListener extends BaseListener
 
         return false;
     }
-//
-//    private function shouldIgnore(RouteMatched $event): bool
-//    {
-//        $url = $this->getUrl($event);
-//
-//        /**
-//         * @var array $ignoreUrls
-//         */
-//        $ignoreUrls = config('footsteps.ignore_urls');
-//        if (RuleService::shouldIgnore($url, $ignoreUrls)) {
-//            return true;
-//        }
-//
-//        $route = $this->getRouteName($event);
-//        if ($route) {
-//            /**
-//             * @var array $ignoreRoutes
-//             */
-//            $ignoreRoutes = config('footsteps.ignore_routes');
-//            if (RuleService::shouldIgnore($route, $ignoreRoutes)) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
 
     private function getRouteName(RouteMatched $event): string
     {

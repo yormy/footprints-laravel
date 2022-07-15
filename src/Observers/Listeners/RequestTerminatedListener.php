@@ -9,6 +9,10 @@ class RequestTerminatedListener extends BaseListener
 {
     public function handle(RequestTerminatedEvent $event): void
     {
+        if (!$this->shouldLog()) {
+            return;
+        }
+
         $request = $event->getRequest();
 
         $duration = $this->getDuration($request);
@@ -18,6 +22,22 @@ class RequestTerminatedListener extends BaseListener
         $requestId = (string)$request->get('request_id');
 
         $this->logItemRepository->updateLogEntry($requestId, $duration, $response);
+    }
+
+    private function shouldLog(): bool
+    {
+        if (! config('footsteps.enabled') ) {
+            return false;
+        }
+
+        if (
+            ! config('footsteps.content.duration') &&
+            ! config('footsteps.content.response')
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     private function getDuration(Request $request): float

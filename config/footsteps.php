@@ -50,10 +50,19 @@ return [
 
     ],
 
-    'log_response' => [
-        'enabled' => true,
-        'max_characters' => 200,
+    'content' => [
+        'duration' => true,
+        'payload' => [
+            'enabled' => true,
+            'max_characters' => 200,
+        ],
+        'response' => [
+            'enabled' => true,
+            'max_characters' => 200,
+        ],
+        'log_geoip' => true,
     ],
+
 
     // do not log the following keys in the database
     'blacklisted_keys' => [

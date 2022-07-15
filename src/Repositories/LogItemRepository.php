@@ -30,9 +30,9 @@ class LogItemRepository
         $logModel->create($data);
     }
 
-    public function updateLogEntry(string $requestId, float $duration, string $payload): void
+    public function updateLogEntry(string $requestId, float $duration, string $response): void
     {
-        $payload = $this->cleanPayload($payload);
+        $response = $this->cleanResponse($response);
 
         $logModel = $this->getLogItemModel();
         $table = $logModel->getTable();
@@ -41,7 +41,7 @@ class LogItemRepository
 
         $statement = "UPDATE $table
             SET {$table}.request_duration_sec = $duration,
-                {$table}.response_base64 = '$payload'
+                {$table}.response_base64 = '$response'
                 $userUpdate
             WHERE {$table}.request_id = '$requestId'";
 
@@ -98,11 +98,23 @@ class LogItemRepository
 
     private static function cleanPayload(string $payload): string
     {
-        if (! config('footsteps.log_response.enabled')) {
+        if (! config('footsteps.content.payload.enabled')) {
             return '';
         }
 
-        $truncated = substr($payload, 0, (int)config('footsteps.log_response.max_characters'));
+        $truncated = substr($payload, 0, (int)config('footsteps.payload.max_characters'));
+
+        return base64_encode($truncated);  // base64 encode to prevent sqli
+    }
+
+
+    private static function cleanResponse(string $response): string
+    {
+        if (! config('footsteps.content.response.enabled')) {
+            return '';
+        }
+
+        $truncated = substr($response, 0, (int)config('footsteps.response.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
