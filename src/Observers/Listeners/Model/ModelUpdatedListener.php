@@ -29,13 +29,12 @@ class ModelUpdatedListener extends BaseListener
         $data = [];
         $data['request_id'] = (string)$request->get('request_id');
 
+        /** @var array $loggableFields */
         $loggableFields = $model->getFootstepsFields();
 
         $valuesOld = json_encode([]);
         if (config('footsteps.content.model.values_old')) {
-            /**
-             * @var array<array-key, mixed> $original
-             */
+            /** @var array<array-key, mixed> $valuesOld */
             $valuesOld = $model->getRawOriginal();
             $valuesOld = BlacklistFilter::filter($valuesOld, $loggableFields);
             $valuesOld = json_encode($valuesOld);

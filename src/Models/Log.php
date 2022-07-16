@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Builder;
 use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 class Log extends Model implements FootstepInterface
 {
     use Prunable;
@@ -34,17 +37,21 @@ class Log extends Model implements FootstepInterface
 
     public function __construct(array $attributes = [])
     {
+        /**
+         * @psalm-suppress RedundantPropertyInitializationCheck
+         */
         if (! isset($this->table)) {
-            $this->setTable(config('footsteps.table_name'));
+            $this->setTable((string)config('footsteps.table_name'));
         }
 
         parent::__construct($attributes);
     }
 
     /**
-     * @psalm-return \Illuminate\Database\Eloquent\Builder<static>
+     * @psalm-suppress InvalidReturnType
+     * @psalm-suppress InvalidReturnStatement
      */
-    public function prunable(): \Illuminate\Database\Eloquent\Builder
+    public function prunable(): Builder
     {
         $days = (int)config('footsteps.delete_records_older_than_days', 100);
 
@@ -56,20 +63,20 @@ class Log extends Model implements FootstepInterface
         return $this->morphTo(__FUNCTION__, 'user_type', 'user_id');
     }
 
-    public function scopeInLog(Builder $query, ...$logNames): Builder
-    {
-        if (is_array($logNames[0])) {
-            $logNames = $logNames[0];
-        }
-
-        return $query->whereIn('log_name', $logNames);
-    }
-
-    public function scopeCausedBy(Builder $query, Model $causer): Builder
-    {
-        return $query
-            ->where('causer_type', $causer->getMorphClass())
-            ->where('causer_id', $causer->getKey());
-    }
+//    public function scopeInLog(Builder $query, ...$logNames): Builder
+//    {
+//        if (is_array($logNames[0])) {
+//            $logNames = $logNames[0];
+//        }
+//
+//        return $query->whereIn('log_name', $logNames);
+//    }
+//
+//    public function scopeCausedBy(Builder $query, Model $causer): Builder
+//    {
+//        return $query
+//            ->where('causer_type', $causer->getMorphClass())
+//            ->where('causer_id', $causer->getKey());
+//    }
 
 }

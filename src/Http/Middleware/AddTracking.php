@@ -40,14 +40,18 @@ class AddTracking
         return bin2hex($bytes);
     }
 
+    /**
+     * @psalm-suppress MixedMethodCall
+     * @param Mixed $response
+     */
     public function terminate(Request $request, $response): void
     {
         if ($response instanceof RedirectResponse) {
-            $response = "redirect";
+            $responseString = "redirect";
         } else {
-            $response = $response->getContent();
+            $responseString = (string)$response->getContent();
         }
 
-        event(new RequestTerminatedEvent($request, $response));
+        event(new RequestTerminatedEvent($request, $responseString));
     }
 }

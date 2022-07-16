@@ -50,19 +50,19 @@ class RouteMatchListener extends BaseListener
         $url = $this->getUrl($event);
         $route = $this->getRouteName($event);
 
-        if ($url && RuleService::shouldIgnore($url, config('footsteps.log_visits.urls_exclude'))) {
+        if ($url && RuleService::shouldIgnore($url, (array)config('footsteps.log_visits.urls_exclude'))) {
             return false;
         }
 
-        if ($route && RuleService::shouldIgnore($route, config('footsteps.log_visits.routes_exclude'))) {
+        if ($route && RuleService::shouldIgnore($route, (array)config('footsteps.log_visits.routes_exclude'))) {
             return false;
         }
 
-        if ($route && RuleService::shouldInclude($route, config('footsteps.log_visits.routes_include'))) {
+        if ($route && RuleService::shouldInclude($route, (array)config('footsteps.log_visits.routes_include'))) {
             return true;
         }
 
-        if ($url && RuleService::shouldInclude($route, config('footsteps.log_visits.urls_include'))) {
+        if ($url && RuleService::shouldInclude($route, (array)config('footsteps.log_visits.urls_include'))) {
             return true;
         }
 

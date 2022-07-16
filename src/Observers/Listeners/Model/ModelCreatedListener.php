@@ -29,6 +29,7 @@ class ModelCreatedListener extends BaseListener
 
         $valuesOld = json_encode([]);
         if (config('footsteps.model.content.values_old')) {
+            /** @var array $loggableFields */
             $loggableFields = $model->getFootstepsFields();
             $valuesOld = BlacklistFilter::filter($model->toArray(), $loggableFields);
             $valuesOld = json_encode($valuesOld);

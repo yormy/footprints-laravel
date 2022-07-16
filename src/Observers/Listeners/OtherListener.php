@@ -16,6 +16,7 @@ class OtherListener
     }
 
     /**
+     * @psalm-suppress MissingParamType
      * @return void
      */
     public function handle($event)
@@ -35,13 +36,18 @@ class OtherListener
             ]);
     }
 
+    /**
+     * @psalm-suppress MissingParamType
+     * @psalm-suppress MixedArgument
+     */
     private function getLogType($event): string
     {
-        $logEvents = config('footsteps.log_events.other_events');
+        $logEvents = (array)config('footsteps.log_events.other_events');
+
         $eventClass = get_class($event);
 
         if (array_key_exists($eventClass, $logEvents)) {
-            return $logEvents[$eventClass];
+            return (string)$logEvents[$eventClass];
         }
         return LogType::UNKNOWN->value;
     }

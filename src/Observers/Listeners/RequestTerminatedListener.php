@@ -15,7 +15,7 @@ class RequestTerminatedListener extends BaseListener
 
         $request = $event->getRequest();
 
-        $duration = $this->getDuration($request);
+        $duration = $this->getDuration();
 
         $response = $event->getResponse();
 
@@ -40,9 +40,12 @@ class RequestTerminatedListener extends BaseListener
         return true;
     }
 
-    private function getDuration(Request $request): float
+    private function getDuration(): float
     {
-        $requestStart = LARAVEL_START;
+        /**
+         * @psalm-suppress UndefinedConstant
+         */
+        $requestStart = (float)LARAVEL_START;
 
         $duration = 0;
         if ($requestStart > 0) {

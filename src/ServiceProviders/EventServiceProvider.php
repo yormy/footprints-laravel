@@ -84,11 +84,15 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    /**
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedAssignment
+     */
     public function __construct(Application $app)
     {
-        $otherEvents = config('footsteps.log_events.other_events');
+        $otherEvents = (array)config('footsteps.log_events.other_events');
 
-        foreach ($otherEvents as $event => $logType) {
+        foreach (array_keys($otherEvents) as $event) {
             $this->listen[$event] = [OtherListener::class];
         }
 
