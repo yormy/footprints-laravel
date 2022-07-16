@@ -14,18 +14,29 @@ trait Footsteps
         return ['*'];
     }
 
+    public static function getFootstepsEvents(): array
+    {
+        return ['CREATED','UPDATED','DELETED'];
+    }
+
     public static function bootFootsteps(): void
     {
         self::created(function ($model) {
-            event(new ModelCreatedEvent($model, Auth::user(), request()));
+            if (in_array('CREATED', self::getFootstepsEvents())) {
+                event(new ModelCreatedEvent($model, Auth::user(), request()));
+            }
         });
 
         static::updated(function ($model) {
-            event(new ModelUpdatedEvent($model, Auth::user(), request()));
+            if (in_array('UPDATED', self::getFootstepsEvents())) {
+                event(new ModelUpdatedEvent($model, Auth::user(), request()));
+            }
         });
 
         static::deleted(function ($model) {
-            event(new ModelDeletedEvent($model, Auth::user(), request()));
+            if (in_array('DELETED', self::getFootstepsEvents())) {
+                event(new ModelDeletedEvent($model, Auth::user(), request()));
+            }
         });
     }
 }
