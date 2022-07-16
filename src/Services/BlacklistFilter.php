@@ -9,6 +9,11 @@ class BlacklistFilter
     {
         $filtered = $values;
         $filtered = self::filterBlacklist($filtered);
+
+        if (is_array($loggableFields) && reset($loggableFields) === '*') {
+            return $filtered;
+        }
+
         return self::filterNonLoggable($loggableFields, $filtered);
     }
 
