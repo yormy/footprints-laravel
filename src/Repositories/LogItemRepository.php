@@ -16,7 +16,6 @@ class LogItemRepository
 
         $requestFields = [];
         $requestFields['request_id'] = (string)$request->get('request_id');
-        $requestFields['request_start'] = (float)$request->get('request_start');
 
         $payload = (string)$request->getContent();
         $payload = $this->cleanPayload($payload);

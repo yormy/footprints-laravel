@@ -42,7 +42,7 @@ class RequestTerminatedListener extends BaseListener
 
     private function getDuration(Request $request): float
     {
-        $requestStart = (int)$request->get('request_start');
+        $requestStart = LARAVEL_START;
 
         $duration = 0;
         if ($requestStart > 0) {

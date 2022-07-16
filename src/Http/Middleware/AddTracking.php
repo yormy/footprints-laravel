@@ -29,7 +29,6 @@ class AddTracking
         $this->requestId = $this->generateKey();
 
         $request->attributes->add(['request_id' => $this->requestId]);
-        $request->attributes->add(['request_start' => $this->startTime]);
 
         return $next($request);
     }

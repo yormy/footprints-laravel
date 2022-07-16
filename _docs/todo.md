@@ -1,11 +1,4 @@
-TooManyRequestsHttpException
-
 sql scopes to get resutl
-
-404 handling
-throttle exception ?
-
-
 
 vue frontend
 remove spatie logger
@@ -16,7 +9,7 @@ Filter on
 * date from - to
 * log type
 * table
-* slow pages
+* slow pages (top 10 slowest pages, unique, average loading, last 10x loading)
 
 Display api resources content
 

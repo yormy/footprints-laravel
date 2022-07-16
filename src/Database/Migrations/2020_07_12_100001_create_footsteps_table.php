@@ -41,7 +41,6 @@ return new class extends Migration
             $table->text('response_base64')->nullable();
 
             $table->string('request_id')->index()->nullable();
-            $table->double('request_start')->nullable();
             $table->double('request_duration_sec')->nullable();
 
             $table->timestamps();

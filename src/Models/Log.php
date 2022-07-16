@@ -20,7 +20,6 @@ class Log extends Model implements FootstepInterface
         'ip',
         'location',
         'request_id',
-        'request_start',
         'payload_base64',
         'user_agent',
         'log_date',
