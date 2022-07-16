@@ -2,9 +2,18 @@
 
 namespace Yormy\LaravelFootsteps\Services;
 
+
 class BlacklistFilter
 {
-    public static function filter(array $values): string
+    public static function filter(array $values, array $loggableFields): array
+    {
+        $filtered = $values;
+        $filtered = self::filterBlacklist($filtered);
+        return self::filterNonLoggable($loggableFields, $filtered);
+    }
+
+
+    public static function filterBlacklist(array $values): array
     {
         $filtered = $values;
 
@@ -18,6 +27,19 @@ class BlacklistFilter
             }
         }
 
-        return json_encode($filtered);
+        return $filtered;
+    }
+
+    public static function filterNonLoggable(array $loggableFields, array $values): array
+    {
+        $filtered = $values;
+
+        foreach (array_keys($filtered) as $property) {
+            if (!in_array($property, $loggableFields)) {
+                unset($filtered[$property]);
+            }
+        }
+
+        return $filtered;
     }
 }

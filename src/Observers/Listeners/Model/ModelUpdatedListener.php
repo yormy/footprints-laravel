@@ -29,21 +29,27 @@ class ModelUpdatedListener extends BaseListener
         $data = [];
         $data['request_id'] = (string)$request->get('request_id');
 
-        $changes = $model->getChanges();
-
-        /**
-         * @var array<array-key, mixed> $original
-         */
-        $original = $model->getRawOriginal();
+        $loggableFields = $model->getFootstepsFields();
 
         $valuesOld = json_encode([]);
-        if (config('footsteps.model.values_old')) {
-            $valuesOld = BlacklistFilter::filter($model->toArray());
+        if (config('footsteps.content.model.values_old')) {
+            /**
+             * @var array<array-key, mixed> $original
+             */
+            $original = $model->getRawOriginal();
+            $valuesOld = BlacklistFilter::filterBlacklist($original);
+            $valuesOld = BlacklistFilter::filterNonLoggable($loggableFields, $valuesOld);
+
+            $valuesOld = json_encode($valuesOld);
         }
 
         $valuesChanged = json_encode([]);
-        if (config('footsteps.model.values_changed')) {
-            $valuesChanged = BlacklistFilter::filter($changes);
+        if (config('footsteps.content.model.values_changed')) {
+            $changes = $model->getChanges();
+            $valuesChanged = BlacklistFilter::filterBlacklist($changes);
+            $valuesChanged = BlacklistFilter::filterNonLoggable($loggableFields, $valuesChanged);
+
+            $valuesChanged = json_encode($valuesChanged);
         }
 
         $fields = [
