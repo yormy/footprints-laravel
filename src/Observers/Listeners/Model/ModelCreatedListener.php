@@ -28,8 +28,10 @@ class ModelCreatedListener extends BaseListener
         $data['request_id'] = (string)$request->get('request_id');
 
         $valuesOld = json_encode([]);
-        if (config('footsteps.model.values_old')) {
-            $valuesOld = BlacklistFilter::filter($model->toArray());
+        if (config('footsteps.model.content.values_old')) {
+            $loggableFields = $model->getFootstepsFields();
+            $valuesOld = BlacklistFilter::filter($model->toArray(), $loggableFields);
+            $valuesOld = json_encode($valuesOld);
         }
 
         $fields = [
