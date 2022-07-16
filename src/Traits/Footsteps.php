@@ -9,6 +9,11 @@ use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
 
 trait Footsteps
 {
+    public function getFootstepsFields(): array
+    {
+        return ['*'];
+    }
+
     public static function bootFootsteps(): void
     {
         self::created(function ($model) {
