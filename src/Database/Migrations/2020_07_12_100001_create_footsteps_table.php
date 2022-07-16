@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('footsteps', function (Blueprint $table) {
+        Schema::create(config('footsteps.table_name'), function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->bigInteger('user_id')->unsigned()->nullable();
@@ -44,19 +44,7 @@ return new class extends Migration
             $table->double('request_start')->nullable();
             $table->double('request_duration_sec')->nullable();
 
-            $table->json('location')->nullable();
-
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('logs');
     }
 };

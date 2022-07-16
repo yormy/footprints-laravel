@@ -4,12 +4,13 @@ namespace Yormy\LaravelFootsteps\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Builder;
+use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
 
-class Log extends Model
+class Log extends Model implements FootstepInterface
 {
     use Prunable;
-
-    protected $table = 'footsteps';
 
     protected $fillable = [
         'user_id',
@@ -32,18 +33,44 @@ class Log extends Model
         'model_changes',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        if (! isset($this->table)) {
+            $this->setTable(config('footsteps.table_name'));
+        }
+
+        parent::__construct($attributes);
+    }
+
     /**
      * @psalm-return \Illuminate\Database\Eloquent\Builder<static>
      */
     public function prunable(): \Illuminate\Database\Eloquent\Builder
     {
-        $days = (int)config('footsteps.prune_logs_after_days', 100);
+        $days = (int)config('footsteps.delete_records_older_than_days', 100);
 
         return static::where('created_at', '<=', now()->subDays($days));
     }
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    public function user(): MorphTo
     {
         return $this->morphTo(__FUNCTION__, 'user_type', 'user_id');
     }
+
+    public function scopeInLog(Builder $query, ...$logNames): Builder
+    {
+        if (is_array($logNames[0])) {
+            $logNames = $logNames[0];
+        }
+
+        return $query->whereIn('log_name', $logNames);
+    }
+
+    public function scopeCausedBy(Builder $query, Model $causer): Builder
+    {
+        return $query
+            ->where('causer_type', $causer->getMorphClass())
+            ->where('causer_id', $causer->getKey());
+    }
+
 }

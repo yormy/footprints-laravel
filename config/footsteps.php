@@ -3,9 +3,25 @@
 use Yormy\LaravelFootsteps\Enums\LogType;
 
 return [
-    'enabled' => true,
+    /*
+     * If set to false, nothing will be saved to the database.
+     */
+    'enabled' => env('FOOTSTEPS_LOGGER_ENABLED', true),
 
-    'log_model' => 'Yormy\LaravelFootsteps\Models\Log',
+    /*
+     * This is the name of the table that will be created by the migration and
+     * used by the Log model shipped with this package.
+     */
+    'table_name' => 'log_footsteps',
+
+    /*
+     * This model will be used to log footsteps.
+     * It should implement the Yormy\LaravelFootsteps\Interfaces\FootstepInterface interface
+     * and extend Illuminate\Database\Eloquent\Model.
+     */
+    'log_model' => Yormy\LaravelFootsteps\Models\Log::class,
+
+
 
     'log_events' => [
         'model_created' => true,
@@ -84,6 +100,10 @@ return [
     ],
 
 
-    // When the clean-up command is run, delete old logs greater than `purge` days
-    'prune_logs_after_days' => 1,
+    /*
+     * When the clean-command is executed, all recording footsteps older than
+     * the number of days specified here will be deleted.
+     * The clean command is automatically run every day
+     */
+    'delete_records_older_than_days' => 1,
 ];
