@@ -2,6 +2,7 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
 use Yormy\LaravelFootsteps\Enums\LogType;
@@ -47,6 +48,10 @@ class ExceptionListener extends BaseListener
 
     private function shouldLog(Throwable $exception): bool
     {
+        if (App::runningInConsole()) {
+            return false;
+        }
+
         if (! config('footsteps.enabled') ) {
             return false;
         }
