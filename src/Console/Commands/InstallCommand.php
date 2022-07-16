@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Console;
+namespace Yormy\LaravelFootsteps\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
