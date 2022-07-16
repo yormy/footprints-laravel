@@ -36,19 +36,15 @@ class ModelUpdatedListener extends BaseListener
             /**
              * @var array<array-key, mixed> $original
              */
-            $original = $model->getRawOriginal();
-            $valuesOld = BlacklistFilter::filterBlacklist($original);
-            $valuesOld = BlacklistFilter::filterNonLoggable($loggableFields, $valuesOld);
-
+            $valuesOld = $model->getRawOriginal();
+            $valuesOld = BlacklistFilter::filter($valuesOld, $loggableFields);
             $valuesOld = json_encode($valuesOld);
         }
 
         $valuesChanged = json_encode([]);
         if (config('footsteps.content.model.values_changed')) {
-            $changes = $model->getChanges();
-            $valuesChanged = BlacklistFilter::filterBlacklist($changes);
-            $valuesChanged = BlacklistFilter::filterNonLoggable($loggableFields, $valuesChanged);
-
+            $valuesChanged = $model->getChanges();
+            $valuesChanged = BlacklistFilter::filter($valuesChanged, $loggableFields);
             $valuesChanged = json_encode($valuesChanged);
         }
 
