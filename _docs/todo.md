@@ -1,3 +1,7 @@
+IP encryption
+USeragent encryption
+
+
 sql scopes to get resutl
 
 vue frontend
@@ -18,6 +22,9 @@ Display api resources content
 Send notification on certain events ?
 - logged in with a unknown device
 - locked out
+- popuplar last 10 days
+- 
+
 
 # automated tests
 
