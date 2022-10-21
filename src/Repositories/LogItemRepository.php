@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Yormy\LaravelFootsteps\Exceptions\CacheTagSupportException;
 
 class LogItemRepository
 {
@@ -78,6 +79,11 @@ class LogItemRepository
         }
 
         if (config('footsteps.content.geoip')) {
+            $supportsTags = cache()->supportsTags();
+            if (!$supportsTags) {
+                throw new CacheTagSupportException();
+            }
+
             $location = geoip()->getLocation($request->ip());
             $data['location'] = json_encode($location->toArray());
         }
