@@ -35,6 +35,7 @@ return new class extends Migration
 
             $table->string('ip')->nullable();
             $table->string('user_agent')->nullable();
+            $table->string('browser_fingerprint', 50)->nullable();
             $table->json('location')->nullable();
 
             $table->text('payload_base64')->nullable();

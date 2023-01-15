@@ -26,6 +26,8 @@ class LogItemRepository
         $remoteFields = $this->getRemoteDetails($request);
         $data = array_merge($props, $userFields, $requestFields, $remoteFields);
 
+        $data['browser_fingerprint'] = $request->cookie('session_id');
+
         $logModel = $this->getLogItemModel();
         $logModel->create($data);
     }

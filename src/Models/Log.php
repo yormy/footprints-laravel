@@ -33,6 +33,7 @@ class Log extends Model implements FootstepInterface
         'data',
         'model_old',
         'model_changes',
+        'browser_fingerprint'
     ];
 
     public function __construct(array $attributes = [])
