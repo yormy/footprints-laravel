@@ -29,7 +29,7 @@ class AddTracking
         $this->requestId = $this->generateKey();
 
         $request->attributes->add(['request_id' => $this->requestId]);
-
+        $request->attributes->add(['browser_fingerprint' => $request->cookie('session_id')]);
         return $next($request);
     }
 
