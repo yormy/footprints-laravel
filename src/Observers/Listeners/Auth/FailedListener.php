@@ -2,7 +2,7 @@
 
 namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
 
-use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Failed;
 use Yormy\LaravelFootsteps\Enums\LogType;
 use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
 
@@ -11,7 +11,7 @@ class FailedListener extends BaseListener
     /**
      * @return void
      */
-    public function handle(Login $event)
+    public function handle(Failed $event)
     {
         if (! config('footsteps.enabled') ||
             ! config('footsteps.log_events.auth_failed')
