@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Builder;
+use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
 
 /**
@@ -13,6 +14,7 @@ use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
  */
 class Log extends Model implements FootstepInterface
 {
+    use PackageFactoryTrait;
     use Prunable;
 
     protected $fillable = [
