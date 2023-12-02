@@ -3,14 +3,60 @@
 namespace Yormy\LaravelFootsteps\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
+use Mexion\BedrockUsersv2\Domain\User\Models\Member;
+use Mexion\BedrockUsersv2\Domain\User\Models\UserSession;
 use Yormy\LaravelFootsteps\Exceptions\CacheTagSupportException;
+use Yormy\LaravelFootsteps\Models\Log;
 
 class LogItemRepository
 {
+
+    public function __construct(private ?Log $model = null)
+    {
+        if (!$model) {
+            $this->model = new Log();
+        }
+    }
+
+    public function getAllLoginForUser(Admin| Member $user): Collection
+    {
+        return $this->queryForUser($user)
+            ->select([
+                'id',
+                'log_type',
+                //'ip_address',
+                'ip',
+                'user_agent',
+                'location',
+                'created_at',
+            ])
+            ->whereIn('log_type', ['AUTH_LOGIN', 'AUTH_FAILED'])
+            ->orderBy('created_at','DESC')
+            ->get();
+    }
+
+    private function queryForUser(Admin| Member $user): Builder
+    {
+        $userType = '';
+        if ($user instanceof Member) {
+            $userType = '%Member';
+        }
+
+        if ($user instanceof Admin) {
+            $userType = '%Member';
+        }
+
+        return $this->model::where('user_id', $user->id)
+            ->where('user_type', 'like', $userType);
+    }
+
     public function createLogEntry(?Authenticatable $user, Request $request, array $props): void
     {
         $userFields = $this->getUserData($user);
