@@ -35,7 +35,7 @@ return new class extends Migration
             $table->json('model_old')->nullable();
             $table->json('model_changes')->nullable();
 
-            $table->string('ip')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('user_agent')->nullable();
             $table->string('browser_fingerprint', 50)->nullable();
             $table->json('location')->nullable();

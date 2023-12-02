@@ -11,7 +11,7 @@ class LogItemResource extends JsonResource
         $data = [
             'xid' => $this->xid,
             'log_type' => $this->log_type,
-            'ip' => $this->ip,
+            'ip_address' => $this->ip_address,
             'user_agent' => $this->user_agent,
             'location' => $this->location,
             'created_at' => $this->created_at,
@@ -19,7 +19,13 @@ class LogItemResource extends JsonResource
 
         $dataLocation = json_decode($this->location, true);
 
-        return array_merge($data, $dataLocation);;
+        $merged = array_merge($data, $dataLocation);
+
+        if (array_key_exists('ip', $merged)) {
+            unset($merged['ip']);       // remove the ip retrieved from the location and use the custom ip
+        }
+
+        return $merged;
     }
 
     private function get()

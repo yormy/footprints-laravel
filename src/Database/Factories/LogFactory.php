@@ -27,7 +27,7 @@ class LogFactory extends Factory
             'data' => null,
             'model_old' => null,
             'model_changes' => null,
-            'ip' => $this->faker->ipv4,
+            'ip_address' => $this->faker->ipv4,
             'user_agent' => $this->faker->userAgent,
             'browser_fingerprint' => '',
             'location' => $this->getLocation(),

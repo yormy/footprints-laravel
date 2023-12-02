@@ -31,8 +31,7 @@ class LogItemRepository
             ->select([
                 'xid',
                 'log_type',
-                //'ip_address',
-                'ip',
+                'ip_address',
                 'user_agent',
                 'location',
                 'created_at',
@@ -119,7 +118,7 @@ class LogItemRepository
         $data = [];
 
         if (config('footsteps.content.ip')) {
-            $data['ip'] = $request->ip();
+            $data['ip_address'] = $request->ip();
         }
 
         if (config('footsteps.content.user_agent')) {
