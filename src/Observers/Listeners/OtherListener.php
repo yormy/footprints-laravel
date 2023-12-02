@@ -30,7 +30,7 @@ class OtherListener
             $this->request,
             [
                 'route' => '',
-                'url' => $this->request->fullUrl(),
+                'url' => substr($this->request->fullUrl(),0, 150),
                 'log_type' => $this->getLogType($event),
                 'data' => json_encode($event),
             ]);

@@ -24,7 +24,7 @@ class RouteMatchListener extends BaseListener
             'methods' => implode(',', $event->route->methods),
         ];
 
-        $url = $this->getUrl($event);
+        $url = substr($this->getUrl($event),0, 150);
         $route = $this->getRouteName($event);
         $this->logItemRepository->createLogEntry(
             null, // no user at this time in the request cycle, update with user in the termination of the request

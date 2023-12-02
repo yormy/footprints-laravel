@@ -24,7 +24,7 @@ class FailedListener extends BaseListener
             $user,
             $this->request,
             [
-                'log_type' => LogType::AUTH_LOGIN,
+                'log_type' => LogType::AUTH_FAILED,
             ]);
     }
 }
