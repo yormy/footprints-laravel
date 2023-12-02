@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create((string)config('footsteps.table_name'), function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
+
+            $table->string('xid')->unique();
 
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('user_type')->nullable();

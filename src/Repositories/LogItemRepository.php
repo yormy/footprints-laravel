@@ -29,7 +29,7 @@ class LogItemRepository
     {
         return $this->queryForUser($user)
             ->select([
-                'id',
+                'xid',
                 'log_type',
                 //'ip_address',
                 'ip',

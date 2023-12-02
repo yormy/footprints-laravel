@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Builder;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
+use Yormy\Xid\Models\Traits\Xid;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
 class Log extends Model implements FootstepInterface
 {
+    use Xid;
     use PackageFactoryTrait;
     use Prunable;
 

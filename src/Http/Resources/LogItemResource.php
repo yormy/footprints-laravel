@@ -9,7 +9,7 @@ class LogItemResource extends JsonResource
     public function toArray($request)
     {
         $data = [
-            'id' => $this->id,
+            'xid' => $this->xid,
             'log_type' => $this->log_type,
             'ip' => $this->ip,
             'user_agent' => $this->user_agent,
