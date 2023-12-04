@@ -45,6 +45,7 @@ class LogFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Admin',
+                'user_agent' => "(admin) ". $this->faker->userAgent,
             ];
         });
     }

@@ -49,7 +49,7 @@ class LogItemRepository
         }
 
         if ($user instanceof Admin) {
-            $userType = '%Member';
+            $userType = '%Admin';
         }
 
         return $this->model::where('user_id', $user->id)
