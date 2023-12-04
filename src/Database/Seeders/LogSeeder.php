@@ -16,5 +16,8 @@ class LogSeeder extends Seeder
     {
         Log::factory(4)->loginFailed()->create();
         Log::factory(3)->loginSuccess()->create();
+
+        Log::factory(4)->loginFailed()->forAdmin()->create();
+        Log::factory(3)->loginSuccess()->forAdmin()->create();
     }
 }

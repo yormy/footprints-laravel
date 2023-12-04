@@ -5,6 +5,7 @@ namespace Yormy\LaravelFootsteps\Database\Factories;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
 use Yormy\ChaskiLaravel\Domain\Shared\Models\NotificationSent;
 use Yormy\LaravelFootsteps\Models\Log;
 
@@ -37,6 +38,15 @@ class LogFactory extends Factory
             'request_duration_sec' => 1,
             'created_at' => $this->faker->dateTime(),
         ];
+    }
+
+    public function forAdmin(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Admin',
+            ];
+        });
     }
 
     public function loginFailed(): Factory
