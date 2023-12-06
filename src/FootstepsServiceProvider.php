@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Yormy\LaravelFootsteps\Console\Commands\InstallCommand;
 use Yormy\LaravelFootsteps\Models\Log;
 use Yormy\LaravelFootsteps\ServiceProviders\EventServiceProvider;
+use Yormy\LaravelFootsteps\ServiceProviders\RouteServiceProvider;
 
 class FootstepsServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class FootstepsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footsteps');
 
         $this->app->register(EventServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
     }
 
     private function schedule(): void
