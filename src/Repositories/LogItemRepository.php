@@ -41,6 +41,29 @@ class LogItemRepository
             ->get();
     }
 
+    public function getAllActivityForUser(Admin| Member $user): Collection
+    {
+        $select = [
+            'xid',
+            'log_type',
+            'ip_address',
+            'user_agent',
+            'browser_fingerprint',
+            'location',
+            'created_at',
+            'data',
+            'impersonator_id',
+            'route',
+            'url',
+            'method'
+        ];
+
+        return $this->queryForUser($user)
+            ->select($select)
+            ->orderBy('created_at','DESC')
+            ->get();
+    }
+
     private function queryForUser(Admin| Member $user): Builder
     {
         $userType = '';

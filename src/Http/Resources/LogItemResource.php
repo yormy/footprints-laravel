@@ -17,6 +17,30 @@ class LogItemResource extends JsonResource
             'created_at' => $this->created_at,
         ];
 
+        if (isset($this->browser_fingerprint)) {
+            $data['browser_fingerprint'] = $this->browser_fingerprint;
+        }
+
+        if (isset($this->data)) {
+            $data['data'] = $this->data;
+        }
+
+        if (isset($this->impersonator_id)) {
+            $data['impersonator_id'] = $this->impersonator_id;
+        }
+
+        if (isset($this->route)) {
+            $data['route'] = $this->route;
+        }
+
+        if (isset($this->url)) {
+            $data['url'] = $this->url;
+        }
+
+        if (isset($this->method)) {
+            $data['method'] = $this->method;
+        }
+
         $dataLocation = json_decode($this->location, true);
 
         $merged = array_merge($data, $dataLocation);

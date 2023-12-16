@@ -8,6 +8,12 @@ use Yormy\LaravelFootsteps\Services\RuleService;
 
 class RouteMatchListener extends BaseListener
 {
+
+    const METHOD_GET = 'GET';
+    const METHOD_PUT = 'PUT';
+    const METHOD_PATCH = 'PATCH';
+    const METHOD_POST = 'POST';
+    const METHOD_DELETE = 'DELETE';
     /**
      * @return void
      */
@@ -24,12 +30,27 @@ class RouteMatchListener extends BaseListener
             'methods' => implode(',', $event->route->methods),
         ];
 
+        $method = '';
+        if (in_array(self::METHOD_GET, $event->route->methods)) {
+            $method = self::METHOD_GET;
+        } elseif (in_array(self::METHOD_PUT, $event->route->methods)) {
+            $method = self::METHOD_GET;
+        } elseif (in_array(self::METHOD_PATCH, $event->route->methods)) {
+            $method = self::METHOD_PATCH;
+        } elseif (in_array(self::METHOD_POST, $event->route->methods)) {
+            $method = self::METHOD_POST;
+        } elseif (in_array(self::METHOD_DELETE, $event->route->methods)) {
+            $method = self::METHOD_DELETE;
+        }
+
+
         $url = substr($this->getUrl($event),0, 150);
         $route = $this->getRouteName($event);
         $this->logItemRepository->createLogEntry(
             null, // no user at this time in the request cycle, update with user in the termination of the request
             $this->request,
             [
+                'method' => $method,
                 'route' => $route,
                 'url' => $url,
                 'log_type' => LogType::ROUTE_VISIT,

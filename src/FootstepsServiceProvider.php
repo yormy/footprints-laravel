@@ -27,6 +27,8 @@ class FootstepsServiceProvider extends ServiceProvider
         $this->loadMigrations();
 
         $this->registerCommands();
+
+        $this->registerTranslations();
     }
 
     /**
@@ -80,5 +82,10 @@ class FootstepsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom((string)static::MIGRATION_PATH);
         }
+    }
+
+    public function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'footsteps');
     }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('user_type')->nullable();
 
             $table->string('log_type', 50);
+            $table->string('method', 10)->nullable();
             $table->string('table_name', 50)->nullable();
 
             $table->bigInteger('model_id')->unsigned()->nullable();

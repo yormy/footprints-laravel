@@ -21,6 +21,7 @@ class Log extends Model implements FootstepInterface
 
     protected $fillable = [
         'impersonator_id',
+        'method',
         'user_id',
         'user_type',
         'route',
