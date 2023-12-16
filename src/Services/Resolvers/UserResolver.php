@@ -17,4 +17,9 @@ class UserResolver
 
         return $user;
     }
+
+    public static function getMemberOnXId(string $xid): ?Member
+    {
+        return Member::where('xid', $xid)->first();
+    }
 }

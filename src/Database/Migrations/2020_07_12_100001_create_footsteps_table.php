@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('xid')->unique();
-
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('impersonator_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->string('user_type')->nullable();
 
             $table->string('log_type', 50);

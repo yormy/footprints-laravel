@@ -20,6 +20,7 @@ class Log extends Model implements FootstepInterface
     use Prunable;
 
     protected $fillable = [
+        'impersonator_id',
         'user_id',
         'user_type',
         'route',

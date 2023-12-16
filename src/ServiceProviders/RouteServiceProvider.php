@@ -3,6 +3,7 @@
 namespace Yormy\LaravelFootsteps\ServiceProviders;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Yormy\LaravelFootsteps\Routes\FootstepsAdminRoutes;
 use Yormy\LaravelFootsteps\Routes\FootstepsRoutes;
 
 class RouteServiceProvider extends ServiceProvider
@@ -30,5 +31,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes(): void
     {
         FootstepsRoutes::register();
+        FootstepsAdminRoutes::register();
     }
 }

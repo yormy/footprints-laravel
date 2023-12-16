@@ -73,6 +73,8 @@ class LogItemRepository
 
         $data['browser_fingerprint'] = $request->cookie('session_id');
 
+        $data['impersonator_id'] = $request->get('impersonator_id');
+
         $logModel = $this->getLogItemModel();
         $logModel->create($data);
     }
