@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Enums;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Enums;
 
 enum LogType: string
 {
@@ -9,7 +11,6 @@ enum LogType: string
     case MODEL_CREATED = 'MODEL_CREATED';
     case MODEL_DELETED = 'MODEL_DELETED';
     case MODEL_UPDATED = 'MODEL_UPDATED';
-
 
     case ROUTE_VISIT = 'ROUTE_VISIT';
 

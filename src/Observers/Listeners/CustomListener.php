@@ -1,36 +1,31 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+declare(strict_types=1);
 
-use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
+
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent;
 
 class CustomListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(CustomFootstepEvent $event)
+    public function handle(CustomFootprintEvent $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.on_custom')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.on_custom')
         ) {
             return;
         }
 
-        $data = $event->getData();
-        $request = $event->getRequest();
-        $data['request_id'] = (string)$request->get('request_id');
+        $requestDto = RequestDto::fromRequest($this->request);
 
-        $fields = [
-            'table_name' => $event->getTableName(),
-            'log_type' => $event->getLogType(),
-            'data' => json_encode($data),
+        $data = $event->getData();
+        $props = [
+            'log_type' => $event->getType(),
+            'custom_data' => json_encode($data),
         ];
 
-        $this->logItemRepository->createLogEntry(
-            $event->getUser(),
-            $event->getRequest(),
-            $fields
-        );
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }

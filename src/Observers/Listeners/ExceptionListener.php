@@ -1,20 +1,20 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Throwable;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
-use Yormy\LaravelFootsteps\Services\RuleService;
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Events\ExceptionEvent;
+use Yormy\FootprintsLaravel\Services\RuleService;
 
 class ExceptionListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ExceptionEvent $event)
+    public function handle(ExceptionEvent $event): void
     {
         $exception = $event->getException();
 
@@ -23,27 +23,32 @@ class ExceptionListener extends BaseListener
         }
 
         $request = $event->getRequest();
+        $requestDto = RequestDto::fromRequest($request);
 
-        $this->logItemRepository->createLogEntry(
-            Auth::user(),
-            $request,
-            [
-                'route' => '',
-                'url' => $request->fullUrl(),
-                'log_type' => $this->getLogType($exception),
-                'data' => json_encode($event),
-            ]);
+        $logtype = $this->getLogType($exception);
+
+        if (! $logtype) {
+            return;
+        }
+
+        $props = [
+            'log_type' => $this->getLogType($exception),
+        ];
+
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 
-    private function getLogType(Throwable $exception): string
+    private function getLogType(Throwable $exception): ?string
     {
-        $logExceptions = (array)config('footsteps.log_exceptions.exceptions');
-        $exceptionClass = get_class($exception);
+        $logExceptions = (array) config('footprints.log_exceptions.exceptions');
+        $exceptionClass = $exception::class;
 
         if (array_key_exists($exceptionClass, $logExceptions)) {
-            return (string)$logExceptions[$exceptionClass];
+            return (string) $logExceptions[$exceptionClass];
         }
-        return LogType::EXCEPTION_UNSPECIFIED->value;
+
+        //return LogType::EXCEPTION_UNSPECIFIED->value; // only log specified exceptions
+        return null;
     }
 
     private function shouldLog(Throwable $exception): bool
@@ -52,16 +57,16 @@ class ExceptionListener extends BaseListener
             return false;
         }
 
-        if (! config('footsteps.enabled') ) {
+        if (! config('footprints.enabled')) {
             return false;
         }
 
-        if (! config('footsteps.log_exceptions.enabled') ) {
+        if (! config('footprints.log_exceptions.enabled')) {
             return false;
         }
 
-        $exceptionClass = get_class($exception);
-        if (RuleService::shouldInclude($exceptionClass, (array)config('footsteps.log_exceptions.exceptions'))) {
+        $exceptionClass = $exception::class;
+        if (RuleService::shouldInclude($exceptionClass, (array) config('footprints.log_exceptions.exceptions'))) {
             return false;
         }
 

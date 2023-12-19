@@ -1,30 +1,32 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Failed;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class FailedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(Failed $event)
+    public function handle(Failed $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.auth_failed')
+        // @phpstan-ignore-next-line
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.auth_failed')
         ) {
             return;
         }
 
-        $user = $event->user;
-        $this->logItemRepository->createLogEntry(
-            $user,
-            $this->request,
-            [
-                'log_type' => LogType::AUTH_FAILED,
-            ]);
+        $props = [
+            'log_type' => LogType::AUTH_FAILED,
+        ];
+
+        $requestDto = RequestDto::fromRequest($this->request);
+
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }
