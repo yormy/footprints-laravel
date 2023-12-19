@@ -1,7 +1,7 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+declare(strict_types=1);
 
-class ModelDeletedEvent extends ModelBaseEvent
-{
-}
+namespace Yormy\FootprintsLaravel\Observers\Events;
+
+class ModelDeletedEvent extends ModelBaseEvent {}

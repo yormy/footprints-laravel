@@ -1,20 +1,20 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Failed;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class FailedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(Failed $event)
+    public function handle(Failed $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.auth_failed')
+        // @phpstan-ignore-next-line
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.auth_failed')
         ) {
             return;
         }
@@ -25,6 +25,7 @@ class FailedListener extends BaseListener
             $this->request,
             [
                 'log_type' => LogType::AUTH_FAILED,
-            ]);
+            ]
+        );
     }
 }

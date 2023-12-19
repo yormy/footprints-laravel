@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\Request;
@@ -11,10 +13,7 @@ class RequestTerminatedEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(protected Request $request, protected string $response)
-    {
-        //
-    }
+    public function __construct(protected Request $request, protected string $response) {}
 
     public function getRequest(): Request
     {

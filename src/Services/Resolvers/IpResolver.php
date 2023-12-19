@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Services\Resolvers;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\IpUtils;
@@ -35,5 +37,4 @@ class IpResolver
 
         return false;
     }
-
 }

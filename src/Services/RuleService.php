@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Services;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Services;
 
 class RuleService
 {

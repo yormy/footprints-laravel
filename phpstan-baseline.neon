@@ -1,0 +1,441 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method object\\:\\:getTable\\(\\)\\.$#"
+			count: 1
+			path: src/Console/Commands/InstallCommand.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Console/Commands/InstallCommand.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Database\\\\Factories\\\\LogFactory\\:\\:forAdmin\\(\\) has parameter \\$admin with no type specified\\.$#"
+			count: 1
+			path: src/Database/Factories/LogFactory.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Database\\\\Factories\\\\LogFactory\\:\\:forMember\\(\\) has parameter \\$member with no type specified\\.$#"
+			count: 1
+			path: src/Database/Factories/LogFactory.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Database/Migrations/2020_07_12_100001_create_footprints_table.php
+
+		-
+			message: "#^Call to static method where\\(\\) on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 4
+			path: src/Database/Seeders/LogSeeder.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:decorateWithStatus\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:indexForUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:indexForUser\\(\\) has parameter \\$member_xid with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:returnForUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:returnForUser\\(\\) has parameter \\$request with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\ActivityController\\:\\:returnForUser\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/ActivityController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Admins\\\\AdminLoginHistoryController\\:\\:getUser\\(\\) has parameter \\$member_xid with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Admins/AdminLoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Admins\\\\AdminLoginHistoryController\\:\\:getUser\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Model but returns Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Admins/AdminLoginHistoryController.php
+
+		-
+			message: "#^Call to an undefined method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:getUser\\(\\)\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:decorateWithStatus\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:index\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:indexForUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:indexForUser\\(\\) has parameter \\$member_xid with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:returnForUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:returnForUser\\(\\) has parameter \\$request with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Base\\\\LoginHistoryController\\:\\:returnForUser\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Variable \\$status might not be defined\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Base/LoginHistoryController.php
+
+		-
+			message: "#^Constructor of class Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\BaseController has an unused parameter \\$request\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/BaseController.php
+
+		-
+			message: "#^Property Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\BaseController\\:\\:\\$user has no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/BaseController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Members\\\\MemberLoginHistoryController\\:\\:getUser\\(\\) has parameter \\$member_xid with no type specified\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Members/MemberLoginHistoryController.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Controllers\\\\Api\\\\V1\\\\Members\\\\MemberLoginHistoryController\\:\\:getUser\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Model but returns Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Http/Controllers/Api/V1/Members/MemberLoginHistoryController.php
+
+		-
+			message: "#^Cannot call method getContent\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Http/Middleware/AddTracking.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$created_at\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$ip_address\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$location\\.$#"
+			count: 2
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$log_type\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$user_agent\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Access to an undefined property Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:\\$xid\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Http\\\\Resources\\\\LogItemResource\\:\\:get\\(\\) is unused\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, mixed given\\.$#"
+			count: 1
+			path: src/Http/Resources/LogItemResource.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Models/Log.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Models/Log.php
+
+		-
+			message: "#^Property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$table \\(string\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: src/Models/Log.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Observers\\\\Listeners\\\\Auth\\\\LockoutListener\\:\\:findUser\\(\\) never returns Illuminate\\\\Contracts\\\\Auth\\\\Authenticatable so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Auth/LockoutListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/CustomListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/ExceptionListener.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelCreatedListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelCreatedListener.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelDeletedListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelDeletedListener.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$id\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelUpdatedListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/Model/ModelUpdatedListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/OtherListener.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Observers\\\\Listeners\\\\OtherListener\\:\\:getLogType\\(\\) has parameter \\$event with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Listeners/OtherListener.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Observers\\\\Listeners\\\\OtherListener\\:\\:handle\\(\\) has parameter \\$event with no type specified\\.$#"
+			count: 1
+			path: src/Observers/Listeners/OtherListener.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Observers/Listeners/RequestTerminatedListener.php
+
+		-
+			message: "#^Constant LARAVEL_START not found\\.$#"
+			count: 1
+			path: src/Observers/Listeners/RequestTerminatedListener.php
+
+		-
+			message: "#^Access to an undefined property Illuminate\\\\Contracts\\\\Auth\\\\Authenticatable\\:\\:\\$id\\.$#"
+			count: 2
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Access to property \\$id on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Access to property \\$id on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Cannot call method supportsTags\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Cannot call static method where\\(\\) on Yormy\\\\FootprintsLaravel\\\\Models\\\\Log\\|null\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin not found\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member not found\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Function geoip not found\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllActivityForUser\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Collection but returns Illuminate\\\\Support\\\\Collection\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllLoginForUser\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Collection but returns Illuminate\\\\Support\\\\Collection\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getLogItemModel\\(\\) should return Illuminate\\\\Database\\\\Eloquent\\\\Model but returns object\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllActivityForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllActivityForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllLoginForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:getAllLoginForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:queryForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Parameter \\$user of method Yormy\\\\FootprintsLaravel\\\\Repositories\\\\LogItemRepository\\:\\:queryForUser\\(\\) has invalid type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Repositories/LogItemRepository.php
+
+		-
+			message: "#^Cannot call method ip\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Services/Resolvers/IpResolver.php
+
+		-
+			message: "#^Parameter \\#1 \\$ip of static method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\IpResolver\\:\\:matches\\(\\) expects string, array\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Services/Resolvers/IpResolver.php
+
+		-
+			message: "#^Call to method browser\\(\\) on an unknown class Jenssegers\\\\Agent\\\\Agent\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Call to method platform\\(\\) on an unknown class Jenssegers\\\\Agent\\\\Agent\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Call to method version\\(\\) on an unknown class Jenssegers\\\\Agent\\\\Agent\\.$#"
+			count: 2
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Instantiated class Jenssegers\\\\Agent\\\\Agent not found\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserAgentResolver\\:\\:getFullAgent\\(\\) should return string but returns array\\|string\\|null\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserAgentResolver.php
+
+		-
+			message: "#^Call to static method where\\(\\) on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Call to static method where\\(\\) on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:getAdminOnXId\\(\\) has invalid return type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:getCurrent\\(\\) has invalid return type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:getCurrent\\(\\) has invalid return type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:getCurrent\\(\\) should return Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Admin\\|Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\|null but returns Illuminate\\\\Contracts\\\\Auth\\\\Authenticatable\\|null\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Method Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\UserResolver\\:\\:getMemberOnXId\\(\\) has invalid return type Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$user contains unknown class Yormy\\\\FootprintsLaravel\\\\Services\\\\Resolvers\\\\User\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php
+
+		-
+			message: "#^Variable \\$user in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: src/Services/Resolvers/UserResolver.php

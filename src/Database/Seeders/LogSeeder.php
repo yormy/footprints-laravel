@@ -1,23 +1,40 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Database\Seeders;
+declare(strict_types=1);
 
+namespace Yormy\FootprintsLaravel\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Mexion\BedrockUsersv2\Domain\Standby\Models\StandbyReason;
-use Mexion\BedrockUsersv2\Domain\User\Models\PersonalAccessToken;
-use Mexion\TestappCore\Domain\Billing\Database\Seeders\BillingMainSeeder;
-use Yormy\ChaskiLaravel\Domain\Shared\Models\NotificationSent;
-use Yormy\LaravelFootsteps\Models\Log;
+use Mexion\BedrockUsersv2\Domain\User\Models\Member;
+use Yormy\FootprintsLaravel\Models\Log;
 
 class LogSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        Log::factory(4)->loginFailed()->create();
-        Log::factory(3)->loginSuccess()->create();
+        $this->memberLogSeeder();
+        $this->adminLogSeeder();
+    }
 
-        Log::factory(4)->loginFailed()->forAdmin()->create();
-        Log::factory(3)->loginSuccess()->forAdmin()->create();
+    private function memberLogSeeder(): void
+    {
+        $member = Member::where('id', 1)->first();
+        Log::factory(4)->loginFailed()->forMember($member)->create();
+        Log::factory(3)->loginSuccess()->forMember($member)->create();
+
+        $member = Member::where('id', 2)->first();
+        Log::factory(4)->loginFailed()->forMember($member)->create();
+        Log::factory(3)->loginSuccess()->forMember($member)->create();
+    }
+
+    private function adminLogSeeder(): void
+    {
+        $admin = Member::where('id', 1)->first();
+        Log::factory(4)->loginFailed()->forAdmin($admin)->create();
+        Log::factory(3)->loginSuccess()->forAdmin($admin)->create();
+
+        $admin = Member::where('id', 2)->first();
+        Log::factory(4)->loginFailed()->forAdmin($admin)->create();
+        Log::factory(3)->loginSuccess()->forAdmin($admin)->create();
     }
 }

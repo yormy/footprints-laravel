@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -13,10 +15,7 @@ class ModelBaseEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(private Model $model, protected ?Authenticatable $user, protected Request $request)
-    {
-        //
-    }
+    public function __construct(private Model $model, protected ?Authenticatable $user, protected Request $request) {}
 
     public function getModel(): Model
     {

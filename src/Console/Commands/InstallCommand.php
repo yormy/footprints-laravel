@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Console\Commands;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -8,11 +10,11 @@ use Illuminate\Support\Facades\Schema;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'footsteps:install';
+    protected $signature = 'footprints:install';
 
     protected $description = 'Publish the configuration and run the migrations';
 
-    protected string $migrationFile = '2020_07_12_100001_create_footsteps_table.php';
+    protected string $migrationFile = '2020_07_12_100001_create_footprints_table.php';
 
     public function handle(): void
     {
@@ -30,7 +32,7 @@ class InstallCommand extends Command
      */
     private function runMigrations(): void
     {
-        $logModelClass = (string)config('footsteps.log_model');
+        $logModelClass = (string) config('footprints.log_model');
 
         $table = (new $logModelClass)->getTable();
 
@@ -44,8 +46,8 @@ class InstallCommand extends Command
 
     private function checkAndPublishConfig(): void
     {
-        if (File::exists(config_path('footsteps.php'))) {
-            $confirm = $this->confirm('footsteps.php config file already exist. Do you want to overwrite?');
+        if (File::exists(config_path('footprints.php'))) {
+            $confirm = $this->confirm('footprints.php config file already exist. Do you want to overwrite?');
             if ($confirm) {
                 $this->publishConfig();
                 $this->info('config overwrite finished');
@@ -60,7 +62,7 @@ class InstallCommand extends Command
 
     private function checkAndPublishMigrations(): void
     {
-        if (File::exists(database_path("migrations/$this->migrationFile"))) {
+        if (File::exists(database_path("migrations/{$this->migrationFile}"))) {
             $confirm = $this->confirm('migration file already exist. Do you want to overwrite?');
             if ($confirm) {
                 $this->publishMigration();
@@ -77,7 +79,7 @@ class InstallCommand extends Command
     private function publishConfig(): void
     {
         $this->call('vendor:publish', [
-            '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",
+            '--provider' => "Yormy\FootprintsLaravel\ServiceProvider",
             '--tag' => 'config',
             '--force' => true,
         ]);
@@ -86,7 +88,7 @@ class InstallCommand extends Command
     private function publishMigration(): void
     {
         $this->call('vendor:publish', [
-            '--provider' => "Yormy\LaravelFootsteps\ServiceProvider",
+            '--provider' => "Yormy\FootprintsLaravel\ServiceProvider",
             '--tag' => 'migrations',
             '--force' => true,
         ]);

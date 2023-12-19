@@ -1,21 +1,20 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
+declare(strict_types=1);
 
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ModelDeletedEvent;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
-use Yormy\LaravelFootsteps\Services\BlacklistFilter;
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
+
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Observers\Events\ModelDeletedEvent;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
+use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelDeletedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelDeletedEvent $event)
+    public function handle(ModelDeletedEvent $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.model_deleted')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.model_deleted')
         ) {
             return;
         }
@@ -25,12 +24,12 @@ class ModelDeletedListener extends BaseListener
 
         $request = $event->getRequest();
         $data = [];
-        $data['request_id'] = (string)$request->get('request_id');
+        $data['request_id'] = (string) $request->get('request_id');
 
         $valuesOld = json_encode([]);
-        if (config('footsteps.model.content.values_old')) {
+        if (config('footprints.model.content.values_old')) {
             /** @var array $loggableFields */
-            $loggableFields = $model->getFootstepsFields();
+            $loggableFields = $model->getFootprintsFields();
             $valuesOld = BlacklistFilter::filter($model->toArray(), $loggableFields);
             $valuesOld = json_encode($valuesOld);
         }
@@ -38,7 +37,7 @@ class ModelDeletedListener extends BaseListener
         $fields = [
             'table_name' => $tableName,
             'log_type' => LogType::MODEL_DELETED,
-            'model_type' => get_class($model),
+            'model_type' => $model::class,
             'model_id' => $model->id,
             'model_old' => $valuesOld,
             'data' => json_encode($data),

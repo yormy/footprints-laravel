@@ -1,27 +1,26 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+declare(strict_types=1);
 
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
 
 class OtherListener
 {
     public function __construct(protected LogItemRepository $logItemRepository, protected Request $request)
     {
-        //
     }
 
     /**
      * @psalm-suppress MissingParamType
-     * @return void
      */
-    public function handle($event)
+    public function handle($event): void
     {
-        if (! config('footsteps.enabled')) {
+        if (! config('footprints.enabled')) {
             return;
         }
 
@@ -30,10 +29,11 @@ class OtherListener
             $this->request,
             [
                 'route' => '',
-                'url' => substr($this->request->fullUrl(),0, 150),
+                'url' => substr($this->request->fullUrl(), 0, 150),
                 'log_type' => $this->getLogType($event),
                 'data' => json_encode($event),
-            ]);
+            ]
+        );
     }
 
     /**
@@ -42,13 +42,14 @@ class OtherListener
      */
     private function getLogType($event): string
     {
-        $logEvents = (array)config('footsteps.log_events.other_events');
+        $logEvents = (array) config('footprints.log_events.other_events');
 
-        $eventClass = get_class($event);
+        $eventClass = $event::class;
 
         if (array_key_exists($eventClass, $logEvents)) {
-            return (string)$logEvents[$eventClass];
+            return (string) $logEvents[$eventClass];
         }
+
         return LogType::UNKNOWN->value;
     }
 }
