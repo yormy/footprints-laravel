@@ -16,9 +16,6 @@ class LogFactory extends Factory
     public function definition()
     {
         return [
-            'id' => rand(1, 99999),
-            'user_id' => 1,
-            'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Member',
             'log_type' => 'AUTH_FAILED',
             'method' => 'SEED',
             'table_name' => '',
@@ -41,12 +38,24 @@ class LogFactory extends Factory
         ];
     }
 
-    public function forAdmin(): Factory
+    public function forMember($member): Factory
     {
-        return $this->state(function (array $attributes) {
+        return $this->state(function (array $attributes) use ($member) {
             return [
+                'user_id' => $member->id,
+                'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Member',
+                'user_agent' => "(member $member->id) ". $this->faker->userAgent,
+            ];
+        });
+    }
+
+    public function forAdmin($admin): Factory
+    {
+        return $this->state(function (array $attributes) use ($admin) {
+            return [
+                'user_id' => $admin->id,
                 'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Admin',
-                'user_agent' => "(admin) ". $this->faker->userAgent,
+                'user_agent' => "(admin $admin->id) ". $this->faker->userAgent,
             ];
         });
     }
