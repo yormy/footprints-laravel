@@ -3,7 +3,7 @@
 namespace Yormy\LaravelFootsteps\Routes;
 
 use Illuminate\Support\Facades\Route;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\LoginHistoryController;
+use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base\LoginHistoryController;
 
 class FootstepsRoutes
 {

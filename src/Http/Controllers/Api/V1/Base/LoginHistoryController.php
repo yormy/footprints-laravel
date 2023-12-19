@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1;
+namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base;
 
 use Illuminate\Http\Request;
 use Yormy\Apiresponse\Facades\ApiResponse;
+use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\BaseController;
+use Yormy\LaravelFootsteps\Http\Resources\LogItemCollection;
 use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
-use  Yormy\LaravelFootsteps\Http\Resources\LogItemCollection;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
 
-class LoginHistoryController extends BaseController
+abstract class LoginHistoryController extends BaseController
 {
     public function index(Request $request)
     {
@@ -17,7 +17,7 @@ class LoginHistoryController extends BaseController
 
     public function indexForUser(Request $request, $member_xid)
     {
-        $user = UserResolver::getMemberOnXId($member_xid);
+        $user = $this->getUser($member_xid);
 
         return $this->returnForUser($request, $user);
     }
