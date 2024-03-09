@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Tests;
+namespace Yormy\FootprintsLaravel\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
 

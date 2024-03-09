@@ -1,17 +1,17 @@
 <?php
 
-namespace Yormy\LaravelFootsteps;
+namespace Yormy\FootprintsLaravel;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
-use Yormy\LaravelFootsteps\Console\Commands\InstallCommand;
-use Yormy\LaravelFootsteps\Models\Log;
-use Yormy\LaravelFootsteps\ServiceProviders\EventServiceProvider;
-use Yormy\LaravelFootsteps\ServiceProviders\RouteServiceProvider;
+use Yormy\FootprintsLaravel\Console\Commands\InstallCommand;
+use Yormy\FootprintsLaravel\Models\Log;
+use Yormy\FootprintsLaravel\ServiceProviders\EventServiceProvider;
+use Yormy\FootprintsLaravel\ServiceProviders\RouteServiceProvider;
 
-class FootstepsServiceProvider extends ServiceProvider
+class FootprintsServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__ . '/../config/footsteps.php';
+    const CONFIG_FILE = __DIR__ . '/../config/footprints.php';
 
     const MIGRATION_PATH = __DIR__ . '/Database/Migrations';
 
@@ -36,7 +36,7 @@ class FootstepsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(static::CONFIG_FILE, 'footsteps');
+        $this->mergeConfigFrom(static::CONFIG_FILE, 'footprints');
 
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
@@ -49,7 +49,7 @@ class FootstepsServiceProvider extends ServiceProvider
                 '--model' => Log::class,
             ])->daily();
 
-            if (config('footsteps.log_geoip')) {
+            if (config('footprints.log_geoip')) {
                 $schedule->command('geoip:update')->monthly();
             }
         });
@@ -59,7 +59,7 @@ class FootstepsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                self::CONFIG_FILE => config_path('footsteps.php'),
+                self::CONFIG_FILE => config_path('footprints.php'),
             ], 'config');
 
             $this->publishes([
@@ -86,6 +86,6 @@ class FootstepsServiceProvider extends ServiceProvider
 
     public function registerTranslations(): void
     {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'footsteps');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'footprints');
     }
 }

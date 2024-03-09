@@ -1,9 +1,9 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
 
 class BaseListener
 {

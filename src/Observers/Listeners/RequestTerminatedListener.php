@@ -1,9 +1,9 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 
 class RequestTerminatedListener extends BaseListener
 {
@@ -26,13 +26,13 @@ class RequestTerminatedListener extends BaseListener
 
     private function shouldLog(): bool
     {
-        if (! config('footsteps.enabled') ) {
+        if (! config('footprints.enabled') ) {
             return false;
         }
 
         if (
-            ! config('footsteps.content.duration') &&
-            ! config('footsteps.content.response')
+            ! config('footprints.content.duration') &&
+            ! config('footprints.content.response')
         ) {
             return false;
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Repositories;
+namespace Yormy\FootprintsLaravel\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
 use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 use Mexion\BedrockUsersv2\Domain\User\Models\UserSession;
-use Yormy\LaravelFootsteps\Exceptions\CacheTagSupportException;
-use Yormy\LaravelFootsteps\Models\Log;
+use Yormy\FootprintsLaravel\Exceptions\CacheTagSupportException;
+use Yormy\FootprintsLaravel\Models\Log;
 
 class LogItemRepository
 {
@@ -128,7 +128,7 @@ class LogItemRepository
      */
     private function getLogItemModel(): Model
     {
-        $logModelClass = config('footsteps.log_model');
+        $logModelClass = config('footprints.log_model');
 
         return new $logModelClass;
     }
@@ -142,15 +142,15 @@ class LogItemRepository
     {
         $data = [];
 
-        if (config('footsteps.content.ip')) {
+        if (config('footprints.content.ip')) {
             $data['ip_address'] = $request->ip();
         }
 
-        if (config('footsteps.content.user_agent')) {
+        if (config('footprints.content.user_agent')) {
             $data['user_agent'] = $request->userAgent();
         }
 
-        if (config('footsteps.content.geoip')) {
+        if (config('footprints.content.geoip')) {
             $supportsTags = cache()->supportsTags();
             if (!$supportsTags) {
                 throw new CacheTagSupportException();
@@ -181,11 +181,11 @@ class LogItemRepository
 
     private static function cleanPayload(string $payload): string
     {
-        if (! config('footsteps.content.payload.enabled')) {
+        if (! config('footprints.content.payload.enabled')) {
             return '';
         }
 
-        $truncated = substr($payload, 0, (int)config('footsteps.payload.max_characters'));
+        $truncated = substr($payload, 0, (int)config('footprints.payload.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
@@ -193,11 +193,11 @@ class LogItemRepository
 
     private static function cleanResponse(string $response): string
     {
-        if (! config('footsteps.content.response.enabled')) {
+        if (! config('footprints.content.response.enabled')) {
             return '';
         }
 
-        $truncated = substr($response, 0, (int)config('footsteps.response.max_characters'));
+        $truncated = substr($response, 0, (int)config('footprints.response.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }

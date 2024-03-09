@@ -1,7 +1,7 @@
-# footsteps
+# Footprints
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/yormy/laravel-footsteps.svg?style=flat-square)](https://packagist.org/packages/yormy/laravel-footsteps)
-[![Total Downloads](https://img.shields.io/packagist/dt/yormy/laravel-footsteps.svg?style=flat-square)](https://packagist.org/packages/yormy/laravel-footsteps)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/yormy/footprints-laravel.svg?style=flat-square)](https://packagist.org/packages/yormy/footprints-laravel)
+[![Total Downloads](https://img.shields.io/packagist/dt/yormy/footprints-laravel.svg?style=flat-square)](https://packagist.org/packages/yormy/footprints-laravel)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/facade/ignition/run-php-tests?label=Tests)
 ![Alt text](./coverage.svg)
 
@@ -13,7 +13,7 @@ This package allows you to track a users journey through your system.
 
 
 ## Model Pruning
-in your footsteps config specify the number of days on that needs to be kept
+in your footprints config specify the number of days on that needs to be kept
 The prune runs daily to check if items need to be deleted
 
 
@@ -22,18 +22,18 @@ The prune runs daily to check if items need to be deleted
 You can install the package via composer:
 
 ```bash
-composer require yormy/laravel-footsteps
+composer require yormy/footprints-laravel
 ```
 
 ### Model changes tracking
 add to your model 
-```use Footsteps;```
+```use Footprints;```
 
 ## Exception logging
 Exceptions can be logged
 add tyo your Exceptions/handler.php
 ```
-use use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
+use use Yormy\FootprintsLaravel\Observers\Events\ExceptionEvent;
 
     public function report(Throwable $exception)
     {
@@ -48,7 +48,7 @@ To allow response tracking, and response timing tracking you need to do the foll
 
 Add the add tracking middleware to the beginning of your request
 ```
-    use Yormy\LaravelFootsteps\Http\Middleware\AddTracking;
+    use Yormy\FootprintsLaravel\Http\Middleware\AddTracking;
 
     protected $middleware = [
         AddTracking::class,

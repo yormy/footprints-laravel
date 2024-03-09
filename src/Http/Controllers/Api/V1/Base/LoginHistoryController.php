@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base;
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base;
 
 use Illuminate\Http\Request;
 use Yormy\Apiresponse\Facades\ApiResponse;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\BaseController;
-use Yormy\LaravelFootsteps\Http\Resources\LogItemCollection;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\BaseController;
+use Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
+use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
 
 abstract class LoginHistoryController extends BaseController
 {

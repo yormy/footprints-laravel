@@ -1,20 +1,20 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Routes;
+namespace Yormy\FootprintsLaravel\Routes;
 
 use Illuminate\Support\Facades\Route;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\ActivityController;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Admins\AdminLoginHistoryController;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base\LoginHistoryController;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Members\MemberLoginHistoryController;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\ActivityController;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Admins\AdminLoginHistoryController;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Members\MemberLoginHistoryController;
 
-class FootstepsAdminRoutes
+class FootprintsAdminRoutes
 {
     public static function register(): void
     {
-        Route::macro('FootstepsAdminApiRoutes', function (string $prefix = '') {
+        Route::macro('FootprintsAdminApiRoutes', function (string $prefix = '') {
             Route::prefix($prefix)
-                ->name('footsteps.')
+                ->name('footprints.')
                 ->group(function () {
 
                     Route::prefix('loginhistory')
@@ -31,9 +31,9 @@ class FootstepsAdminRoutes
                 });
         });
 
-        Route::macro('FootstepsAdminAdminApiRoutes', function (string $prefix = '') {
+        Route::macro('FootprintsAdminAdminApiRoutes', function (string $prefix = '') {
             Route::prefix($prefix)
-                ->name('footsteps.')
+                ->name('footprints.')
                 ->group(function () {
 
                     Route::prefix('loginhistory')

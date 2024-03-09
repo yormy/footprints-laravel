@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Enums;
+namespace Yormy\FootprintsLaravel\Enums;
 
 enum LogType: string
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\Request;

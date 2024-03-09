@@ -1,10 +1,10 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Routing\Events\RouteMatched;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Services\RuleService;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Services\RuleService;
 
 class RouteMatchListener extends BaseListener
 {
@@ -60,30 +60,30 @@ class RouteMatchListener extends BaseListener
 
     private function shouldLog(RouteMatched $event): bool
     {
-        if (! config('footsteps.enabled') ) {
+        if (! config('footprints.enabled') ) {
             return false;
         }
 
-        if (! config('footsteps.log_events.route_visit') ) {
+        if (! config('footprints.log_events.route_visit') ) {
             return false;
         }
 
         $url = $this->getUrl($event);
         $route = $this->getRouteName($event);
 
-        if ($url && RuleService::shouldIgnore($url, (array)config('footsteps.log_visits.urls_exclude'))) {
+        if ($url && RuleService::shouldIgnore($url, (array)config('footprints.log_visits.urls_exclude'))) {
             return false;
         }
 
-        if ($route && RuleService::shouldIgnore($route, (array)config('footsteps.log_visits.routes_exclude'))) {
+        if ($route && RuleService::shouldIgnore($route, (array)config('footprints.log_visits.routes_exclude'))) {
             return false;
         }
 
-        if ($route && RuleService::shouldInclude($route, (array)config('footsteps.log_visits.routes_include'))) {
+        if ($route && RuleService::shouldInclude($route, (array)config('footprints.log_visits.routes_include'))) {
             return true;
         }
 
-        if ($url && RuleService::shouldInclude($route, (array)config('footsteps.log_visits.urls_include'))) {
+        if ($url && RuleService::shouldInclude($route, (array)config('footprints.log_visits.urls_include'))) {
             return true;
         }
 

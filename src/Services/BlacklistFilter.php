@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Services;
+namespace Yormy\FootprintsLaravel\Services;
 
 
 class BlacklistFilter
@@ -25,7 +25,7 @@ class BlacklistFilter
         /**
          * @var array<array-key, string> $blacklistedKeys
          */
-        $blacklistedKeys = config('footsteps.content.blacklisted_keys');
+        $blacklistedKeys = config('footprints.content.blacklisted_keys');
         foreach ($blacklistedKeys as $blacklistedKey) {
             if (array_key_exists($blacklistedKey, $filtered)) {
                 $filtered[$blacklistedKey] = '******';

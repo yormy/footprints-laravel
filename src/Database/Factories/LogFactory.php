@@ -1,13 +1,13 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Database\Factories;
+namespace Yormy\FootprintsLaravel\Database\Factories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
 use Yormy\ChaskiLaravel\Domain\Shared\Models\NotificationSent;
-use Yormy\LaravelFootsteps\Models\Log;
+use Yormy\FootprintsLaravel\Models\Log;
 
 class LogFactory extends Factory
 {
@@ -80,7 +80,7 @@ class LogFactory extends Factory
 
     public function routeVisit(): Factory
     {
-//        INSERT INTO testapp.log_footsteps (id, user_id, user_type, log_type, table_name, model_id, model_type, route, url, data, model_old, model_changes, ip, user_agent, browser_fingerprint, location, payload_base64, response_base64, request_id, request_duration_sec, created_at, updated_at) VALUES (71209, 1, 'Mexion\\TestappCore\\Domain\\User\\Models\\Member', 'ROUTE_VISIT', null, null, null, 'api.v1.member.login', 'http://testapp.local/login', '{"methods": "POST"}', null, null, '172.18.0.7', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'e097f15fffc2eb6a17677f260b00b891', '{"ip": "127.0.0.0", "lat": 41.31, "lon": -72.92, "city": "New Haven", "state": "CT", "cached": false, "country": "United States", "default": true, "currency": "USD", "iso_code": "US", "timezone": "America/New_York", "continent": "NA", "state_name": "Connecticut", "postal_code": "06510"}', '', '', '8ab4b316c7f2244af70689fd424fa5b10bb51dac', 0.426, '2023-12-01 18:45:12', '2023-12-01 18:45:12');
+//        INSERT INTO testapp.footprints (id, user_id, user_type, log_type, table_name, model_id, model_type, route, url, data, model_old, model_changes, ip, user_agent, browser_fingerprint, location, payload_base64, response_base64, request_id, request_duration_sec, created_at, updated_at) VALUES (71209, 1, 'Mexion\\TestappCore\\Domain\\User\\Models\\Member', 'ROUTE_VISIT', null, null, null, 'api.v1.member.login', 'http://testapp.local/login', '{"methods": "POST"}', null, null, '172.18.0.7', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'e097f15fffc2eb6a17677f260b00b891', '{"ip": "127.0.0.0", "lat": 41.31, "lon": -72.92, "city": "New Haven", "state": "CT", "cached": false, "country": "United States", "default": true, "currency": "USD", "iso_code": "US", "timezone": "America/New_York", "continent": "NA", "state_name": "Connecticut", "postal_code": "06510"}', '', '', '8ab4b316c7f2244af70689fd424fa5b10bb51dac', 0.426, '2023-12-01 18:45:12', '2023-12-01 18:45:12');
 
         return $this->state(function (array $attributes) {
             return [

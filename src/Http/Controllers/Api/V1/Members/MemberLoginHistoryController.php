@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Members;
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Members;
 
 use Illuminate\Database\Eloquent\Model;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base\LoginHistoryController;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
+use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class MemberLoginHistoryController extends LoginHistoryController
 {

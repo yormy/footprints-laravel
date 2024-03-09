@@ -1,18 +1,18 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
-use Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent;
+use Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent;
 
 class CustomListener extends BaseListener
 {
     /**
      * @return void
      */
-    public function handle(CustomFootstepEvent $event)
+    public function handle(CustomFootprintEvent $event)
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.on_custom')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.on_custom')
         ) {
             return;
         }

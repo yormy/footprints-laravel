@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Exceptions;
+namespace Yormy\FootprintsLaravel\Exceptions;
 
 use Exception;
 

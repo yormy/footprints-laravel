@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1;
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Yormy\Apiresponse\Facades\ApiResponse;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
-use  Yormy\LaravelFootsteps\Http\Resources\LogItemCollection;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
+use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
+use  Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
+use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class ActivityController extends BaseController
 {
@@ -41,14 +41,14 @@ class ActivityController extends BaseController
                 $status = [
                     'key' => 'Login',
                     'nature' => 'success',
-                    'text' => __('footsteps::activity.auth_login'),
+                    'text' => __('footprints::activity.auth_login'),
                 ];
             }
             if ($data['log_type'] === 'AUTH_FAILED') {
                 $status = [
                     'key' => 'Login',
                     'nature' => 'danger',
-                    'text' => __('footsteps::activity.auth_failed'),
+                    'text' => __('footprints::activity.auth_failed'),
                 ];
             }
 
@@ -56,7 +56,7 @@ class ActivityController extends BaseController
                 $status = [
                     'key' => 'Visit',
                     'nature' => 'info',
-                    'text' => __('footsteps::activity.route_visit'),
+                    'text' => __('footprints::activity.route_visit'),
                 ];
             }
 

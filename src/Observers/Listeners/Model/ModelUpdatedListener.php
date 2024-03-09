@@ -1,11 +1,11 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
-use Yormy\LaravelFootsteps\Services\BlacklistFilter;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Observers\Events\ModelUpdatedEvent;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
+use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelUpdatedListener extends BaseListener
 {
@@ -15,8 +15,8 @@ class ModelUpdatedListener extends BaseListener
     public function handle(ModelUpdatedEvent $event)
     {
         ray('updated');
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.model_updated')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.model_updated')
         ) {
             return;
         }
@@ -30,10 +30,10 @@ class ModelUpdatedListener extends BaseListener
         $data['request_id'] = (string)$request->get('request_id');
 
         /** @var array $loggableFields */
-        $loggableFields = $model->getFootstepsFields();
+        $loggableFields = $model->getFootprintsFields();
 
         $valuesOld = json_encode([]);
-        if (config('footsteps.content.model.values_old')) {
+        if (config('footprints.content.model.values_old')) {
             /** @var array<array-key, mixed> $valuesOld */
             $valuesOld = $model->getRawOriginal();
             $valuesOld = BlacklistFilter::filter($valuesOld, $loggableFields);
@@ -41,7 +41,7 @@ class ModelUpdatedListener extends BaseListener
         }
 
         $valuesChanged = json_encode([]);
-        if (config('footsteps.content.model.values_changed')) {
+        if (config('footprints.content.model.values_changed')) {
             $valuesChanged = $model->getChanges();
             $valuesChanged = BlacklistFilter::filter($valuesChanged, $loggableFields);
             $valuesChanged = json_encode($valuesChanged);

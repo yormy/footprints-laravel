@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Http\Resources;
+namespace Yormy\FootprintsLaravel\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

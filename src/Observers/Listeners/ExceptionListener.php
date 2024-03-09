@@ -1,13 +1,13 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ExceptionEvent;
-use Yormy\LaravelFootsteps\Services\RuleService;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Observers\Events\ExceptionEvent;
+use Yormy\FootprintsLaravel\Services\RuleService;
 
 class ExceptionListener extends BaseListener
 {
@@ -37,7 +37,7 @@ class ExceptionListener extends BaseListener
 
     private function getLogType(Throwable $exception): string
     {
-        $logExceptions = (array)config('footsteps.log_exceptions.exceptions');
+        $logExceptions = (array)config('footprints.log_exceptions.exceptions');
         $exceptionClass = get_class($exception);
 
         if (array_key_exists($exceptionClass, $logExceptions)) {
@@ -52,16 +52,16 @@ class ExceptionListener extends BaseListener
             return false;
         }
 
-        if (! config('footsteps.enabled') ) {
+        if (! config('footprints.enabled') ) {
             return false;
         }
 
-        if (! config('footsteps.log_exceptions.enabled') ) {
+        if (! config('footprints.log_exceptions.enabled') ) {
             return false;
         }
 
         $exceptionClass = get_class($exception);
-        if (RuleService::shouldInclude($exceptionClass, (array)config('footsteps.log_exceptions.exceptions'))) {
+        if (RuleService::shouldInclude($exceptionClass, (array)config('footprints.log_exceptions.exceptions'))) {
             return false;
         }
 

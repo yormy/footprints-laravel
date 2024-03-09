@@ -1,10 +1,10 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Logout;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class LogoutListener extends BaseListener
 {
@@ -13,8 +13,8 @@ class LogoutListener extends BaseListener
      */
     public function handle(Logout $event)
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.auth_logout')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.auth_logout')
         ) {
             return;
         }

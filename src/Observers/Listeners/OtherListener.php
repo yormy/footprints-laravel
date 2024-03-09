@@ -1,12 +1,12 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
 
 class OtherListener
 {
@@ -21,7 +21,7 @@ class OtherListener
      */
     public function handle($event)
     {
-        if (! config('footsteps.enabled')) {
+        if (! config('footprints.enabled')) {
             return;
         }
 
@@ -42,7 +42,7 @@ class OtherListener
      */
     private function getLogType($event): string
     {
-        $logEvents = (array)config('footsteps.log_events.other_events');
+        $logEvents = (array)config('footprints.log_events.other_events');
 
         $eventClass = get_class($event);
 

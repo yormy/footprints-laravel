@@ -1,11 +1,11 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Http\Middleware;
+namespace Yormy\FootprintsLaravel\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 
 class AddTracking
 {

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1;
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
+use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class BaseController
 {

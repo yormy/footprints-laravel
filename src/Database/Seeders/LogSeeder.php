@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Database\Seeders;
+namespace Yormy\FootprintsLaravel\Database\Seeders;
 
 
 use Illuminate\Database\Seeder;
@@ -9,7 +9,7 @@ use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 use Mexion\BedrockUsersv2\Domain\User\Models\PersonalAccessToken;
 use Mexion\TestappCore\Domain\Billing\Database\Seeders\BillingMainSeeder;
 use Yormy\ChaskiLaravel\Domain\Shared\Models\NotificationSent;
-use Yormy\LaravelFootsteps\Models\Log;
+use Yormy\FootprintsLaravel\Models\Log;
 
 class LogSeeder extends Seeder
 {

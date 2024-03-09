@@ -1,11 +1,11 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Interfaces;
+namespace Yormy\FootprintsLaravel\Interfaces;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-interface FootstepInterface
+interface FootprintInterface
 {
 //    /**
 //     * @param Array $logNames

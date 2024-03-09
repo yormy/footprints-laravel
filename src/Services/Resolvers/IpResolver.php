@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Services\Resolvers;
+namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\IpUtils;

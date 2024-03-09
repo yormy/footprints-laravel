@@ -1,19 +1,19 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Models;
+namespace Yormy\FootprintsLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Builder;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
-use Yormy\LaravelFootsteps\Interfaces\FootstepInterface;
+use Yormy\FootprintsLaravel\Interfaces\FootprintInterface;
 use Yormy\Xid\Models\Traits\Xid;
 
 /**
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class Log extends Model implements FootstepInterface
+class Log extends Model implements FootprintInterface
 {
     use Xid;
     use PackageFactoryTrait;
@@ -48,7 +48,7 @@ class Log extends Model implements FootstepInterface
          * @psalm-suppress RedundantPropertyInitializationCheck
          */
         if (! isset($this->table)) {
-            $this->setTable((string)config('footsteps.table_name'));
+            $this->setTable((string)config('footprints.table_name'));
         }
 
         parent::__construct($attributes);
@@ -60,7 +60,7 @@ class Log extends Model implements FootstepInterface
      */
     public function prunable(): Builder
     {
-        $days = (int)config('footsteps.delete_records_older_than_days', 100);
+        $days = (int)config('footprints.delete_records_older_than_days', 100);
 
         return static::where('created_at', '<=', now()->subDays($days));
     }

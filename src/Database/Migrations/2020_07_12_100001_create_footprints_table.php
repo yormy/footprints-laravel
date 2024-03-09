@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create((string)config('footsteps.table_name'), function (Blueprint $table) {
+        Schema::create((string)config('footprints.table_name'), function (Blueprint $table) {
             $table->id();
 
             $table->string('xid')->unique();

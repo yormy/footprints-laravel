@@ -1,17 +1,17 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Routes;
+namespace Yormy\FootprintsLaravel\Routes;
 
 use Illuminate\Support\Facades\Route;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base\LoginHistoryController;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
 
-class FootstepsRoutes
+class FootprintsRoutes
 {
     public static function register(): void
     {
-        Route::macro('FootstepsApiRoutes', function (string $prefix = '') {
+        Route::macro('FootprintsApiRoutes', function (string $prefix = '') {
             Route::prefix($prefix)
-                ->name('footsteps.')
+                ->name('footprints.')
                 ->group(function () {
 
                     Route::prefix('loginhistory')

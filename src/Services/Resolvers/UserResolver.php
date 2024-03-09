@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yormy\LaravelFootsteps\Services\Resolvers;
+namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
 use Illuminate\Support\Facades\Auth;
 use Mexion\BedrockUsersv2\Domain\User\Models\Admin;

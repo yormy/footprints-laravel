@@ -1,27 +1,25 @@
 <?php
 
-use Yormy\LaravelFootsteps\Enums\LogType;
+use Yormy\FootprintsLaravel\Enums\LogType;
 
 return [
     /*
      * If set to false, nothing will be saved to the database.
      */
-    'enabled' => env('FOOTSTEPS_LOGGER_ENABLED', true),
+    'enabled' => env('FOOTPRINTS_LOGGER_ENABLED', true),
 
     /*
      * This is the name of the table that will be created by the migration and
      * used by the Log model shipped with this package.
      */
-    'table_name' => 'log_footsteps',
+    'table_name' => 'footprints',
 
     /*
-     * This model will be used to log footsteps.
-     * It should implement the Yormy\LaravelFootsteps\Interfaces\FootstepInterface interface
+     * This model will be used to log footprints.
+     * It should implement the Yormy\FootprintsLaravel\Interfaces\FootprintInterface interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'log_model' => Yormy\LaravelFootsteps\Models\Log::class,
-
-
+    'log_model' => Yormy\FootprintsLaravel\Models\Log::class,
 
     'log_events' => [
         'model_created' => true,
@@ -35,7 +33,7 @@ return [
         'auth_failed' => true,
         'auth_other_device_logout' => true,
         'other_events' => [
-            'Yormy\LaravelFootsteps\Observers\Events\CustomFootstepEvent' => "CUSTOM EVENT LISTENER"
+            'Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent' => "CUSTOM EVENT LISTENER"
         ],
     ],
 
@@ -101,7 +99,7 @@ return [
 
 
     /*
-     * When the clean-command is executed, all recording footsteps older than
+     * When the clean-command is executed, all recording footprints older than
      * the number of days specified here will be deleted.
      * The clean command is automatically run every day
      */

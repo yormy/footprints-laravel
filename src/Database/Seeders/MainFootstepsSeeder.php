@@ -1,12 +1,12 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Database\Seeders;
+namespace Yormy\FootprintsLaravel\Database\Seeders;
 
 
 use Illuminate\Database\Seeder;
 
 
-class MainFootstepsSeeder extends Seeder
+class MainFootprintsSeeder extends Seeder
 {
     public function run()
     {

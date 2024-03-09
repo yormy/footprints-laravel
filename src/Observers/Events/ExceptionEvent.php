@@ -1,6 +1,6 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Events\Dispatchable;

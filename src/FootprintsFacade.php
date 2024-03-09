@@ -1,13 +1,13 @@
 <?php
 
-namespace Yormy\LaravelFootsteps;
+namespace Yormy\FootprintsLaravel;
 
 use Illuminate\Support\Facades\Facade;
 
-class FootstepsFacade extends Facade
+class FootprintsFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return Footsteps::class;
+        return Footprints::class;
     }
 }
