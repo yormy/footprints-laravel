@@ -1,9 +1,10 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
 
 class BaseController
 {
@@ -11,6 +12,9 @@ class BaseController
 
     public function __construct(Request $request)
     {
-        $this->user = UserResolver::getCurrent();
+        $userResolverClass = config('footprints.resolvers.user');
+        $userResolver = new $userResolverClass;
+
+        $this->user = $userResolver->getCurrent();
     }
 }

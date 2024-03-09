@@ -1,53 +1,30 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
+declare(strict_types=1);
 
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ModelCreatedEvent;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
-use Yormy\LaravelFootsteps\Services\BlacklistFilter;
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
-class ModelCreatedListener extends BaseListener
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Events\ModelCreatedEvent;
+
+class ModelCreatedListener extends ModelBaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelCreatedEvent $event)
+    public function handle(ModelCreatedEvent $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.model_created')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.model_created')
         ) {
             return;
         }
 
-        $model = $event->getModel();
-        $tableName = $model->getTable();
-
         $request = $event->getRequest();
-        $data = [];
-        $data['request_id'] = (string)$request->get('request_id');
+        $requestDto = RequestDto::fromRequest($request);
 
-        $valuesOld = json_encode([]);
-        if (config('footsteps.model.content.values_old')) {
-            /** @var array $loggableFields */
-            $loggableFields = $model->getFootstepsFields();
-            $valuesOld = BlacklistFilter::filter($model->toArray(), $loggableFields);
-            $valuesOld = json_encode($valuesOld);
-        }
+        $props = $this->getData($event);
+        $props['log_type'] = LogType::MODEL_CREATED;
 
-        $fields = [
-            'table_name' => $tableName,
-            'model_type' => get_class($model),
-            'model_id' => $model->id,
-            'log_type' => LogType::MODEL_CREATED,
-            'model_old' => $valuesOld,
-            'data' => json_encode($data),
-        ];
-
-        $this->logItemRepository->createLogEntry(
-            $event->getUser(),
-            $event->getRequest(),
-            $fields
-        );
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }

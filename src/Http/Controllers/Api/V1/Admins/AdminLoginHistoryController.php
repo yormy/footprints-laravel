@@ -1,15 +1,19 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Admins;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Admins;
 
 use Illuminate\Database\Eloquent\Model;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base\LoginHistoryController;
-use Yormy\LaravelFootsteps\Services\Resolvers\UserResolver;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
 
 class AdminLoginHistoryController extends LoginHistoryController
 {
     protected function getUser($member_xid): Model
     {
-        return UserResolver::getAdminOnXId($member_xid);
+        $userResolverClass = config('footprints.resolvers.user');
+        $userResolver = new $userResolverClass;
+
+        return $userResolver->getAdmin('xid', $member_xid);
     }
 }

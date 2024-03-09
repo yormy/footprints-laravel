@@ -1,30 +1,40 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Auth;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Login;
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class LoginListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.auth_login')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.auth_login')
         ) {
             return;
         }
 
-        $user = $event->user;
-        $this->logItemRepository->createLogEntry(
-            $user,
-            $this->request,
-            [
-                'log_type' => LogType::AUTH_LOGIN,
-            ]);
+        $loginSessionIdCookieName = config('footprints.cookies.login_session_id', false);
+        if ($loginSessionIdCookieName) {
+            $sessionId = Str::random(64);
+            Cookie::queue($loginSessionIdCookieName, $sessionId, 60 * 24 * 7);
+        }
+
+        $requestDto =  RequestDto::fromRequest($this->request);
+
+        $props = [
+            'log_type' => LogType::AUTH_LOGIN,
+            'session_id' => $sessionId, // cookie not yet set, but include in logging
+        ];
+
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }

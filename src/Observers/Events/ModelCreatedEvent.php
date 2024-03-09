@@ -1,6 +1,8 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Observers\Events;
 
 class ModelCreatedEvent extends ModelBaseEvent
 {

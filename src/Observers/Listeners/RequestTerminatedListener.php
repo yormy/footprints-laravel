@@ -1,38 +1,39 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners;
+declare(strict_types=1);
 
-use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+namespace Yormy\FootprintsLaravel\Observers\Listeners;
+
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Jobs\FootprintsUpdateLogJob;
+use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 
 class RequestTerminatedListener extends BaseListener
 {
     public function handle(RequestTerminatedEvent $event): void
     {
-        if (!$this->shouldLog()) {
+        if (! $this->shouldLog()) {
             return;
         }
 
-        $request = $event->getRequest();
-
         $duration = $this->getDuration();
-
         $response = $event->getResponse();
 
-        $requestId = (string)$request->get('request_id');
+        $requestId = (string) $this->request->get('request_id');
 
-        $this->logItemRepository->updateLogEntry($requestId, $duration, $response);
+        FootprintsUpdateLogJob::dispatch($requestId, $duration, $response);
+
     }
 
     private function shouldLog(): bool
     {
-        if (! config('footsteps.enabled') ) {
+        if (! config('footprints.enabled')) {
             return false;
         }
 
         if (
-            ! config('footsteps.content.duration') &&
-            ! config('footsteps.content.response')
+            ! config('footprints.content.duration') &&
+            ! config('footprints.content.response')
         ) {
             return false;
         }
@@ -45,7 +46,7 @@ class RequestTerminatedListener extends BaseListener
         /**
          * @psalm-suppress UndefinedConstant
          */
-        $requestStart = (float)LARAVEL_START;
+        $requestStart = (float) LARAVEL_START;
 
         $duration = 0;
         if ($requestStart > 0) {

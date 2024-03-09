@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Http\Resources;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 

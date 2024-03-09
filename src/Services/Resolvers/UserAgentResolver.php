@@ -1,6 +1,8 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Services\Resolvers;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
@@ -11,17 +13,15 @@ class UserAgentResolver
     {
         $agent = new Agent();
         $platform = $agent->platform();
-        $userAgent = $platform . " ". $agent->version($platform);
+        $userAgent = $platform.' '.$agent->version($platform);
 
         $browser = $agent->browser();
-        $userAgent .= $browser ." " . $agent->version($browser);
-        return $userAgent;
+
+        return $userAgent.$browser.' '.$agent->version($browser);
     }
 
     public static function getFullAgent(Request $request): string
     {
         return $request->server('HTTP_USER_AGENT');
     }
-
-
 }

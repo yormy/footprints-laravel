@@ -1,8 +1,9 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Events;
+declare(strict_types=1);
 
-use Illuminate\Contracts\Auth\Authenticatable;
+namespace Yormy\FootprintsLaravel\Observers\Events;
+
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
@@ -15,7 +16,6 @@ class ExceptionEvent
 
     public function __construct(private Throwable $exception, private Request $request)
     {
-        //
     }
 
     public function getException(): Throwable

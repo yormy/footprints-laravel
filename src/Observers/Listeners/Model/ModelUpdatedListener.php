@@ -1,66 +1,31 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Observers\Listeners\Model;
+declare(strict_types=1);
 
-use Yormy\LaravelFootsteps\Enums\LogType;
-use Yormy\LaravelFootsteps\Observers\Events\ModelUpdatedEvent;
-use Yormy\LaravelFootsteps\Observers\Listeners\BaseListener;
-use Yormy\LaravelFootsteps\Services\BlacklistFilter;
+namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
-class ModelUpdatedListener extends BaseListener
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
+use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
+use Yormy\FootprintsLaravel\Observers\Events\ModelUpdatedEvent;
+use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
+
+class ModelUpdatedListener extends ModelBaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelUpdatedEvent $event)
+    public function handle(ModelUpdatedEvent $event): void
     {
-        ray('updated');
-        if (! config('footsteps.enabled') ||
-            ! config('footsteps.log_events.model_updated')
+        if (! config('footprints.enabled') ||
+            ! config('footprints.log_events.model_updated')
         ) {
             return;
         }
 
-        $model = $event->getModel();
-        $tableName = $model->getTable();
-
         $request = $event->getRequest();
+        $requestDto =  RequestDto::fromRequest($request);
 
-        $data = [];
-        $data['request_id'] = (string)$request->get('request_id');
+        $props = $this->getData($event);
+        $props['log_type'] = LogType::MODEL_UPDATED;
 
-        /** @var array $loggableFields */
-        $loggableFields = $model->getFootstepsFields();
-
-        $valuesOld = json_encode([]);
-        if (config('footsteps.content.model.values_old')) {
-            /** @var array<array-key, mixed> $valuesOld */
-            $valuesOld = $model->getRawOriginal();
-            $valuesOld = BlacklistFilter::filter($valuesOld, $loggableFields);
-            $valuesOld = json_encode($valuesOld);
-        }
-
-        $valuesChanged = json_encode([]);
-        if (config('footsteps.content.model.values_changed')) {
-            $valuesChanged = $model->getChanges();
-            $valuesChanged = BlacklistFilter::filter($valuesChanged, $loggableFields);
-            $valuesChanged = json_encode($valuesChanged);
-        }
-
-        $fields = [
-            'table_name' => $tableName,
-            'log_type' => LogType::MODEL_UPDATED,
-            'model_type' => get_class($model),
-            'model_id' => $model->id,
-            'model_changes' => $valuesChanged,
-            'model_old' => $valuesOld,
-            'data' => json_encode($data),
-        ];
-
-        $this->logItemRepository->createLogEntry(
-            $event->getUser(),
-            $event->getRequest(),
-            $fields
-        );
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }

@@ -1,19 +1,20 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\ServiceProviders;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\ServiceProviders;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Yormy\LaravelFootsteps\Routes\FootstepsAdminRoutes;
-use Yormy\LaravelFootsteps\Routes\FootstepsRoutes;
+use Yormy\FootprintsLaravel\Routes\FootprintsAdminRoutes;
+use Yormy\FootprintsLaravel\Routes\FootprintsRoutes;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
         $this->map();
-
     }
 
     public function map(): void
@@ -25,12 +26,11 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes(): void
     {
-
     }
 
     protected function mapApiRoutes(): void
     {
-        FootstepsRoutes::register();
-        FootstepsAdminRoutes::register();
+        FootprintsRoutes::register();
+        FootprintsAdminRoutes::register();
     }
 }

@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
 
-namespace Yormy\LaravelFootsteps\Http\Controllers\Api\V1\Base;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base;
 
 use Illuminate\Http\Request;
 use Yormy\Apiresponse\Facades\ApiResponse;
-use Yormy\LaravelFootsteps\Http\Controllers\Api\V1\BaseController;
-use Yormy\LaravelFootsteps\Http\Resources\LogItemCollection;
-use Yormy\LaravelFootsteps\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\BaseController;
+use Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
+use Yormy\FootprintsLaravel\Repositories\FootprintItemRepository;
 
 abstract class LoginHistoryController extends BaseController
 {
@@ -22,10 +24,9 @@ abstract class LoginHistoryController extends BaseController
         return $this->returnForUser($request, $user);
     }
 
-
     private function returnForUser($request, $user)
     {
-        $logItemRepository = new LogItemRepository();
+        $logItemRepository = new FootprintItemRepository();
         $logins = $logItemRepository->getAllLoginForUser($user);
 
         $logins = (new LogItemCollection($logins))->toArray($request);
@@ -34,7 +35,6 @@ abstract class LoginHistoryController extends BaseController
         return ApiResponse::withData($logins)
             ->successResponse();
     }
-
 
     private function decorateWithStatus($values): array
     {
@@ -60,4 +60,3 @@ abstract class LoginHistoryController extends BaseController
         return $values;
     }
 }
-

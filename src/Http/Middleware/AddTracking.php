@@ -1,11 +1,13 @@
 <?php
 
-namespace Yormy\LaravelFootsteps\Http\Middleware;
+declare(strict_types=1);
+
+namespace Yormy\FootprintsLaravel\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Yormy\LaravelFootsteps\Observers\Events\RequestTerminatedEvent;
+use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 
 class AddTracking
 {
@@ -21,16 +23,32 @@ class AddTracking
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedMethodCall
-     * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         $this->startTime = microtime(true);
         $this->requestId = $this->generateKey();
 
         $request->attributes->add(['request_id' => $this->requestId]);
-        $request->attributes->add(['browser_fingerprint' => $request->cookie('session_id')]);
+
+        $fingerprintCookieName = config('footprints.browser_fingerprint_cookie_name','browser_fingerprint');
+        $request->attributes->add(['browser_fingerprint' => $request->cookie($fingerprintCookieName)]);
+
         return $next($request);
+    }
+
+    /**
+     * @psalm-suppress MixedMethodCall
+     */
+    public function terminate(Request $request, mixed $response): void
+    {
+        if ($response instanceof RedirectResponse) {
+            $responseString = 'redirect';
+        } else {
+            $responseString = (string) $response->getContent();
+        }
+
+        event(new RequestTerminatedEvent($request, $responseString));
     }
 
     private function generateKey(): string
@@ -38,20 +56,5 @@ class AddTracking
         $bytes = random_bytes(20);
 
         return bin2hex($bytes);
-    }
-
-    /**
-     * @psalm-suppress MixedMethodCall
-     * @param Mixed $response
-     */
-    public function terminate(Request $request, $response): void
-    {
-        if ($response instanceof RedirectResponse) {
-            $responseString = "redirect";
-        } else {
-            $responseString = (string)$response->getContent();
-        }
-
-        event(new RequestTerminatedEvent($request, $responseString));
     }
 }
