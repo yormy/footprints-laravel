@@ -12,7 +12,6 @@ This package allows you to track a users journey through your system.
 * page visits
 
 
-
 ## Model Pruning
 in your footsteps config specify the number of days on that needs to be kept
 The prune runs daily to check if items need to be deleted
