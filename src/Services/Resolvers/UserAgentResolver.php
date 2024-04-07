@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
@@ -11,10 +13,11 @@ class UserAgentResolver
     {
         $agent = new Agent();
         $platform = $agent->platform();
-        $userAgent = $platform . " ". $agent->version($platform);
+        $userAgent = $platform.' '.$agent->version($platform);
 
         $browser = $agent->browser();
-        $userAgent .= $browser ." " . $agent->version($browser);
+        $userAgent .= $browser.' '.$agent->version($browser);
+
         return $userAgent;
     }
 
@@ -22,6 +25,4 @@ class UserAgentResolver
     {
         return $request->server('HTTP_USER_AGENT');
     }
-
-
 }

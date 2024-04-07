@@ -2,14 +2,13 @@
 
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
-use Illuminate\Http\Request;
 use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 
 class RequestTerminatedListener extends BaseListener
 {
     public function handle(RequestTerminatedEvent $event): void
     {
-        if (!$this->shouldLog()) {
+        if (! $this->shouldLog()) {
             return;
         }
 
@@ -19,14 +18,14 @@ class RequestTerminatedListener extends BaseListener
 
         $response = $event->getResponse();
 
-        $requestId = (string)$request->get('request_id');
+        $requestId = (string) $request->get('request_id');
 
         $this->logItemRepository->updateLogEntry($requestId, $duration, $response);
     }
 
     private function shouldLog(): bool
     {
-        if (! config('footprints.enabled') ) {
+        if (! config('footprints.enabled')) {
             return false;
         }
 
@@ -45,7 +44,7 @@ class RequestTerminatedListener extends BaseListener
         /**
          * @psalm-suppress UndefinedConstant
          */
-        $requestStart = (float)LARAVEL_START;
+        $requestStart = (float) LARAVEL_START;
 
         $duration = 0;
         if ($requestStart > 0) {

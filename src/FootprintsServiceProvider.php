@@ -11,9 +11,9 @@ use Yormy\FootprintsLaravel\ServiceProviders\RouteServiceProvider;
 
 class FootprintsServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__ . '/../config/footprints.php';
+    const CONFIG_FILE = __DIR__.'/../config/footprints.php';
 
-    const MIGRATION_PATH = __DIR__ . '/Database/Migrations';
+    const MIGRATION_PATH = __DIR__.'/Database/Migrations';
 
     /**
      * @psalm-suppress MissingReturnType
@@ -80,7 +80,7 @@ class FootprintsServiceProvider extends ServiceProvider
     private function loadMigrations(): void
     {
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom((string)static::MIGRATION_PATH);
+            $this->loadMigrationsFrom((string) static::MIGRATION_PATH);
         }
     }
 

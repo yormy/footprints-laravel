@@ -33,11 +33,9 @@ return [
         'auth_failed' => true,
         'auth_other_device_logout' => true,
         'other_events' => [
-            'Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent' => "CUSTOM EVENT LISTENER"
+            'Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent' => 'CUSTOM EVENT LISTENER',
         ],
     ],
-
-
 
     /*
      * List the exceptions you want to log with the client
@@ -49,7 +47,7 @@ return [
             'Illuminate\Database\Eloquent\ModelNotFoundException' => LogType::EXCEPTION_MODEL_NOT_FOUND->value,
             'Illuminate\Http\Exceptions\ThrottleRequestsException' => LogType::EXCEPTION_TOO_MANY_REQUEST->value,
             'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' => LogType::EXCEPTION_PAGE_NOT_FOUND->value,
-        ]
+        ],
     ],
 
     'log_visits' => [
@@ -94,9 +92,8 @@ return [
         'model' => [
             'values_changed' => true,
             'values_old' => true,
-        ]
+        ],
     ],
-
 
     /*
      * When the clean-command is executed, all recording footprints older than

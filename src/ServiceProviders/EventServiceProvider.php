@@ -29,8 +29,6 @@ use Yormy\FootprintsLaravel\Observers\Listeners\Model\ModelUpdatedListener;
 use Yormy\FootprintsLaravel\Observers\Listeners\OtherListener;
 use Yormy\FootprintsLaravel\Observers\Listeners\RequestTerminatedListener;
 use Yormy\FootprintsLaravel\Observers\Listeners\RouteMatchListener;
-use Illuminate\Contracts\Foundation\Application\App;
-
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -90,7 +88,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function __construct(Application $app)
     {
-        $otherEvents = (array)config('footprints.log_events.other_events');
+        $otherEvents = (array) config('footprints.log_events.other_events');
 
         foreach (array_keys($otherEvents) as $event) {
             $this->listen[$event] = [OtherListener::class];

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create((string)config('footprints.table_name'), function (Blueprint $table) {
+        Schema::create((string) config('footprints.table_name'), function (Blueprint $table) {
             $table->id();
 
             $table->string('xid')->unique();
@@ -27,7 +27,6 @@ return new class extends Migration
 
             $table->bigInteger('model_id')->unsigned()->nullable();
             $table->string('model_type', 50)->nullable();
-
 
             $table->string('route')->nullable();
             $table->string('url')->nullable();

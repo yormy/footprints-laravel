@@ -1,12 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Yormy\Apiresponse\Facades\ApiResponse;
+use Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
 use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
-use  Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
 use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class ActivityController extends BaseController
@@ -17,7 +19,6 @@ class ActivityController extends BaseController
 
         return $this->returnForUser($request, $user);
     }
-
 
     private function returnForUser($request, $user)
     {
@@ -31,7 +32,6 @@ class ActivityController extends BaseController
         return ApiResponse::withData($logins)
             ->successResponse();
     }
-
 
     private function decorateWithStatus($values): array
     {
@@ -63,19 +63,20 @@ class ActivityController extends BaseController
             if ($method = Arr::get($data, 'method')) {
                 $status = [
                     'key' => $method,
-                    'text' => $method
+                    'text' => $method,
                 ];
 
                 if ($method === 'GET') {
                     $status['nature'] = 'info';
-                }elseif ($method === 'POST') {
+                } elseif ($method === 'POST') {
                     $status['nature'] = 'warning';
                 } elseif ($method === 'PUT') {
                     $status['nature'] = 'info';
                 } elseif ($method === 'PATCH') {
                     $status['nature'] = 'info';
                 } elseif ($method === 'DELETE') {
-                    $status['nature'] = 'info';                }
+                    $status['nature'] = 'info';
+                }
             }
 
             $values[$index]['status'] = $status;
@@ -84,4 +85,3 @@ class ActivityController extends BaseController
         return $values;
     }
 }
-

@@ -11,21 +11,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
 use Mexion\BedrockUsersv2\Domain\User\Models\Member;
-use Mexion\BedrockUsersv2\Domain\User\Models\UserSession;
 use Yormy\FootprintsLaravel\Exceptions\CacheTagSupportException;
 use Yormy\FootprintsLaravel\Models\Log;
 
 class LogItemRepository
 {
-
     public function __construct(private ?Log $model = null)
     {
-        if (!$model) {
+        if (! $model) {
             $this->model = new Log();
         }
     }
 
-    public function getAllLoginForUser(Admin| Member $user): Collection
+    public function getAllLoginForUser(Admin|Member $user): Collection
     {
         return $this->queryForUser($user)
             ->select([
@@ -37,11 +35,11 @@ class LogItemRepository
                 'created_at',
             ])
             ->whereIn('log_type', ['AUTH_LOGIN', 'AUTH_FAILED'])
-            ->orderBy('created_at','DESC')
+            ->orderBy('created_at', 'DESC')
             ->get();
     }
 
-    public function getAllActivityForUser(Admin| Member $user): Collection
+    public function getAllActivityForUser(Admin|Member $user): Collection
     {
         $select = [
             'xid',
@@ -55,16 +53,16 @@ class LogItemRepository
             'impersonator_id',
             'route',
             'url',
-            'method'
+            'method',
         ];
 
         return $this->queryForUser($user)
             ->select($select)
-            ->orderBy('created_at','DESC')
+            ->orderBy('created_at', 'DESC')
             ->get();
     }
 
-    private function queryForUser(Admin| Member $user): Builder
+    private function queryForUser(Admin|Member $user): Builder
     {
         $userType = '';
         if ($user instanceof Member) {
@@ -84,9 +82,9 @@ class LogItemRepository
         $userFields = $this->getUserData($user);
 
         $requestFields = [];
-        $requestFields['request_id'] = (string)$request->get('request_id');
+        $requestFields['request_id'] = (string) $request->get('request_id');
 
-        $payload = (string)$request->getContent();
+        $payload = (string) $request->getContent();
         $payload = $this->cleanPayload($payload);
 
         $props['payload_base64'] = $payload;
@@ -152,7 +150,7 @@ class LogItemRepository
 
         if (config('footprints.content.geoip')) {
             $supportsTags = cache()->supportsTags();
-            if (!$supportsTags) {
+            if (! $supportsTags) {
                 throw new CacheTagSupportException();
             }
 
@@ -185,11 +183,10 @@ class LogItemRepository
             return '';
         }
 
-        $truncated = substr($payload, 0, (int)config('footprints.payload.max_characters'));
+        $truncated = substr($payload, 0, (int) config('footprints.payload.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }
-
 
     private static function cleanResponse(string $response): string
     {
@@ -197,7 +194,7 @@ class LogItemRepository
             return '';
         }
 
-        $truncated = substr($response, 0, (int)config('footprints.response.max_characters'));
+        $truncated = substr($response, 0, (int) config('footprints.response.max_characters'));
 
         return base64_encode($truncated);  // base64 encode to prevent sqli
     }

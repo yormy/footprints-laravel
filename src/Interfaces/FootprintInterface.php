@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 interface FootprintInterface
 {
-//    /**
-//     * @param Array $logNames
-//     */
-//    public function scopeInLog(Builder $query, ...$logNames): Builder;
-//
-//    public function scopeCausedBy(Builder $query, Model $causer): Builder;
+    //    /**
+    //     * @param Array $logNames
+    //     */
+    //    public function scopeInLog(Builder $query, ...$logNames): Builder;
+    //
+    //    public function scopeCausedBy(Builder $query, Model $causer): Builder;
 }

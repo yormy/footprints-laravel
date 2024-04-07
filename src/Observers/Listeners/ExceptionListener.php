@@ -37,12 +37,13 @@ class ExceptionListener extends BaseListener
 
     private function getLogType(Throwable $exception): string
     {
-        $logExceptions = (array)config('footprints.log_exceptions.exceptions');
+        $logExceptions = (array) config('footprints.log_exceptions.exceptions');
         $exceptionClass = get_class($exception);
 
         if (array_key_exists($exceptionClass, $logExceptions)) {
-            return (string)$logExceptions[$exceptionClass];
+            return (string) $logExceptions[$exceptionClass];
         }
+
         return LogType::EXCEPTION_UNSPECIFIED->value;
     }
 
@@ -52,16 +53,16 @@ class ExceptionListener extends BaseListener
             return false;
         }
 
-        if (! config('footprints.enabled') ) {
+        if (! config('footprints.enabled')) {
             return false;
         }
 
-        if (! config('footprints.log_exceptions.enabled') ) {
+        if (! config('footprints.log_exceptions.enabled')) {
             return false;
         }
 
         $exceptionClass = get_class($exception);
-        if (RuleService::shouldInclude($exceptionClass, (array)config('footprints.log_exceptions.exceptions'))) {
+        if (RuleService::shouldInclude($exceptionClass, (array) config('footprints.log_exceptions.exceptions'))) {
             return false;
         }
 

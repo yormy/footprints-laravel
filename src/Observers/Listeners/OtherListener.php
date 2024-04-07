@@ -2,7 +2,6 @@
 
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yormy\FootprintsLaravel\Enums\LogType;
@@ -30,7 +29,7 @@ class OtherListener
             $this->request,
             [
                 'route' => '',
-                'url' => substr($this->request->fullUrl(),0, 150),
+                'url' => substr($this->request->fullUrl(), 0, 150),
                 'log_type' => $this->getLogType($event),
                 'data' => json_encode($event),
             ]);
@@ -42,13 +41,14 @@ class OtherListener
      */
     private function getLogType($event): string
     {
-        $logEvents = (array)config('footprints.log_events.other_events');
+        $logEvents = (array) config('footprints.log_events.other_events');
 
         $eventClass = get_class($event);
 
         if (array_key_exists($eventClass, $logEvents)) {
-            return (string)$logEvents[$eventClass];
+            return (string) $logEvents[$eventClass];
         }
+
         return LogType::UNKNOWN->value;
     }
 }

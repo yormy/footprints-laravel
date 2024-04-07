@@ -30,6 +30,7 @@ class AddTracking
 
         $request->attributes->add(['request_id' => $this->requestId]);
         $request->attributes->add(['browser_fingerprint' => $request->cookie('session_id')]);
+
         return $next($request);
     }
 
@@ -42,14 +43,14 @@ class AddTracking
 
     /**
      * @psalm-suppress MixedMethodCall
-     * @param Mixed $response
+     * @param  mixed  $response
      */
     public function terminate(Request $request, $response): void
     {
         if ($response instanceof RedirectResponse) {
-            $responseString = "redirect";
+            $responseString = 'redirect';
         } else {
-            $responseString = (string)$response->getContent();
+            $responseString = (string) $response->getContent();
         }
 
         event(new RequestTerminatedEvent($request, $responseString));

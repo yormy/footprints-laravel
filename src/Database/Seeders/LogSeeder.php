@@ -2,13 +2,8 @@
 
 namespace Yormy\FootprintsLaravel\Database\Seeders;
 
-
 use Illuminate\Database\Seeder;
-use Mexion\BedrockUsersv2\Domain\Standby\Models\StandbyReason;
 use Mexion\BedrockUsersv2\Domain\User\Models\Member;
-use Mexion\BedrockUsersv2\Domain\User\Models\PersonalAccessToken;
-use Mexion\TestappCore\Domain\Billing\Database\Seeders\BillingMainSeeder;
-use Yormy\ChaskiLaravel\Domain\Shared\Models\NotificationSent;
 use Yormy\FootprintsLaravel\Models\Log;
 
 class LogSeeder extends Seeder

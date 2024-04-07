@@ -2,10 +2,10 @@
 
 namespace Yormy\FootprintsLaravel\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Builder;
 use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 use Yormy\FootprintsLaravel\Interfaces\FootprintInterface;
 use Yormy\Xid\Models\Traits\Xid;
@@ -15,9 +15,9 @@ use Yormy\Xid\Models\Traits\Xid;
  */
 class Log extends Model implements FootprintInterface
 {
-    use Xid;
     use PackageFactoryTrait;
     use Prunable;
+    use Xid;
 
     protected $fillable = [
         'impersonator_id',
@@ -39,7 +39,7 @@ class Log extends Model implements FootprintInterface
         'data',
         'model_old',
         'model_changes',
-        'browser_fingerprint'
+        'browser_fingerprint',
     ];
 
     public function __construct(array $attributes = [])
@@ -48,7 +48,7 @@ class Log extends Model implements FootprintInterface
          * @psalm-suppress RedundantPropertyInitializationCheck
          */
         if (! isset($this->table)) {
-            $this->setTable((string)config('footprints.table_name'));
+            $this->setTable((string) config('footprints.table_name'));
         }
 
         parent::__construct($attributes);
@@ -60,7 +60,7 @@ class Log extends Model implements FootprintInterface
      */
     public function prunable(): Builder
     {
-        $days = (int)config('footprints.delete_records_older_than_days', 100);
+        $days = (int) config('footprints.delete_records_older_than_days', 100);
 
         return static::where('created_at', '<=', now()->subDays($days));
     }
@@ -70,20 +70,20 @@ class Log extends Model implements FootprintInterface
         return $this->morphTo(__FUNCTION__, 'user_type', 'user_id');
     }
 
-//    public function scopeInLog(Builder $query, ...$logNames): Builder
-//    {
-//        if (is_array($logNames[0])) {
-//            $logNames = $logNames[0];
-//        }
-//
-//        return $query->whereIn('log_name', $logNames);
-//    }
-//
-//    public function scopeCausedBy(Builder $query, Model $causer): Builder
-//    {
-//        return $query
-//            ->where('causer_type', $causer->getMorphClass())
-//            ->where('causer_id', $causer->getKey());
-//    }
+    //    public function scopeInLog(Builder $query, ...$logNames): Builder
+    //    {
+    //        if (is_array($logNames[0])) {
+    //            $logNames = $logNames[0];
+    //        }
+    //
+    //        return $query->whereIn('log_name', $logNames);
+    //    }
+    //
+    //    public function scopeCausedBy(Builder $query, Model $causer): Builder
+    //    {
+    //        return $query
+    //            ->where('causer_type', $causer->getMorphClass())
+    //            ->where('causer_id', $causer->getKey());
+    //    }
 
 }

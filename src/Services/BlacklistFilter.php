@@ -2,7 +2,6 @@
 
 namespace Yormy\FootprintsLaravel\Services;
 
-
 class BlacklistFilter
 {
     public static function filter(array $values, array $loggableFields): array
@@ -16,7 +15,6 @@ class BlacklistFilter
 
         return self::filterNonLoggable($loggableFields, $filtered);
     }
-
 
     public static function filterBlacklist(array $values): array
     {
@@ -40,7 +38,7 @@ class BlacklistFilter
         $filtered = $values;
 
         foreach (array_keys($filtered) as $property) {
-            if (!in_array($property, $loggableFields)) {
+            if (! in_array($property, $loggableFields)) {
                 unset($filtered[$property]);
             }
         }

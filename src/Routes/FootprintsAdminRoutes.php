@@ -3,9 +3,7 @@
 namespace Yormy\FootprintsLaravel\Routes;
 
 use Illuminate\Support\Facades\Route;
-use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\ActivityController;
 use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Admins\AdminLoginHistoryController;
-use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
 use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Members\MemberLoginHistoryController;
 
 class FootprintsAdminRoutes

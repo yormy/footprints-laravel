@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Services\Resolvers;
 
@@ -8,7 +10,7 @@ use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 
 class UserResolver
 {
-    public static function getCurrent() : Admin | Member | null
+    public static function getCurrent(): Admin|Member|null
     {
         /**
          * @var User $user

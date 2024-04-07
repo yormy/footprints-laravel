@@ -27,7 +27,7 @@ class ModelUpdatedListener extends BaseListener
         $request = $event->getRequest();
 
         $data = [];
-        $data['request_id'] = (string)$request->get('request_id');
+        $data['request_id'] = (string) $request->get('request_id');
 
         /** @var array $loggableFields */
         $loggableFields = $model->getFootprintsFields();

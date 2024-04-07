@@ -16,7 +16,7 @@ trait Footprints
 
     public static function getFootprintsEvents(): array
     {
-        return ['CREATED','UPDATED','DELETED'];
+        return ['CREATED', 'UPDATED', 'DELETED'];
     }
 
     public static function bootFootprints(): void

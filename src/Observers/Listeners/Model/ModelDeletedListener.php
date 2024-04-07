@@ -25,7 +25,7 @@ class ModelDeletedListener extends BaseListener
 
         $request = $event->getRequest();
         $data = [];
-        $data['request_id'] = (string)$request->get('request_id');
+        $data['request_id'] = (string) $request->get('request_id');
 
         $valuesOld = json_encode([]);
         if (config('footprints.model.content.values_old')) {
