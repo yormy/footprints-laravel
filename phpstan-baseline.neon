@@ -26,16 +26,6 @@ parameters:
 			path: src/Database/Migrations/2020_07_12_100001_create_footprints_table.php
 
 		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Factories\\\\Factory\\<Yormy\\\\FootprintsLaravel\\\\Models\\\\Log\\>\\:\\:loginFailed\\(\\)\\.$#"
-			count: 4
-			path: src/Database/Seeders/LogSeeder.php
-
-		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Factories\\\\Factory\\<Yormy\\\\FootprintsLaravel\\\\Models\\\\Log\\>\\:\\:loginSuccess\\(\\)\\.$#"
-			count: 4
-			path: src/Database/Seeders/LogSeeder.php
-
-		-
 			message: "#^Call to static method where\\(\\) on an unknown class Mexion\\\\BedrockUsersv2\\\\Domain\\\\User\\\\Models\\\\Member\\.$#"
 			count: 4
 			path: src/Database/Seeders/LogSeeder.php
@@ -226,11 +216,6 @@ parameters:
 			path: src/Observers/Listeners/Model/ModelCreatedListener.php
 
 		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:getFootprintsFields\\(\\)\\.$#"
-			count: 1
-			path: src/Observers/Listeners/Model/ModelCreatedListener.php
-
-		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: src/Observers/Listeners/Model/ModelCreatedListener.php
@@ -241,22 +226,12 @@ parameters:
 			path: src/Observers/Listeners/Model/ModelDeletedListener.php
 
 		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:getFootprintsFields\\(\\)\\.$#"
-			count: 1
-			path: src/Observers/Listeners/Model/ModelDeletedListener.php
-
-		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
 			path: src/Observers/Listeners/Model/ModelDeletedListener.php
 
 		-
 			message: "#^Access to an undefined property Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:\\$id\\.$#"
-			count: 1
-			path: src/Observers/Listeners/Model/ModelUpdatedListener.php
-
-		-
-			message: "#^Call to an undefined method Illuminate\\\\Database\\\\Eloquent\\\\Model\\:\\:getFootprintsFields\\(\\)\\.$#"
 			count: 1
 			path: src/Observers/Listeners/Model/ModelUpdatedListener.php
 
