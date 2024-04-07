@@ -16,7 +16,8 @@ class UserAgentResolver
         $userAgent = $platform.' '.$agent->version($platform);
 
         $browser = $agent->browser();
-        return $userAgent . $browser.' '.$agent->version($browser);
+
+        return $userAgent.$browser.' '.$agent->version($browser);
     }
 
     public static function getFullAgent(Request $request): string
