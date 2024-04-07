@@ -13975,32 +13975,57 @@ namespace Illuminate\Support\Facades {
                     /**
          * 
          *
+         * @see \Yormy\ValidationLaravel\ValidationLaravelServiceProvider::registerUserRoutes()
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */        public static function ValidationLaravelUser($prefix)
+        {
+                        \Illuminate\Routing\Router::ValidationLaravelUser($prefix);
+        }
+                    /**
+         * 
+         *
+         * @see \Yormy\ValidationLaravel\ValidationLaravelServiceProvider::registerAdminRoutes()
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */        public static function ValidationLaravelAdmin($prefix)
+        {
+                        \Illuminate\Routing\Router::ValidationLaravelAdmin($prefix);
+        }
+                    /**
+         * 
+         *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsApiRoutes($prefix);
         }
                     /**
          * 
          *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsAdminRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsAdminApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsAdminApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsAdminApiRoutes($prefix);
         }
                     /**
          * 
          *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsAdminRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsAdminAdminApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsAdminAdminApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsAdminAdminApiRoutes($prefix);
         }
             }
             /**
@@ -17893,6 +17918,39 @@ namespace Illuminate\Support\Facades {
             }
     }
 
+namespace Yormy\Dateformatter {
+            /**
+     * 
+     *
+     */        class DateformatterFacade {
+            }
+    }
+
+namespace Yormy\Repository {
+            /**
+     * 
+     *
+     */        class RepositoryFacade {
+            }
+    }
+
+namespace Yormy\ValidationLaravel {
+            /**
+     * 
+     *
+     * @see \Yormy\ValidationLaravel\ValidationLaravel
+     */        class ValidationLaravelFacade {
+            }
+    }
+
+namespace Yormy\Xid {
+            /**
+     * 
+     *
+     */        class XidFacade {
+            }
+    }
+
 namespace Yormy\FootprintsLaravel {
             /**
      * 
@@ -18067,32 +18125,57 @@ namespace Illuminate\Routing {
                     /**
          * 
          *
+         * @see \Yormy\ValidationLaravel\ValidationLaravelServiceProvider::registerUserRoutes()
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */        public static function ValidationLaravelUser($prefix)
+        {
+                        \Illuminate\Routing\Router::ValidationLaravelUser($prefix);
+        }
+                    /**
+         * 
+         *
+         * @see \Yormy\ValidationLaravel\ValidationLaravelServiceProvider::registerAdminRoutes()
+         * @param string $prefix
+         * @return void 
+         * @static 
+         */        public static function ValidationLaravelAdmin($prefix)
+        {
+                        \Illuminate\Routing\Router::ValidationLaravelAdmin($prefix);
+        }
+                    /**
+         * 
+         *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsApiRoutes($prefix);
         }
                     /**
          * 
          *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsAdminRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsAdminApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsAdminApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsAdminApiRoutes($prefix);
         }
                     /**
          * 
          *
          * @see \Yormy\FootprintsLaravel\Routes\FootprintsAdminRoutes::register()
          * @param string $prefix
+         * @return void 
          * @static 
          */        public static function FootprintsAdminAdminApiRoutes($prefix = '')
         {
-                        return \Illuminate\Routing\Router::FootprintsAdminAdminApiRoutes($prefix);
+                        \Illuminate\Routing\Router::FootprintsAdminAdminApiRoutes($prefix);
         }
             }
     }
@@ -21618,6 +21701,10 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class Dateformatter extends \Yormy\Dateformatter\DateformatterFacade {}
+            class Repository extends \Yormy\Repository\RepositoryFacade {}
+            class ValidationLaravel extends \Yormy\ValidationLaravel\ValidationLaravelFacade {}
+            class Xid extends \Yormy\Xid\XidFacade {}
             class footprints extends \Yormy\FootprintsLaravel\FootprintsFacade {}
     }
 

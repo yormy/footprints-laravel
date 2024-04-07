@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8e9751439a77e82d7808299f1a94272",
+    "content-hash": "23f9ccee76f6a53e8f763313331e4314",
     "packages": [
         {
             "name": "brick/math",
@@ -581,6 +581,67 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "bbc513d79acf6691fa9cf10f192c90dd2957f18c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/bbc513d79acf6691fa9cf10f192c90dd2957f18c",
+                "reference": "bbc513d79acf6691fa9cf10f192c90dd2957f18c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
+            },
+            "require-dev": {
+                "cerdic/css-tidy": "^1.7 || ^2.0",
+                "simpletest/simpletest": "dev-master"
+            },
+            "suggest": {
+                "cerdic/css-tidy": "If you want to use the filter 'Filter.ExtractStyleBlocks'.",
+                "ext-bcmath": "Used for unit conversion and imagecrash protection",
+                "ext-iconv": "Converts text to and from non-UTF-8 encodings",
+                "ext-tidy": "Used for pretty-printing HTML"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ],
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "exclude-from-classmap": [
+                    "/library/HTMLPurifier/Language/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "support": {
+                "issues": "https://github.com/ezyang/htmlpurifier/issues",
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.17.0"
+            },
+            "time": "2023-11-17T15:01:25+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -2020,6 +2081,54 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "linkorb/xuid",
+            "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linkorb/xuid.git",
+                "reference": "065ea66143931eb4306b4c79f59ed7e718f5d0fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linkorb/xuid/zipball/065ea66143931eb4306b4c79f59ed7e718f5d0fe",
+                "reference": "065ea66143931eb4306b4c79f59ed7e718f5d0fe",
+                "shasum": ""
+            },
+            "require": {
+                "ramsey/uuid": "^3.0||^4.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joost Faassen",
+                    "email": "j.faassen@linkorb.com",
+                    "role": "Development"
+                }
+            ],
+            "description": "XUID library for PHP",
+            "homepage": "https://github.com/linkorb/xuid",
+            "keywords": [
+                "xuid"
+            ],
+            "support": {
+                "issues": "https://github.com/linkorb/xuid/issues",
+                "source": "https://github.com/linkorb/xuid/tree/v1.4.0"
+            },
+            "time": "2021-02-18T12:39:45+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -4517,6 +4626,72 @@
                 }
             ],
             "time": "2024-04-05T09:01:07+00:00"
+        },
+        {
+            "name": "rennokki/laravel-eloquent-query-cache",
+            "version": "dev-laravel11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/laravel-eloquent-query-cache.git",
+                "reference": "e20bd416f506a0212903ce65efd2419bd2bb4638"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/laravel-eloquent-query-cache/zipball/e20bd416f506a0212903ce65efd2419bd2bb4638",
+                "reference": "e20bd416f506a0212903ce65efd2419bd2bb4638",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^9.35|^10.5|^11",
+                "illuminate/support": "^9.35|^10.5|^11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rennokki\\QueryCache\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Rennokki\\QueryCache\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Renoki",
+                    "email": "alex@renoki.org",
+                    "homepage": "https://github.com/rennokki",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adding cache on your Laravel Eloquent queries' results is now a breeze.",
+            "homepage": "https://github.com/renoki-co/laravel-eloquent-query-cache",
+            "keywords": [
+                "caching",
+                "eloquent",
+                "laravel",
+                "query",
+                "remember",
+                "sql"
+            ],
+            "support": {
+                "source": "https://github.com/yormy/laravel-eloquent-query-cache/tree/laravel11"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/rennokki"
+                }
+            ],
+            "time": "2024-04-03T10:10:04+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -8543,6 +8718,381 @@
             "time": "2022-06-03T18:03:27+00:00"
         },
         {
+            "name": "yormy/apiresponse",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/apiresponse.git",
+                "reference": "f87a0a8c9971e1d7416747382be61445e8f4c30a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/apiresponse/zipball/f87a0a8c9971e1d7416747382be61445e8f4c30a",
+                "reference": "f87a0a8c9971e1d7416747382be61445e8f4c30a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\Apiresponse\\ApiresponseServiceProvider"
+                    ],
+                    "aliases": {
+                        "ApiResponse": "Yormy\\ApiResponse\\Facades\\ApiResponse"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\Apiresponse\\": "src",
+                    "Yormy\\Apiresponse\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://gitlab.com/yormy/apiresponse",
+            "keywords": [
+                "apiresponse",
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/apiresponse/issues",
+                "source": "https://github.com/yormy/apiresponse/tree/master"
+            },
+            "time": "2024-04-07T07:36:27+00:00"
+        },
+        {
+            "name": "yormy/core-tools-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/core-tools-laravel.git",
+                "reference": "1d9dbd81b2c6831667cee18ab26aef6569b6ee8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/core-tools-laravel/zipball/1d9dbd81b2c6831667cee18ab26aef6569b6ee8a",
+                "reference": "1d9dbd81b2c6831667cee18ab26aef6569b6ee8a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "ezyang/htmlpurifier": "^v4.17",
+                "php": "^8.2",
+                "rennokki/laravel-eloquent-query-cache": "dev-laravel11",
+                "yormy/apiresponse": "dev-master",
+                "yormy/dateformatter": "dev-master",
+                "yormy/repository": "dev-master",
+                "yormy/validation-laravel": "dev-master",
+                "yormy/xid": "dev-master"
+            },
+            "require-dev": {
+                "spatie/laravel-translatable": "^6.6",
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\CoreToolsLaravel\\CoreToolsLaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\CoreToolsLaravel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://gitlab.com/yormy/core-tools-laravel",
+            "keywords": [
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/core-tools-laravel/issues",
+                "source": "https://github.com/yormy/core-tools-laravel/tree/master"
+            },
+            "time": "2024-04-04T16:04:46+00:00"
+        },
+        {
+            "name": "yormy/dateformatter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/DateFormater.git",
+                "reference": "5c32864dfd56aa6138872eede6af88293ad930c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/DateFormater/zipball/5c32864dfd56aa6138872eede6af88293ad930c6",
+                "reference": "5c32864dfd56aa6138872eede6af88293ad930c6",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\Dateformatter\\DateformatterServiceProvider"
+                    ],
+                    "aliases": {
+                        "Dateformatter": "Yormy\\Dateformatter\\DateformatterFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\Dateformatter\\": "src",
+                    "Yormy\\Dateformatter\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://gitlab.com/yormy/dateformatter",
+            "keywords": [
+                "dateformatter",
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/DateFormater/issues",
+                "source": "https://github.com/yormy/DateFormater/tree/master"
+            },
+            "time": "2024-04-04T16:08:52+00:00"
+        },
+        {
+            "name": "yormy/repository",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/repository.git",
+                "reference": "118e13c8412236102d1dd3eac7c4c0143f2d6fa3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/repository/zipball/118e13c8412236102d1dd3eac7c4c0143f2d6fa3",
+                "reference": "118e13c8412236102d1dd3eac7c4c0143f2d6fa3",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\Repository\\RepositoryServiceProvider"
+                    ],
+                    "aliases": {
+                        "Repository": "Yormy\\Repository\\RepositoryFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\Repository\\": "src",
+                    "Yormy\\Repository\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://gitlab.com/yormy/repository",
+            "keywords": [
+                "repository",
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/repository/issues",
+                "source": "https://github.com/yormy/repository/tree/master"
+            },
+            "time": "2024-04-04T16:11:41+00:00"
+        },
+        {
+            "name": "yormy/validation-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/validation-laravel.git",
+                "reference": "f415e28f97c129c5b54a29df93d532d9e5028b18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/validation-laravel/zipball/f415e28f97c129c5b54a29df93d532d9e5028b18",
+                "reference": "f415e28f97c129c5b54a29df93d532d9e5028b18",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^11",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\ValidationLaravel\\ValidationLaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "ValidationLaravel": "Yormy\\ValidationLaravel\\ValidationLaravelFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\ValidationLaravel\\": "src",
+                    "Yormy\\ValidationLaravel\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://gitlab.com/yormy/validation-laravel",
+            "keywords": [
+                "validation-laravel",
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/validation-laravel/issues",
+                "source": "https://github.com/yormy/validation-laravel/tree/master"
+            },
+            "time": "2024-04-04T16:14:28+00:00"
+        },
+        {
+            "name": "yormy/xid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yormy/xid.git",
+                "reference": "8741bf26ecc9ca65d7e16b3d19146b53d551785d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yormy/xid/zipball/8741bf26ecc9ca65d7e16b3d19146b53d551785d",
+                "reference": "8741bf26ecc9ca65d7e16b3d19146b53d551785d",
+                "shasum": ""
+            },
+            "require": {
+                "linkorb/xuid": "^1.4.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "yormy/dev-tools-laravel": "dev-master"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Yormy\\Xid\\XidServiceProvider"
+                    ],
+                    "aliases": {
+                        "Xid": "Yormy\\Xid\\XidFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yormy\\Xid\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yormy",
+                    "email": "dev@yormy.com",
+                    "homepage": "https://yormy.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add a random validatable public id to a model that can be safely exposed and validated",
+            "homepage": "https://github.com/yormy/xid",
+            "keywords": [
+                "xid",
+                "yormy"
+            ],
+            "support": {
+                "issues": "https://github.com/yormy/xid/issues",
+                "source": "https://github.com/yormy/xid/tree/master"
+            },
+            "time": "2024-04-04T16:10:58+00:00"
+        },
+        {
             "name": "zbateson/mail-mime-parser",
             "version": "2.4.0",
             "source": {
@@ -12182,6 +12732,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "yormy/core-tools-laravel": 20,
         "yormy/dev-tools-laravel": 20
     },
     "prefer-stable": true,

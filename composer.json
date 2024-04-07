@@ -15,6 +15,12 @@
             "role": "Developer"
         }
     ],
+    "repositories" : [
+        {
+            "type": "vcs",
+            "url": "https://github.com/yormy/laravel-eloquent-query-cache.git"
+        }
+    ],
     "require": {
         "ext-zip": "*",
         "php": "^8.2",
@@ -23,7 +29,8 @@
         "illuminate/contracts": "^11",
         "illuminate/database": "^11",
         "laravel/framework": "^11",
-        "orchestra/testbench": "^9"
+        "orchestra/testbench": "^9",
+        "yormy/core-tools-laravel": "dev-master"
     },
     "require-dev": {
         "yormy/dev-tools-laravel": "dev-master"
