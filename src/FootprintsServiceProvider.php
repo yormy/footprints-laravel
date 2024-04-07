@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -11,14 +13,14 @@ use Yormy\FootprintsLaravel\ServiceProviders\RouteServiceProvider;
 
 class FootprintsServiceProvider extends ServiceProvider
 {
-    const CONFIG_FILE = __DIR__.'/../config/footprints.php';
+    public const CONFIG_FILE = __DIR__.'/../config/footprints.php';
 
-    const MIGRATION_PATH = __DIR__.'/Database/Migrations';
+    public const MIGRATION_PATH = __DIR__.'/Database/Migrations';
 
     /**
      * @psalm-suppress MissingReturnType
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publish();
 
@@ -34,7 +36,7 @@ class FootprintsServiceProvider extends ServiceProvider
     /**
      * @psalm-suppress MixedArgument
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footprints');
 
@@ -42,9 +44,14 @@ class FootprintsServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
     }
 
+    public function registerTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'footprints');
+    }
+
     private function schedule(): void
     {
-        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule): void {
             $schedule->command('model:prune', [
                 '--model' => Log::class,
             ])->daily();
@@ -82,10 +89,5 @@ class FootprintsServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->loadMigrationsFrom((string) static::MIGRATION_PATH);
         }
-    }
-
-    public function registerTranslations(): void
-    {
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'footprints');
     }
 }

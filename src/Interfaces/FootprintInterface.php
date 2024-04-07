@@ -1,9 +1,8 @@
 <?php
 
-namespace Yormy\FootprintsLaravel\Interfaces;
+declare(strict_types=1);
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+namespace Yormy\FootprintsLaravel\Interfaces;
 
 interface FootprintInterface
 {

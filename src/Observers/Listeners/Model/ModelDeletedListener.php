@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
 use Yormy\FootprintsLaravel\Enums\LogType;
@@ -9,10 +11,7 @@ use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelDeletedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelDeletedEvent $event)
+    public function handle(ModelDeletedEvent $event): void
     {
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.model_deleted')
@@ -38,7 +37,7 @@ class ModelDeletedListener extends BaseListener
         $fields = [
             'table_name' => $tableName,
             'log_type' => LogType::MODEL_DELETED,
-            'model_type' => get_class($model),
+            'model_type' => $model::class,
             'model_id' => $model->id,
             'model_old' => $valuesOld,
             'data' => json_encode($data),

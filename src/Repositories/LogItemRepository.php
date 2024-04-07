@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Repositories;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -62,21 +64,6 @@ class LogItemRepository
             ->get();
     }
 
-    private function queryForUser(Admin|Member $user): Builder
-    {
-        $userType = '';
-        if ($user instanceof Member) {
-            $userType = '%Member';
-        }
-
-        if ($user instanceof Admin) {
-            $userType = '%Admin';
-        }
-
-        return $this->model::where('user_id', $user->id)
-            ->where('user_type', 'like', $userType);
-    }
-
     public function createLogEntry(?Authenticatable $user, Request $request, array $props): void
     {
         $userFields = $this->getUserData($user);
@@ -109,13 +96,28 @@ class LogItemRepository
 
         $userUpdate = $this->getUserUpdateStatement($table);
 
-        $statement = "UPDATE $table
-            SET {$table}.request_duration_sec = $duration,
-                {$table}.response_base64 = '$response'
-                $userUpdate
-            WHERE {$table}.request_id = '$requestId'";
+        $statement = "UPDATE {$table}
+            SET {$table}.request_duration_sec = {$duration},
+                {$table}.response_base64 = '{$response}'
+                {$userUpdate}
+            WHERE {$table}.request_id = '{$requestId}'";
 
         DB::statement($statement);
+    }
+
+    private function queryForUser(Admin|Member $user): Builder
+    {
+        $userType = '';
+        if ($user instanceof Member) {
+            $userType = '%Member';
+        }
+
+        if ($user instanceof Admin) {
+            $userType = '%Admin';
+        }
+
+        return $this->model::where('user_id', $user->id)
+            ->where('user_type', 'like', $userType);
     }
 
     /**
@@ -128,7 +130,7 @@ class LogItemRepository
     {
         $logModelClass = config('footprints.log_model');
 
-        return new $logModelClass;
+        return new $logModelClass();
     }
 
     /**
@@ -170,7 +172,7 @@ class LogItemRepository
         if ($user) {
             $userFields = [
                 'user_id' => $user->id,
-                'user_type' => get_class($user),
+                'user_type' => $user::class,
             ];
         }
 
@@ -207,13 +209,12 @@ class LogItemRepository
         $userUpdate = '';
         $user = Auth::user();
         if ($user) {
-
             /** @var int $userId */
             $userId = $user->id;
-            $userType = addslashes(get_class($user));
+            $userType = addslashes($user::class);
 
-            $userUpdate = ",{$table}.user_id = $userId,
-                {$table}.user_type = '$userType'";
+            $userUpdate = ",{$table}.user_id = {$userId},
+                {$table}.user_type = '{$userType}'";
         }
 
         return $userUpdate;

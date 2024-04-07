@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Http\Request;
@@ -11,6 +13,5 @@ class BaseListener
         protected Request $request,
         protected LogItemRepository $logItemRepository
     ) {
-        //
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -40,7 +42,7 @@ class LogFactory extends Factory
             return [
                 'user_id' => $member->id,
                 'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Member',
-                'user_agent' => "(member $member->id) ".$this->faker->userAgent,
+                'user_agent' => "(member {$member->id}) ".$this->faker->userAgent,
             ];
         });
     }
@@ -51,7 +53,7 @@ class LogFactory extends Factory
             return [
                 'user_id' => $admin->id,
                 'user_type' => 'Mexion\\TestappCore\\Domain\\User\\Models\\Admin',
-                'user_agent' => "(admin $admin->id) ".$this->faker->userAgent,
+                'user_agent' => "(admin {$admin->id}) ".$this->faker->userAgent,
             ];
         });
     }

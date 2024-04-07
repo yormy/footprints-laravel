@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -15,7 +17,6 @@ class ModelBaseEvent
 
     public function __construct(private Model $model, protected ?Authenticatable $user, protected Request $request)
     {
-        //
     }
 
     public function getModel(): Model

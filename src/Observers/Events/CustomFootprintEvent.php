@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -19,7 +21,6 @@ class CustomFootprintEvent
         protected array $data = [],
         protected string $tableName = ''
     ) {
-        //
     }
 
     public function getUser(): ?Authenticatable

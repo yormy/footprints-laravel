@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
 use Yormy\FootprintsLaravel\Enums\LogType;
@@ -9,10 +11,7 @@ use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelCreatedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelCreatedEvent $event)
+    public function handle(ModelCreatedEvent $event): void
     {
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.model_created')
@@ -37,7 +36,7 @@ class ModelCreatedListener extends BaseListener
 
         $fields = [
             'table_name' => $tableName,
-            'model_type' => get_class($model),
+            'model_type' => $model::class,
             'model_id' => $model->id,
             'log_type' => LogType::MODEL_CREATED,
             'model_old' => $valuesOld,

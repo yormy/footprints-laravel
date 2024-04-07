@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -85,5 +87,4 @@ class Log extends Model implements FootprintInterface
     //            ->where('causer_type', $causer->getMorphClass())
     //            ->where('causer_id', $causer->getKey());
     //    }
-
 }

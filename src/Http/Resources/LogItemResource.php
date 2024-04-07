@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -52,8 +54,7 @@ class LogItemResource extends JsonResource
         return $merged;
     }
 
-    private function get()
+    private function get(): void
     {
-
     }
 }

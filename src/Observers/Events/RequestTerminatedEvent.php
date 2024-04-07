@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -13,7 +15,6 @@ class RequestTerminatedEvent
 
     public function __construct(protected Request $request, protected string $response)
     {
-        //
     }
 
     public function getRequest(): Request

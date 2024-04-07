@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Lockout;
@@ -9,10 +11,7 @@ use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class LockoutListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(Lockout $event)
+    public function handle(Lockout $event): void
     {
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.auth_login')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Support\Facades\App;
@@ -11,10 +13,7 @@ use Yormy\FootprintsLaravel\Services\RuleService;
 
 class ExceptionListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ExceptionEvent $event)
+    public function handle(ExceptionEvent $event): void
     {
         $exception = $event->getException();
 
@@ -32,13 +31,14 @@ class ExceptionListener extends BaseListener
                 'url' => $request->fullUrl(),
                 'log_type' => $this->getLogType($exception),
                 'data' => json_encode($event),
-            ]);
+            ]
+        );
     }
 
     private function getLogType(Throwable $exception): string
     {
         $logExceptions = (array) config('footprints.log_exceptions.exceptions');
-        $exceptionClass = get_class($exception);
+        $exceptionClass = $exception::class;
 
         if (array_key_exists($exceptionClass, $logExceptions)) {
             return (string) $logExceptions[$exceptionClass];
@@ -61,7 +61,7 @@ class ExceptionListener extends BaseListener
             return false;
         }
 
-        $exceptionClass = get_class($exception);
+        $exceptionClass = $exception::class;
         if (RuleService::shouldInclude($exceptionClass, (array) config('footprints.log_exceptions.exceptions'))) {
             return false;
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Http\Request;
@@ -11,14 +13,12 @@ class OtherListener
 {
     public function __construct(protected LogItemRepository $logItemRepository, protected Request $request)
     {
-        //
     }
 
     /**
      * @psalm-suppress MissingParamType
-     * @return void
      */
-    public function handle($event)
+    public function handle($event): void
     {
         if (! config('footprints.enabled')) {
             return;
@@ -32,7 +32,8 @@ class OtherListener
                 'url' => substr($this->request->fullUrl(), 0, 150),
                 'log_type' => $this->getLogType($event),
                 'data' => json_encode($event),
-            ]);
+            ]
+        );
     }
 
     /**
@@ -43,7 +44,7 @@ class OtherListener
     {
         $logEvents = (array) config('footprints.log_events.other_events');
 
-        $eventClass = get_class($event);
+        $eventClass = $event::class;
 
         if (array_key_exists($eventClass, $logEvents)) {
             return (string) $logEvents[$eventClass];

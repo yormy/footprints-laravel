@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Login;
@@ -8,10 +10,7 @@ use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class LoginListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.auth_login')
@@ -25,6 +24,7 @@ class LoginListener extends BaseListener
             $this->request,
             [
                 'log_type' => LogType::AUTH_LOGIN,
-            ]);
+            ]
+        );
     }
 }

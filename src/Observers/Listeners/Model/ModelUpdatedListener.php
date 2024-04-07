@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
 use Yormy\FootprintsLaravel\Enums\LogType;
@@ -9,10 +11,7 @@ use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelUpdatedListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(ModelUpdatedEvent $event)
+    public function handle(ModelUpdatedEvent $event): void
     {
         ray('updated');
         if (! config('footprints.enabled') ||
@@ -50,7 +49,7 @@ class ModelUpdatedListener extends BaseListener
         $fields = [
             'table_name' => $tableName,
             'log_type' => LogType::MODEL_UPDATED,
-            'model_type' => get_class($model),
+            'model_type' => $model::class,
             'model_id' => $model->id,
             'model_changes' => $valuesChanged,
             'model_old' => $valuesOld,

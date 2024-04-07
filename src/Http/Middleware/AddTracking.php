@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Http\Middleware;
 
 use Closure;
@@ -21,9 +23,8 @@ class AddTracking
     /**
      * @psalm-suppress UndefinedPropertyFetch
      * @psalm-suppress MixedMethodCall
-     * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
         $this->startTime = microtime(true);
         $this->requestId = $this->generateKey();
@@ -34,18 +35,10 @@ class AddTracking
         return $next($request);
     }
 
-    private function generateKey(): string
-    {
-        $bytes = random_bytes(20);
-
-        return bin2hex($bytes);
-    }
-
     /**
      * @psalm-suppress MixedMethodCall
-     * @param  mixed  $response
      */
-    public function terminate(Request $request, $response): void
+    public function terminate(Request $request, mixed $response): void
     {
         if ($response instanceof RedirectResponse) {
             $responseString = 'redirect';
@@ -54,5 +47,12 @@ class AddTracking
         }
 
         event(new RequestTerminatedEvent($request, $responseString));
+    }
+
+    private function generateKey(): string
+    {
+        $bytes = random_bytes(20);
+
+        return bin2hex($bytes);
     }
 }

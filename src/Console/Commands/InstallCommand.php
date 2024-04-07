@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -32,7 +34,7 @@ class InstallCommand extends Command
     {
         $logModelClass = (string) config('footprints.log_model');
 
-        $table = (new $logModelClass)->getTable();
+        $table = (new $logModelClass())->getTable();
 
         $this->line('-----------------------------');
         if (! Schema::hasTable($table)) {
@@ -60,7 +62,7 @@ class InstallCommand extends Command
 
     private function checkAndPublishMigrations(): void
     {
-        if (File::exists(database_path("migrations/$this->migrationFile"))) {
+        if (File::exists(database_path("migrations/{$this->migrationFile}"))) {
             $confirm = $this->confirm('migration file already exist. Do you want to overwrite?');
             if ($confirm) {
                 $this->publishMigration();

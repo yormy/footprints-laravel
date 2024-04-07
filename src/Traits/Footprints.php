@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Traits;
 
 use Illuminate\Support\Facades\Auth;
@@ -21,19 +23,19 @@ trait Footprints
 
     public static function bootFootprints(): void
     {
-        self::created(function ($model) {
+        self::created(function ($model): void {
             if (in_array('CREATED', self::getFootprintsEvents())) {
                 event(new ModelCreatedEvent($model, Auth::user(), request()));
             }
         });
 
-        static::updated(function ($model) {
+        static::updated(function ($model): void {
             if (in_array('UPDATED', self::getFootprintsEvents())) {
                 event(new ModelUpdatedEvent($model, Auth::user(), request()));
             }
         });
 
-        static::deleted(function ($model) {
+        static::deleted(function ($model): void {
             if (in_array('DELETED', self::getFootprintsEvents())) {
                 event(new ModelDeletedEvent($model, Auth::user(), request()));
             }

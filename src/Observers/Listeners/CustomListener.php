@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Yormy\FootprintsLaravel\Observers\Events\CustomFootprintEvent;
 
 class CustomListener extends BaseListener
 {
-    /**
-     * @return void
-     */
-    public function handle(CustomFootprintEvent $event)
+    public function handle(CustomFootprintEvent $event): void
     {
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.on_custom')

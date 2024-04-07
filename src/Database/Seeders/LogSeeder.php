@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -8,13 +10,13 @@ use Yormy\FootprintsLaravel\Models\Log;
 
 class LogSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $this->memberLogSeeder();
         $this->adminLogSeeder();
     }
 
-    private function memberLogSeeder()
+    private function memberLogSeeder(): void
     {
         $member = Member::where('id', 1)->first();
         Log::factory(4)->loginFailed()->forMember($member)->create();
@@ -25,7 +27,7 @@ class LogSeeder extends Seeder
         Log::factory(3)->loginSuccess()->forMember($member)->create();
     }
 
-    private function adminLogSeeder()
+    private function adminLogSeeder(): void
     {
         $admin = Member::where('id', 1)->first();
         Log::factory(4)->loginFailed()->forAdmin($admin)->create();

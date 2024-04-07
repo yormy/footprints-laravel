@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
 use Illuminate\Routing\Events\RouteMatched;
@@ -8,20 +10,17 @@ use Yormy\FootprintsLaravel\Services\RuleService;
 
 class RouteMatchListener extends BaseListener
 {
-    const METHOD_GET = 'GET';
+    public const METHOD_GET = 'GET';
 
-    const METHOD_PUT = 'PUT';
+    public const METHOD_PUT = 'PUT';
 
-    const METHOD_PATCH = 'PATCH';
+    public const METHOD_PATCH = 'PATCH';
 
-    const METHOD_POST = 'POST';
+    public const METHOD_POST = 'POST';
 
-    const METHOD_DELETE = 'DELETE';
+    public const METHOD_DELETE = 'DELETE';
 
-    /**
-     * @return void
-     */
-    public function handle(RouteMatched $event)
+    public function handle(RouteMatched $event): void
     {
         if (! $this->shouldLog($event)) {
             return;
@@ -58,7 +57,8 @@ class RouteMatchListener extends BaseListener
                 'url' => $url,
                 'log_type' => LogType::ROUTE_VISIT,
                 'data' => json_encode($data),
-            ]);
+            ]
+        );
     }
 
     private function shouldLog(RouteMatched $event): bool

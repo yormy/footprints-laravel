@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yormy\FootprintsLaravel\Observers\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
@@ -14,7 +16,6 @@ class ExceptionEvent
 
     public function __construct(private Throwable $exception, private Request $request)
     {
-        //
     }
 
     public function getException(): Throwable
