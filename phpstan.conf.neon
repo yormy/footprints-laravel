@@ -18,7 +18,7 @@ parameters:
    # reportUnmatchedIgnoredErrors: false
     ignoreErrors:
         - '#Call to an undefined method Illuminate#'  #ignore scope on model errors
-        #- '#Call to an undefined static method Illuminate#'  #ignore scope on model errors
+        - '#Call to an undefined static method Yormy#'  #ignore scope on model errors
 
     # Level 9 is the strictest
     level: 9
