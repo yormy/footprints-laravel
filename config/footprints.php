@@ -72,7 +72,7 @@ return [
         'ip' => true,
         'user_agent' => true,
         'duration' => true,
-        'geoip' => true,
+        'geoip' => false,
         'payload' => [
             'enabled' => true,
             'max_characters' => 200,

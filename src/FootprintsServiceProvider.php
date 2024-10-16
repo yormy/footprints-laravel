@@ -3,8 +3,14 @@
 declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel;
-
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\OtherDeviceLogout;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Foundation\Application;
+use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\ServiceProvider;
 use Yormy\FootprintsLaravel\Console\Commands\InstallCommand;
 use Yormy\FootprintsLaravel\Models\Log;
@@ -31,6 +37,9 @@ class FootprintsServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerTranslations();
+
+        $this->app->register(EventServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -39,9 +48,6 @@ class FootprintsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footprints');
-
-        $this->app->register(EventServiceProvider::class);
-        $this->app->register(RouteServiceProvider::class);
     }
 
     public function registerTranslations(): void
