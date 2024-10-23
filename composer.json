@@ -31,7 +31,8 @@
         "illuminate/database": "^10|^11",
         "laravel/framework": "^10|^11",
         "orchestra/testbench": "^8|^9",
-        "yormy/core-tools-laravel": "^1.0.10"
+        "yormy/xid": "1.1.2",
+        "yormy/apiresponse": "1.0.10"
     },
     "require-dev": {
         "yormy/dev-tools-laravel": "1.0.5"

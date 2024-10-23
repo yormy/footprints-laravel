@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Yormy\CoreToolsLaravel\Traits\Factories\PackageFactoryTrait;
 use Yormy\FootprintsLaravel\Interfaces\FootprintInterface;
+use Yormy\FootprintsLaravel\Traits\PackageFactoryTrait;
 use Yormy\Xid\Models\Traits\Xid;
 
 /**
