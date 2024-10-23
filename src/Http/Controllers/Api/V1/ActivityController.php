@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Yormy\Apiresponse\Facades\ApiResponse;
 use Yormy\FootprintsLaravel\Http\Resources\LogItemCollection;
 use Yormy\FootprintsLaravel\Repositories\FootprintItemRepository;
+use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class ActivityController extends BaseController
 {
@@ -16,6 +17,8 @@ class ActivityController extends BaseController
     {
         $userResolverClass = config('footprints.resolvers.user');
         $userResolver = new $userResolverClass;
+
+        /** @var UserResolver $userResolver */
         $user = $userResolver->getMember('xid', $member_xid);
 
         return $this->returnForUser($request, $user);

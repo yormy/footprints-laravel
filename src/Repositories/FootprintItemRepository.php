@@ -10,23 +10,24 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mexion\BedrockUsersv2\Domain\User\Models\Admin;
-use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 use Yormy\FootprintsLaravel\Exceptions\CacheTagSupportException;
 use Yormy\FootprintsLaravel\Models\Footprint;
 
 class FootprintItemRepository
 {
-    public function __construct(private ?Footprint $model = null)
+    private Footprint $model;
+
+    public function __construct(Footprint $model = null)
     {
         if (! $model) {
             $this->model = new Footprint;
         }
     }
 
-    public function getAllLoginForUser(Admin|Member $user): Collection
+    public function getAllLoginForUser(Authenticatable $user): Collection
     {
-        return $this->queryForUser($user)
+        /** @var Collection $results */
+        $results =  $this->queryForUser($user)
             ->select([
                 'xid',
                 'log_type',
@@ -38,9 +39,11 @@ class FootprintItemRepository
             ->whereIn('log_type', ['AUTH_LOGIN', 'AUTH_FAILED'])
             ->orderBy('created_at', 'DESC')
             ->get();
+
+        return $results;
     }
 
-    public function getAllActivityForUser(Admin|Member $user): Collection
+    public function getAllActivityForUser(Authenticatable $user): Collection
     {
         $select = [
             'xid',
@@ -57,10 +60,13 @@ class FootprintItemRepository
             'method',
         ];
 
-        return $this->queryForUser($user)
+        /** @var Collection $results */
+        $results = $this->queryForUser($user)
             ->select($select)
             ->orderBy('created_at', 'DESC')
             ->get();
+
+        return $results;
     }
 
     public function createLogEntry(array $data, array $props): void
@@ -100,7 +106,7 @@ class FootprintItemRepository
         DB::statement($statement);
     }
 
-    private function queryForUser(Admin|Member $user): Builder
+    private function queryForUser(Authenticatable $user): Builder
     {
         $userType = '';
         if ($user instanceof Member) {
@@ -111,21 +117,21 @@ class FootprintItemRepository
             $userType = '%Admin';
         }
 
-        return $this->model::where('user_id', $user->id)
+        // @phpstan-ignore-next-line
+        $userId = $user->id;
+
+        return $this->model::where('user_id', $userId)
             ->where('user_type', 'like', $userType);
     }
 
-    /**
-     * @psalm-suppress MoreSpecificReturnType
-     * @psalm-suppress LessSpecificReturnStatement
-     * @psalm-suppress MixedMethodCall
-     * @psalm-suppress MixedAssignment
-     */
-    private function getLogItemModel(): Model
+    private function getLogItemModel(): Footprint
     {
         $logModelClass = config('footprints.log_model');
 
-        return new $logModelClass;
+        /** @var Footprint $model */
+        $model = new $logModelClass;
+
+        return $model;
     }
 
     /**
@@ -133,46 +139,46 @@ class FootprintItemRepository
      * @psalm-suppress MixedAssignment
      * @psalm-suppress MixedMethodCall
      */
-    private function getRemoteDetails(Request $request): array
-    {
-        $data = [];
-
-        if (config('footprints.content.ip')) {
-            $data['ip_address'] = $request->ip();
-        }
-
-        if (config('footprints.content.user_agent')) {
-            $data['user_agent'] = $request->userAgent();
-        }
-
-        if (config('footprints.content.geoip')) {
-            $supportsTags = cache()->supportsTags();
-            if (! $supportsTags) {
-                throw new CacheTagSupportException;
-            }
-
-            $location = geoip()->getLocation($request->ip());
-            $data['location'] = json_encode($location->toArray());
-        }
-
-        return $data;
-    }
+//    private function getRemoteDetails(Request $request): array
+//    {
+//        $data = [];
+//
+//        if (config('footprints.content.ip')) {
+//            $data['ip_address'] = $request->ip();
+//        }
+//
+//        if (config('footprints.content.user_agent')) {
+//            $data['user_agent'] = $request->userAgent();
+//        }
+//
+//        if (config('footprints.content.geoip')) {
+//            $supportsTags = cache()->supportsTags();
+//            if (! $supportsTags) {
+//                throw new CacheTagSupportException;
+//            }
+//
+//            $location = geoip()->getLocation($request->ip());
+//            $data['location'] = json_encode($location->toArray());
+//        }
+//
+//        return $data;
+//    }
 
     /**
      * @psalm-suppress NoInterfaceProperties
      */
-    private function getUserData(?Authenticatable $user): array
-    {
-        $userFields = [];
-        if ($user) {
-            $userFields = [
-                'user_id' => $user->id,
-                'user_type' => $user::class,
-            ];
-        }
-
-        return $userFields;
-    }
+//    private function getUserData(?Authenticatable $user): array
+//    {
+//        $userFields = [];
+//        if ($user) {
+//            $userFields = [
+//                'user_id' => $user->id,
+//                'user_type' => $user::class,
+//            ];
+//        }
+//
+//        return $userFields;
+//    }
 
     //    private static function cleanPayload(string $payload): string
     //    {

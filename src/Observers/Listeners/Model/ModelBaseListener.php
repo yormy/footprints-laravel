@@ -9,7 +9,7 @@ use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
 class ModelBaseListener extends model
 {
-    public function getData($event): array
+    public function getData($event): array // @phpstan-ignore-line
     {
         $model = $event->getModel();
         $tableName = $model->getTable();
