@@ -174,16 +174,16 @@ class FootprintItemRepository
         return $userFields;
     }
 
-    private static function cleanPayload(string $payload): string
-    {
-        if (! config('footprints.content.payload.enabled')) {
-            return '';
-        }
-
-        $truncated = substr($payload, 0, (int) config('footprints.payload.max_characters'));
-
-        return base64_encode($truncated);  // base64 encode to prevent sqli
-    }
+//    private static function cleanPayload(string $payload): string
+//    {
+//        if (! config('footprints.content.payload.enabled')) {
+//            return '';
+//        }
+//
+//        $truncated = substr($payload, 0, (int) config('footprints.payload.max_characters'));
+//
+//        return base64_encode($truncated);  // base64 encode to prevent sqli
+//    }
 
     private static function cleanResponse(string $response): string
     {
@@ -191,6 +191,9 @@ class FootprintItemRepository
             return '';
         }
 
-        return substr($response, 0, (int) config('footprints.content.response.max_characters'));
+        /** @var int $maxCharacters */
+        $maxCharacters = (int) config('footprints.content.response.max_characters'); // @phpstan-ignore-line
+
+        return substr($response, 0, $maxCharacters);
     }
 }
