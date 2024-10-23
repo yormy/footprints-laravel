@@ -2,6 +2,7 @@
 
 namespace Yormy\FootprintsLaravel\DataObjects;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 use Yormy\FootprintsLaravel\Services\Resolvers\ImpersonatorResolver;
@@ -33,7 +34,7 @@ class RequestDto
 
     private ?string $method;
 
-    private $user;
+    private ?Authenticatable $user;
 
     private ?array $customCookies;
 
@@ -90,7 +91,7 @@ class RequestDto
         return $model;
     }
 
-    private static function determineUser()
+    private static function determineUser(): ?Authenticatable
     {
         $userResolverClass = config('footprints.resolvers.user');
         $userResolver = new $userResolverClass;
@@ -126,7 +127,7 @@ class RequestDto
 
         $data['impersonator_id'] = $this->impersonatorId;
 
-        $data['user_id'] = $this->user?->id;
+        $data['user_id'] = $this->user?->id; // @phpstan-ignore-line
         $data['user_type'] = $this->user ? get_class($this->user) : null;
 
         $data['browser_fingerprint'] = $this->browserFingerprint;
@@ -223,9 +224,9 @@ class RequestDto
         return $this->cleanPayload($payload);
     }
 
-    private function getGeoLocation(Request $request): ?string
+    private function getGeoLocation(Request $request): ?string // @phpstan-ignore-line
     {
-        return json_encode(['disabled']);
+        return (string)json_encode(['disabled']);
         //        $supportsTags = cache()->supportsTags();
         //        if (! $supportsTags) {
         //            throw new CacheTagSupportException;
