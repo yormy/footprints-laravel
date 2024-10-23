@@ -84,7 +84,7 @@ return [
             '_token',
             'password',
             'new_password',
-            'one_time_password'
+            'one_time_password',
         ],
 
         'model' => [
@@ -118,5 +118,5 @@ return [
         'custom' => [
         ],
         'max_characters' => 100,
-    ]
+    ],
 ];

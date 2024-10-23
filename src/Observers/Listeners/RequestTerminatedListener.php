@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
-use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 use Yormy\FootprintsLaravel\Jobs\FootprintsUpdateLogJob;
 use Yormy\FootprintsLaravel\Observers\Events\RequestTerminatedEvent;
 

@@ -20,7 +20,7 @@ class FootprintItemRepository
     public function __construct(private ?Footprint $model = null)
     {
         if (! $model) {
-            $this->model = new Footprint();
+            $this->model = new Footprint;
         }
     }
 
@@ -121,7 +121,7 @@ class FootprintItemRepository
     {
         $logModelClass = config('footprints.log_model');
 
-        return new $logModelClass();
+        return new $logModelClass;
     }
 
     /**
@@ -144,7 +144,7 @@ class FootprintItemRepository
         if (config('footprints.content.geoip')) {
             $supportsTags = cache()->supportsTags();
             if (! $supportsTags) {
-                throw new CacheTagSupportException();
+                throw new CacheTagSupportException;
             }
 
             $location = geoip()->getLocation($request->ip());

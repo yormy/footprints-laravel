@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Yormy\FootprintsLaravel\Observers\Events\ModelCreatedEvent;
 use Yormy\FootprintsLaravel\Observers\Events\ModelDeletedEvent;
 use Yormy\FootprintsLaravel\Observers\Events\ModelUpdatedEvent;

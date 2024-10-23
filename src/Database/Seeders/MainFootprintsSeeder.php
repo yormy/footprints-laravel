@@ -10,6 +10,6 @@ class MainFootprintsSeeder extends Seeder
 {
     public function run(): void
     {
-        (new FootprintSeeder())->run();
+        (new FootprintSeeder)->run();
     }
 }

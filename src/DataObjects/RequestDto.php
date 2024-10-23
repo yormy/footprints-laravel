@@ -33,7 +33,6 @@ class RequestDto
 
     private $user;
 
-
     private function __construct()
     {
         // ...
@@ -43,11 +42,11 @@ class RequestDto
     {
         $model = new self;
 
-        $model->request = (string) $request->get('request_id');
-
         $model->url = $request->fullUrl();
 
-        $model->route = $request->route()?->getName();
+        if (is_object($request->route())) {
+            $model->route = $request->route()->getName();
+        }
 
         $model->ipAddress = $request->ip();
 
@@ -103,7 +102,6 @@ class RequestDto
         return BlacklistFilter::filterBlacklist($data);
     }
 
-
     public function toArray(): array
     {
         $data['request_id'] = $this->requestId;
@@ -144,7 +142,7 @@ class RequestDto
     private static function determineMethod(?array $methods = []): string
     {
         $method = '';
-        if (!$methods) {
+        if (! $methods) {
             return $method;
         }
 
@@ -176,13 +174,13 @@ class RequestDto
 
         return BlacklistFilter::truncateData($cookies, (int) config('footprints.cookies.max_characters'));
 
-
     }
+
     private function getBrowserFingerprint(Request $request): ?string
     {
         $fingerprintCookieName = config('footprints.cookies.browser_fingerprint', 'browser_fingerprint');
 
-        $fingerprint =  $request->cookie($fingerprintCookieName);
+        $fingerprint = $request->cookie($fingerprintCookieName);
 
         return BlacklistFilter::truncateField($fingerprint, (int) config('footprints.cookies.max_characters'));
     }
@@ -224,7 +222,6 @@ class RequestDto
 
         return BlacklistFilter::filterBlacklist($payloadArray);
     }
-
 
     private static function truncateFields(array $payloadArray): array
     {

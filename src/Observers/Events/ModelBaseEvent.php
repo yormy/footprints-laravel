@@ -15,9 +15,7 @@ class ModelBaseEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(private Model $model, protected ?Authenticatable $user, protected Request $request)
-    {
-    }
+    public function __construct(private Model $model, protected ?Authenticatable $user, protected Request $request) {}
 
     public function getModel(): Model
     {

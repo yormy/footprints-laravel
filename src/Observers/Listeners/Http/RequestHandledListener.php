@@ -17,11 +17,11 @@ class RequestHandledListener extends BaseListener
         $request = $event->request;
         $response = $event->response;
 
-        if (!$this->shouldLog($request)) {
+        if (! $this->shouldLog($request)) {
             return;
         }
 
-        $requestDto =  RequestDto::fromRequest($request);
+        $requestDto = RequestDto::fromRequest($request);
 
         $props = [
             'log_type' => LogType::ROUTE_VISIT,
@@ -41,7 +41,10 @@ class RequestHandledListener extends BaseListener
         }
 
         $url = $request->fullUrl();
-        $route = $request->route()?->getName();
+        $route = null;
+        if (is_object($request->route())) {
+            $route = $request->route()->getName();
+        }
 
         if ($url && RuleService::shouldIgnore($url, (array) config('footprints.log_visits.urls_exclude'))) {
             return false;

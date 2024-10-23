@@ -8,7 +8,6 @@ use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
 use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 use Yormy\FootprintsLaravel\Observers\Events\ModelUpdatedEvent;
-use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class ModelUpdatedListener extends ModelBaseListener
 {
@@ -21,7 +20,7 @@ class ModelUpdatedListener extends ModelBaseListener
         }
 
         $request = $event->getRequest();
-        $requestDto =  RequestDto::fromRequest($request);
+        $requestDto = RequestDto::fromRequest($request);
 
         $props = $this->getData($event);
         $props['log_type'] = LogType::MODEL_UPDATED;

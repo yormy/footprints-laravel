@@ -3,14 +3,8 @@
 declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel;
-use Illuminate\Auth\Events\Failed;
-use Illuminate\Auth\Events\Lockout;
-use Illuminate\Auth\Events\Login;
-use Illuminate\Auth\Events\Logout;
-use Illuminate\Auth\Events\OtherDeviceLogout;
+
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Foundation\Application;
-use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\ServiceProvider;
 use Yormy\FootprintsLaravel\Console\Commands\InstallCommand;
 use Yormy\FootprintsLaravel\Models\Footprint;

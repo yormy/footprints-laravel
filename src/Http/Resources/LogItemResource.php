@@ -54,7 +54,5 @@ class LogItemResource extends JsonResource
         return $merged;
     }
 
-    private function get(): void
-    {
-    }
+    private function get(): void {}
 }

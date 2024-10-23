@@ -22,18 +22,19 @@ class LoginListener extends BaseListener
             return;
         }
 
+        $props = [
+            'log_type' => LogType::AUTH_LOGIN,
+        ];
+
         $loginSessionIdCookieName = config('footprints.cookies.login_session_id', false);
         if ($loginSessionIdCookieName) {
             $sessionId = Str::random(64);
             Cookie::queue($loginSessionIdCookieName, $sessionId, 60 * 24 * 7);
+
+            $props['session_id'] = $sessionId;
         }
 
-        $requestDto =  RequestDto::fromRequest($this->request);
-
-        $props = [
-            'log_type' => LogType::AUTH_LOGIN,
-            'session_id' => $sessionId, // cookie not yet set, but include in logging
-        ];
+        $requestDto = RequestDto::fromRequest($this->request);
 
         FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }

@@ -34,7 +34,7 @@ class InstallCommand extends Command
     {
         $logModelClass = (string) config('footprints.log_model');
 
-        $table = (new $logModelClass())->getTable();
+        $table = (new $logModelClass)->getTable();
 
         $this->line('-----------------------------');
         if (! Schema::hasTable($table)) {

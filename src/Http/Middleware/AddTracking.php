@@ -31,7 +31,7 @@ class AddTracking
 
         $request->attributes->add(['request_id' => $this->requestId]);
 
-        $fingerprintCookieName = config('footprints.browser_fingerprint_cookie_name','browser_fingerprint');
+        $fingerprintCookieName = config('footprints.browser_fingerprint_cookie_name', 'browser_fingerprint');
         $request->attributes->add(['browser_fingerprint' => $request->cookie($fingerprintCookieName)]);
 
         return $next($request);

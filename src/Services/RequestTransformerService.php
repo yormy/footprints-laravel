@@ -1,4 +1,5 @@
 <?php
+
 namespace Yormy\FootprintsLaravel\Services;
 
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class RequestTransformerService
         $remoteFields = $this->getRemoteDetails($this->request);
         $data = array_merge($props, $requestFields, $remoteFields);
 
-        $fingerprintCookieName = config('footprints.browser_fingerprint_cookie_name','browser_fingerprint');
+        $fingerprintCookieName = config('footprints.browser_fingerprint_cookie_name', 'browser_fingerprint');
         $data['browser_fingerprint'] = $this->request->cookie($fingerprintCookieName);
 
         $data['impersonator_id'] = $this->request->get('impersonator_id');

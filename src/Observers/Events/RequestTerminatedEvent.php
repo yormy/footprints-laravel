@@ -13,9 +13,7 @@ class RequestTerminatedEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(protected Request $request, protected string $response)
-    {
-    }
+    public function __construct(protected Request $request, protected string $response) {}
 
     public function getRequest(): Request
     {

@@ -23,11 +23,11 @@ class ExceptionListener extends BaseListener
         }
 
         $request = $event->getRequest();
-        $requestDto =  RequestDto::fromRequest($request);
+        $requestDto = RequestDto::fromRequest($request);
 
         $logtype = $this->getLogType($exception);
 
-        if (!$logtype) {
+        if (! $logtype) {
             return;
         }
 

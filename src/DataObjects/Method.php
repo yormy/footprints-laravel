@@ -13,5 +13,4 @@ class Method
     public const POST = 'POST';
 
     public const DELETE = 'DELETE';
-
 }

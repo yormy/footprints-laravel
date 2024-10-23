@@ -23,7 +23,7 @@ class ActivityController extends BaseController
 
     private function returnForUser($request, $user)
     {
-        $logItemRepository = new FootprintItemRepository();
+        $logItemRepository = new FootprintItemRepository;
         $logins = $logItemRepository->getAllActivityForUser($user);
 
         $logins = (new LogItemCollection($logins))->toArray($request);

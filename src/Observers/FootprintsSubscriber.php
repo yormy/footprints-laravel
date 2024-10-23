@@ -58,7 +58,7 @@ class FootprintsSubscriber
         );
     }
 
-    private function httpEvents(Dispatcher $events)
+    private function httpEvents(Dispatcher $events): void
     {
         $events->listen(
             RequestHandled::class,
@@ -66,7 +66,7 @@ class FootprintsSubscriber
         );
     }
 
-    private function authEvents(Dispatcher $events)
+    private function authEvents(Dispatcher $events): void
     {
         $events->listen(
             Login::class,
@@ -94,7 +94,7 @@ class FootprintsSubscriber
         );
     }
 
-    private function modelEvents(Dispatcher $events)
+    private function modelEvents(Dispatcher $events): void
     {
         $events->listen(
             ModelCreatedEvent::class,
@@ -112,11 +112,11 @@ class FootprintsSubscriber
         );
     }
 
-    private function routeEvents(Dispatcher $events)
+    private function routeEvents(Dispatcher $events): void
     {
-//        $events->listen(
-//            RouteMatched::class, // this is before middleware, so no user is known/ no cookies decrypted
-//            RouteMatchListener::class
-//        );
+        //        $events->listen(
+        //            RouteMatched::class, // this is before middleware, so no user is known/ no cookies decrypted
+        //            RouteMatchListener::class
+        //        );
     }
 }

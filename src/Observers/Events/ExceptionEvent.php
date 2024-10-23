@@ -14,9 +14,7 @@ class ExceptionEvent
     use Dispatchable;
     use SerializesModels;
 
-    public function __construct(private Throwable $exception, private Request $request)
-    {
-    }
+    public function __construct(private Throwable $exception, private Request $request) {}
 
     public function getException(): Throwable
     {

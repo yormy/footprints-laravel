@@ -18,8 +18,7 @@ class CustomListener extends BaseListener
             return;
         }
 
-
-        $requestDto =  RequestDto::fromRequest($this->request);
+        $requestDto = RequestDto::fromRequest($this->request);
 
         $data = $event->getData();
         $props = [

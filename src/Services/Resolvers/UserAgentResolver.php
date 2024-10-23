@@ -11,7 +11,7 @@ class UserAgentResolver
 {
     public static function get(): string
     {
-        $agent = new Agent();
+        $agent = new Agent;
         $platform = $agent->platform();
         $userAgent = $platform.' '.$agent->version($platform);
 

@@ -26,7 +26,7 @@ abstract class LoginHistoryController extends BaseController
 
     private function returnForUser($request, $user)
     {
-        $logItemRepository = new FootprintItemRepository();
+        $logItemRepository = new FootprintItemRepository;
         $logins = $logItemRepository->getAllLoginForUser($user);
 
         $logins = (new LogItemCollection($logins))->toArray($request);

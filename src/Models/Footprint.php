@@ -45,7 +45,7 @@ class Footprint extends Model implements FootprintInterface
         'model_old',
         'model_changes',
         'browser_fingerprint',
-        'custom_cookies'
+        'custom_cookies',
     ];
 
     public function __construct(array $attributes = [])
