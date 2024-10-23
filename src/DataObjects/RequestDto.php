@@ -21,7 +21,7 @@ class RequestDto
 
     private ?string $sessionId;
 
-    private string| int| null $impersonatorId;
+    private string|int|null $impersonatorId;
 
     private ?string $browserFingerprint;
 
@@ -62,7 +62,7 @@ class RequestDto
 
         $model->requestId = (string) $request->get('request_id'); // @phpstan-ignore-line
 
-        $loginSessionIdCookieName = (string)config('footprints.cookies.login_session_id', false);  // @phpstan-ignore-line
+        $loginSessionIdCookieName = (string) config('footprints.cookies.login_session_id', false);  // @phpstan-ignore-line
         if ($loginSessionIdCookieName) {
             /** @var string $loginSessionIdCookieName */
             $sessionId = (string) $request->cookie($loginSessionIdCookieName); // @phpstan-ignore-line
@@ -99,7 +99,7 @@ class RequestDto
         return $userResolver->getCurrent();
     }
 
-    private static function determineImpersonator(): string | int | null
+    private static function determineImpersonator(): string|int|null
     {
         $impersonatorResolverClass = config('footprints.resolvers.impersonator');
         $impersonatorResolver = new $impersonatorResolverClass;
@@ -201,14 +201,14 @@ class RequestDto
     private function getBrowserFingerprint(Request $request): string
     {
         /** @var string $fingerprintCookieName */
-        $fingerprintCookieName = (string)config('footprints.cookies.browser_fingerprint', 'browser_fingerprint'); // @phpstan-ignore-line
+        $fingerprintCookieName = (string) config('footprints.cookies.browser_fingerprint', 'browser_fingerprint'); // @phpstan-ignore-line
 
-        if (!$fingerprintCookieName) {
+        if (! $fingerprintCookieName) {
             return '';
         }
 
         /** @var string $fingerprint */
-        $fingerprint = (string)$request->cookie($fingerprintCookieName); // @phpstan-ignore-line
+        $fingerprint = (string) $request->cookie($fingerprintCookieName); // @phpstan-ignore-line
 
         // @phpstan-ignore-next-line
         $maxCharacters = (int) config('footprints.cookies.max_characters');
@@ -244,7 +244,7 @@ class RequestDto
         $payloadArray = self::maskFields($payload);
         $payloadArray = self::truncateFields($payloadArray);
 
-        return (string)json_encode($payloadArray);
+        return (string) json_encode($payloadArray);
     }
 
     private static function maskFields(string $payload): array

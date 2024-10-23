@@ -31,7 +31,7 @@ class AddTracking
 
         $request->attributes->add(['request_id' => $this->requestId]);
 
-        $fingerprintCookieName = (string)config('footprints.browser_fingerprint_cookie_name', 'browser_fingerprint'); // @phpstan-ignore-line
+        $fingerprintCookieName = (string) config('footprints.browser_fingerprint_cookie_name', 'browser_fingerprint'); // @phpstan-ignore-line
         $request->attributes->add(['browser_fingerprint' => $request->cookie($fingerprintCookieName)]);
 
         return $next($request);

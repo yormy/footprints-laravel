@@ -58,7 +58,7 @@ class Footprint extends Model implements FootprintInterface
          * @psalm-suppress RedundantPropertyInitializationCheck
          */
         if (! isset($this->table)) {
-            $this->setTable((string)config('footprints.table_name', '')); // @phpstan-ignore-line
+            $this->setTable((string) config('footprints.table_name', '')); // @phpstan-ignore-line
         }
 
         parent::__construct($attributes);
