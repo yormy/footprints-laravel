@@ -67,14 +67,18 @@ class FootprintItemRepository
     {
         $data = array_merge($data, $props);
 
+        /** @var Footprint $logModel */
         $logModel = $this->getLogItemModel();
 
         $sessionId = $data['session_id'];
+
+        /** @var Footprint $previous */
         $previous = $logModel->where('session_id', $sessionId)->latest()->first();
 
+        /** @var Footprint $new */
         $new = $logModel->create($data);
 
-        if ($new?->created_at && $previous?->created_at) {
+        if ($new && $previous) {
             $pageVisitSec = $new->created_at->diffInSeconds($previous->created_at);
             $previous->page_visit_sec = $pageVisitSec;
             $previous->update();

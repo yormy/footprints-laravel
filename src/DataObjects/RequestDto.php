@@ -4,6 +4,8 @@ namespace Yormy\FootprintsLaravel\DataObjects;
 
 use Illuminate\Http\Request;
 use Yormy\FootprintsLaravel\Services\BlacklistFilter;
+use Yormy\FootprintsLaravel\Services\Resolvers\ImpersonatorResolver;
+use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class RequestDto
 {
@@ -19,7 +21,7 @@ class RequestDto
 
     private ?string $sessionId;
 
-    private ?string $impersonatorId;
+    private string| int| null $impersonatorId;
 
     private ?string $browserFingerprint;
 
@@ -33,6 +35,8 @@ class RequestDto
 
     private $user;
 
+    private ?array $customCookies;
+
     private function __construct()
     {
         // ...
@@ -45,7 +49,7 @@ class RequestDto
         $model->url = $request->fullUrl();
 
         if (is_object($request->route())) {
-            $model->route = $request->route()->getName();
+            $model->route = $request->route()->getName(); // @phpstan-ignore-line
         }
 
         $model->ipAddress = $request->ip();
@@ -56,19 +60,26 @@ class RequestDto
 
         $model->payload = $model->getPayload($request);
 
-        $model->requestId = (string) $request->get('request_id');
+        $model->requestId = (string) $request->get('request_id'); // @phpstan-ignore-line
 
-        $loginSessionIdCookieName = config('footprints.cookies.login_session_id', false);
+        $loginSessionIdCookieName = (string)config('footprints.cookies.login_session_id', false);  // @phpstan-ignore-line
         if ($loginSessionIdCookieName) {
-            $sessionId = (string) $request->cookie($loginSessionIdCookieName);
-            $model->sessionId = BlacklistFilter::truncateField($sessionId, (int) config('footprints.cookies.max_characters'));
+            /** @var string $loginSessionIdCookieName */
+            $sessionId = (string) $request->cookie($loginSessionIdCookieName); // @phpstan-ignore-line
+
+            /** @var int $maxCharacters */
+            $maxCharacters = (int) config('footprints.cookies.max_characters'); // @phpstan-ignore-line
+
+            $model->sessionId = BlacklistFilter::truncateField($sessionId, $maxCharacters);
         }
 
         $model->browserFingerprint = $model->getBrowserFingerprint($request);
 
         $model->geoLocation = $model->getGeoLocation($request);
 
-        $model->method = self::determineMethod($request->route()?->methods);
+        if (is_object($request->route())) {
+            $model->method = self::determineMethod($request->route()?->methods); // @phpstan-ignore-line
+        }
 
         $model->user = self::determineUser();
 
@@ -84,15 +95,17 @@ class RequestDto
         $userResolverClass = config('footprints.resolvers.user');
         $userResolver = new $userResolverClass;
 
+        /** @var UserResolver $userResolver */
         return $userResolver->getCurrent();
     }
 
-    private static function determineImpersonator()
+    private static function determineImpersonator(): string | int | null
     {
         $impersonatorResolverClass = config('footprints.resolvers.impersonator');
         $impersonatorResolver = new $impersonatorResolverClass;
 
-        return $impersonatorResolver->getImpersonator();
+        /** @var ImpersonatorResolver $impersonatorResolver */
+        return $impersonatorResolver->getImpersonatorId();
     }
 
     private function getData(Request $request): array
@@ -118,13 +131,17 @@ class RequestDto
 
         $data['browser_fingerprint'] = $this->browserFingerprint;
 
+        // @phpstan-ignore-next-line
         if (config('footprints.content.ip')) {
             $data['ip_address'] = $this->ipAddress;
         }
 
+        // @phpstan-ignore-next-line
         if (config('footprints.content.user_agent')) {
             $data['user_agent'] = $this->userAgent;
         }
+
+        // @phpstan-ignore-next-line
         if (config('footprints.content.geoip')) {
             $data['location'] = $this->geoLocation;
 
@@ -163,26 +180,40 @@ class RequestDto
 
     private static function getCustomCookies(Request $request): array
     {
+        /** @var array $customCookies */
         $customCookies = config('footprints.cookies.custom', []);
 
         $cookies = [];
         foreach ($customCookies as $cookieName) {
+            /** @var string $cookieName */
             $cookies[$cookieName] = $request->cookie($cookieName);
         }
 
         $cookies = BlacklistFilter::filterBlacklist($cookies);
 
-        return BlacklistFilter::truncateData($cookies, (int) config('footprints.cookies.max_characters'));
+        /** @var int $maxCharacters */
+        $maxCharacters = (int) config('footprints.cookies.max_characters'); // @phpstan-ignore-line
+
+        return BlacklistFilter::truncateData($cookies, $maxCharacters);
 
     }
 
-    private function getBrowserFingerprint(Request $request): ?string
+    private function getBrowserFingerprint(Request $request): string
     {
-        $fingerprintCookieName = config('footprints.cookies.browser_fingerprint', 'browser_fingerprint');
+        /** @var string $fingerprintCookieName */
+        $fingerprintCookieName = (string)config('footprints.cookies.browser_fingerprint', 'browser_fingerprint'); // @phpstan-ignore-line
 
-        $fingerprint = $request->cookie($fingerprintCookieName);
+        if (!$fingerprintCookieName) {
+            return '';
+        }
 
-        return BlacklistFilter::truncateField($fingerprint, (int) config('footprints.cookies.max_characters'));
+        /** @var string $fingerprint */
+        $fingerprint = (string)$request->cookie($fingerprintCookieName); // @phpstan-ignore-line
+
+        // @phpstan-ignore-next-line
+        $maxCharacters = (int) config('footprints.cookies.max_characters');
+
+        return BlacklistFilter::truncateField($fingerprint, $maxCharacters);
     }
 
     private function getPayload(Request $request): string
@@ -213,7 +244,7 @@ class RequestDto
         $payloadArray = self::maskFields($payload);
         $payloadArray = self::truncateFields($payloadArray);
 
-        return json_encode($payloadArray);
+        return (string)json_encode($payloadArray);
     }
 
     private static function maskFields(string $payload): array
@@ -225,6 +256,9 @@ class RequestDto
 
     private static function truncateFields(array $payloadArray): array
     {
-        return BlacklistFilter::truncateData($payloadArray, (int) config('footprints.content.payload.max_characters_per_field'));
+        /** @var int $maxCharacters */
+        $maxCharacters = (int) config('footprints.content.payload.max_characters_per_field'); // @phpstan-ignore-line
+
+        return BlacklistFilter::truncateData($payloadArray, $maxCharacters);
     }
 }

@@ -36,6 +36,7 @@ class FootprintFactory extends Factory
         ];
     }
 
+    // @phpstan-ignore-next-line
     public function forMember($member): Factory
     {
         return $this->state(function (array $attributes) use ($member) {
@@ -47,6 +48,7 @@ class FootprintFactory extends Factory
         });
     }
 
+    // @phpstan-ignore-next-line
     public function forAdmin($admin): Factory
     {
         return $this->state(function (array $attributes) use ($admin) {

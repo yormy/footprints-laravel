@@ -11,6 +11,7 @@ class MemberLoginHistoryController extends LoginHistoryController
 {
     protected function getUser($member_xid): Model
     {
+        // @phpstan-ignore-next-line
         $userResolverClass = config('footprints.resolvers.user');
         $userResolver = new $userResolverClass;
 

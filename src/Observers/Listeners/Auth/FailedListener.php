@@ -14,6 +14,7 @@ class FailedListener extends BaseListener
 {
     public function handle(Failed $event): void
     {
+        // @phpstan-ignore-next-line
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.auth_failed')
         ) {

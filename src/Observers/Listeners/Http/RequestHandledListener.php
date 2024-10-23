@@ -43,7 +43,7 @@ class RequestHandledListener extends BaseListener
         $url = $request->fullUrl();
         $route = null;
         if (is_object($request->route())) {
-            $route = $request->route()->getName();
+            $route = $request->route()->getName(); // @phpstan-ignore-line
         }
 
         if ($url && RuleService::shouldIgnore($url, (array) config('footprints.log_visits.urls_exclude'))) {

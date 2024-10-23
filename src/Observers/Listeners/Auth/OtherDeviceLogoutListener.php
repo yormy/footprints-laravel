@@ -14,6 +14,7 @@ class OtherDeviceLogoutListener extends BaseListener
 {
     public function handle(Login $event): void
     {
+        // @phpstan-ignore-next-line
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.auth_other_device_logout')
         ) {

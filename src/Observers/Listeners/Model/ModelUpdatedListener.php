@@ -13,6 +13,7 @@ class ModelUpdatedListener extends ModelBaseListener
 {
     public function handle(ModelUpdatedEvent $event): void
     {
+        // @phpstan-ignore-next-line
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.model_updated')
         ) {

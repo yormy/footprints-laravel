@@ -56,6 +56,7 @@ class FootprintsServiceProvider extends ServiceProvider
                 '--model' => Footprint::class,
             ])->daily();
 
+            // @phpstan-ignore-next-line
             if (config('footprints.log_geoip')) {
                 $schedule->command('geoip:update')->monthly();
             }

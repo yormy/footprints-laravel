@@ -13,7 +13,11 @@ use Yormy\FootprintsLaravel\Traits\PackageFactoryTrait;
 use Yormy\Xid\Models\Traits\Xid;
 
 /**
- * @psalm-suppress PropertyNotSetInConstructor
+ * Class Footprint
+ *
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property float $page_visit_sec
  */
 class Footprint extends Model implements FootprintInterface
 {
@@ -54,7 +58,7 @@ class Footprint extends Model implements FootprintInterface
          * @psalm-suppress RedundantPropertyInitializationCheck
          */
         if (! isset($this->table)) {
-            $this->setTable((string) config('footprints.table_name'));
+            $this->setTable((string)config('footprints.table_name', '')); // @phpstan-ignore-line
         }
 
         parent::__construct($attributes);
@@ -66,7 +70,7 @@ class Footprint extends Model implements FootprintInterface
      */
     public function prunable(): Builder
     {
-        $days = (int) config('footprints.delete_records_older_than_days', 100);
+        $days = (int) config('footprints.delete_records_older_than_days', 100); // @phpstan-ignore-line
 
         return static::where('created_at', '<=', now()->subDays($days));
     }

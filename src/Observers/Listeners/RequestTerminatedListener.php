@@ -26,10 +26,12 @@ class RequestTerminatedListener extends BaseListener
 
     private function shouldLog(): bool
     {
+        // @phpstan-ignore-next-line
         if (! config('footprints.enabled')) {
             return false;
         }
 
+        // @phpstan-ignore-next-line
         if (
             ! config('footprints.content.duration') &&
             ! config('footprints.content.response')

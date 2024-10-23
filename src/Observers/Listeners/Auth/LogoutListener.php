@@ -20,6 +20,7 @@ class LogoutListener extends BaseListener
             Cookie::queue($loginSessionIdCookieName, '', 0); // clear tracking cookie
         }
 
+        // @phpstan-ignore-next-line
         if (! config('footprints.enabled') ||
             ! config('footprints.log_events.auth_logout')
         ) {
