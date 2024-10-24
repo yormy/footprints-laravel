@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Yormy\FootprintsLaravel\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Yormy\FootprintsLaravel\Models\Footprint;
+use Yormy\FootprintsLaravel\Models\Log;
 
-class FootprintFactory extends Factory
+class LogFactory extends Factory
 {
-    protected $model = Footprint::class;
+    protected $model = Log::class;
 
     public function definition()
     {

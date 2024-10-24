@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Failed;
-use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
-use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class FailedListener extends BaseListener
@@ -21,12 +19,13 @@ class FailedListener extends BaseListener
             return;
         }
 
-        $props = [
-            'log_type' => LogType::AUTH_FAILED,
-        ];
-
-        $requestDto = RequestDto::fromRequest($this->request);
-
-        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
+        $user = $event->user;
+        $this->logItemRepository->createLogEntry(
+            $user,
+            $this->request,
+            [
+                'log_type' => LogType::AUTH_FAILED,
+            ]
+        );
     }
 }

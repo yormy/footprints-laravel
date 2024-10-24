@@ -8,10 +8,10 @@ Anyway I developed this in my free time, I could have gone swimming, hiking, par
 ***I worked for free for you and your company, and make your software more secure... and that is fine.***
 
 That having said, if you had to employ someone or use one of your developers to create a firewall like this you would have to pay them and it would take them some time to develop.
-So your investment would be considerable to get a system like Footprints running.
+So your investment would be considerable to get a system like Promocodes running.
 
 Ask yourself, could you or your development staff develop this level of tested code and features within 4 hours of their time.
-If not, please support me by donating [100 Euro (or more)](https://helpforhealth.thrivecart.com/yormy-pro-support/) for my time and effort. If you are an agency developing software for others, please consider supporting me for every product that includes Footprints.
+If not, please support me by donating [100 Euro (or more)](https://helpforhealth.thrivecart.com/yormy-pro-support/) for my time and effort. If you are an agency developing software for others, please consider supporting me for every product that includes Promocodes.
 This will allow me to continue working on this project and support the people I learned from and make it even better for you. Lets keep the community alive.
 
 If you are a sole developer, without employing people or making money with your code, just use this package as you see fit, and 'donate' with your feedback

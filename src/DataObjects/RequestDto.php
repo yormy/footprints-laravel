@@ -10,33 +10,33 @@ use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class RequestDto
 {
-    private ?string $url = null;
+    private ?string $url;
 
-    private ?string $route = null;
+    private ?string $route;
 
-    private ?string $payload = null;
+    private ?string $payload;
 
-    private ?array $data = null;
+    private ?array $data;
 
-    private ?string $requestId = null;
+    private ?string $requestId;
 
-    private ?string $sessionId = null;
+    private ?string $sessionId;
 
-    private string|int|null $impersonatorId = null;
+    private string|int|null $impersonatorId;
 
-    private ?string $browserFingerprint = null;
+    private ?string $browserFingerprint;
 
-    private ?string $ipAddress = null;
+    private ?string $ipAddress;
 
-    private ?string $userAgent = null;
+    private ?string $userAgent;
 
-    private ?string $geoLocation = null;
+    private ?string $geoLocation;
 
-    private ?string $method = null;
+    private ?string $method;
 
-    private ?Authenticatable $user = null;
+    private ?Authenticatable $user;
 
-    private ?array $customCookies = null;
+    private ?array $customCookies;
 
     private function __construct()
     {
@@ -47,10 +47,7 @@ class RequestDto
     {
         $model = new self;
 
-        /** @var int $truncateSize */
-        $truncateSize = (int)config('footprints.max_characters', 200); //@phpstan-ignore-line
-
-        $model->url = BlacklistFilter::truncateField($request->fullUrl(), $truncateSize);
+        $model->url = $request->fullUrl();
 
         if (is_object($request->route())) {
             $model->route = $request->route()->getName(); // @phpstan-ignore-line
@@ -58,7 +55,7 @@ class RequestDto
 
         $model->ipAddress = $request->ip();
 
-        $model->userAgent = BlacklistFilter::truncateField($request->userAgent(), $truncateSize);
+        $model->userAgent = $request->userAgent();
 
         $model->data = $model->getData($request);
 
@@ -122,7 +119,6 @@ class RequestDto
     public function toArray(): array
     {
         $data['request_id'] = $this->requestId;
-
         $data['method'] = $this->method;
         $data['route'] = $this->route;
         $data['url'] = $this->url;
@@ -230,7 +226,7 @@ class RequestDto
 
     private function getGeoLocation(Request $request): ?string // @phpstan-ignore-line
     {
-        return (string) json_encode(['disabled']);
+        return (string)json_encode(['disabled']);
         //        $supportsTags = cache()->supportsTags();
         //        if (! $supportsTags) {
         //            throw new CacheTagSupportException;

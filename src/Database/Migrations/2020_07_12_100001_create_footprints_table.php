@@ -28,23 +28,27 @@ return new class extends Migration
             $table->bigInteger('model_id')->unsigned()->nullable();
             $table->string('model_type', 50)->nullable();
 
-            $table->string('route', 250)->nullable();
-            $table->string('url', 250)->nullable();
+            $table->string('route')->nullable();
+            $table->string('url')->nullable();
 
             $table->text('data')->nullable();
             $table->text('model_old')->nullable();
             $table->text('model_changes')->nullable();
 
             $table->text('ip_address')->nullable();
-            $table->string('user_agent', 250)->nullable();
+            $table->string('user_agent')->nullable();
             $table->string('browser_fingerprint', 50)->nullable();
             $table->json('location')->nullable();
 
-            $table->text('payload_base64')->nullable();
-            $table->text('response_base64')->nullable();
+            $table->text('payload')->nullable();
+            $table->text('response')->nullable();
+            $table->text('custom_cookies')->nullable();
+            $table->text('custom_data')->nullable();
 
+            $table->string('session_id')->index()->nullable();
             $table->string('request_id')->index()->nullable();
             $table->double('request_duration_sec')->nullable();
+            $table->double('page_visit_sec')->nullable();
 
             $table->timestamps();
         });

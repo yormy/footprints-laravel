@@ -1,8 +1,8 @@
 # Installation
 
-Footprints can be installed through composer
+Promocodes can be installed through composer
 ```bash
-composer require yormy/footprints-laravel
+composer require yormy/promocode-laravel
 ```
 
 # Preparing the database

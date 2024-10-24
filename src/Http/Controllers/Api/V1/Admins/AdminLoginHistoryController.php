@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Admins;
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Yormy\FootprintsLaravel\Http\Controllers\Api\V1\Base\LoginHistoryController;
 use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
