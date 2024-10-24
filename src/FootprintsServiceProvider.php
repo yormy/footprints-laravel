@@ -8,7 +8,6 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use Yormy\FootprintsLaravel\Console\Commands\InstallCommand;
 use Yormy\FootprintsLaravel\Models\Footprint;
-use Yormy\FootprintsLaravel\Models\Log;
 use Yormy\FootprintsLaravel\ServiceProviders\EventServiceProvider;
 use Yormy\FootprintsLaravel\ServiceProviders\RouteServiceProvider;
 

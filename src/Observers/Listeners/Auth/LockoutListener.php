@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Lockout;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
 use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;

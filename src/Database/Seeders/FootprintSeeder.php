@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Database\Seeders;
 
-use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
-use Mexion\BedrockUsersv2\Domain\User\Models\Member;
 use Yormy\FootprintsLaravel\Models\Footprint;
 
 class FootprintSeeder extends Seeder

@@ -7,7 +7,6 @@ namespace Yormy\FootprintsLaravel\Repositories;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yormy\FootprintsLaravel\Exceptions\CacheTagSupportException;
@@ -17,7 +16,7 @@ class FootprintItemRepository
 {
     private Footprint $model;
 
-    public function __construct(Footprint $model = null)
+    public function __construct(?Footprint $model = null)
     {
         if (! $model) {
             $this->model = new Footprint;
@@ -27,7 +26,7 @@ class FootprintItemRepository
     public function getAllLoginForUser(Authenticatable $user): Collection
     {
         /** @var Collection $results */
-        $results =  $this->queryForUser($user)
+        $results = $this->queryForUser($user)
             ->select([
                 'xid',
                 'log_type',
@@ -141,46 +140,46 @@ class FootprintItemRepository
      * @psalm-suppress MixedAssignment
      * @psalm-suppress MixedMethodCall
      */
-//    private function getRemoteDetails(Request $request): array
-//    {
-//        $data = [];
-//
-//        if (config('footprints.content.ip')) {
-//            $data['ip_address'] = $request->ip();
-//        }
-//
-//        if (config('footprints.content.user_agent')) {
-//            $data['user_agent'] = $request->userAgent();
-//        }
-//
-//        if (config('footprints.content.geoip')) {
-//            $supportsTags = cache()->supportsTags();
-//            if (! $supportsTags) {
-//                throw new CacheTagSupportException;
-//            }
-//
-//            $location = geoip()->getLocation($request->ip());
-//            $data['location'] = json_encode($location->toArray());
-//        }
-//
-//        return $data;
-//    }
+    //    private function getRemoteDetails(Request $request): array
+    //    {
+    //        $data = [];
+    //
+    //        if (config('footprints.content.ip')) {
+    //            $data['ip_address'] = $request->ip();
+    //        }
+    //
+    //        if (config('footprints.content.user_agent')) {
+    //            $data['user_agent'] = $request->userAgent();
+    //        }
+    //
+    //        if (config('footprints.content.geoip')) {
+    //            $supportsTags = cache()->supportsTags();
+    //            if (! $supportsTags) {
+    //                throw new CacheTagSupportException;
+    //            }
+    //
+    //            $location = geoip()->getLocation($request->ip());
+    //            $data['location'] = json_encode($location->toArray());
+    //        }
+    //
+    //        return $data;
+    //    }
 
     /**
      * @psalm-suppress NoInterfaceProperties
      */
-//    private function getUserData(?Authenticatable $user): array
-//    {
-//        $userFields = [];
-//        if ($user) {
-//            $userFields = [
-//                'user_id' => $user->id,
-//                'user_type' => $user::class,
-//            ];
-//        }
-//
-//        return $userFields;
-//    }
+    //    private function getUserData(?Authenticatable $user): array
+    //    {
+    //        $userFields = [];
+    //        if ($user) {
+    //            $userFields = [
+    //                'user_id' => $user->id,
+    //                'user_type' => $user::class,
+    //            ];
+    //        }
+    //
+    //        return $userFields;
+    //    }
 
     //    private static function cleanPayload(string $payload): string
     //    {

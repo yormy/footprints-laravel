@@ -47,8 +47,7 @@ class RequestTerminatedListener extends BaseListener
         /**
          * @psalm-suppress UndefinedConstant
          */
-        if (!defined('LARAVEL_START'))
-        {
+        if (! defined('LARAVEL_START')) {
             return 0;
         }
 

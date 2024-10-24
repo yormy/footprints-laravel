@@ -19,7 +19,6 @@ class OtherListener extends BaseListener
             return;
         }
 
-
         $requestDto = RequestDto::fromRequest($this->request);
 
         $props = [

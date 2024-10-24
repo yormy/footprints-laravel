@@ -48,7 +48,7 @@ class RequestDto
         $model = new self;
 
         /** @var int $maxCharacters */
-        $maxCharacters = (int)config('footprints.max_characters', 200); //@phpstan-ignore-line
+        $maxCharacters = (int) config('footprints.max_characters', 200); //@phpstan-ignore-line
         $model->url = BlacklistFilter::truncateField($request->fullUrl(), $maxCharacters);
 
         if (is_object($request->route())) {
@@ -228,7 +228,7 @@ class RequestDto
 
     private function getGeoLocation(Request $request): ?string // @phpstan-ignore-line
     {
-        return (string)json_encode(['disabled']);
+        return (string) json_encode(['disabled']);
         //        $supportsTags = cache()->supportsTags();
         //        if (! $supportsTags) {
         //            throw new CacheTagSupportException;
