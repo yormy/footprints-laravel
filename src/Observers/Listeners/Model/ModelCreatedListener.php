@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Observers\Listeners\Model;
 
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 use Yormy\FootprintsLaravel\Observers\Events\ModelCreatedEvent;
-use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
-use Yormy\FootprintsLaravel\Services\BlacklistFilter;
 
-class ModelCreatedListener extends BaseListener
+class ModelCreatedListener extends ModelBaseListener
 {
     public function handle(ModelCreatedEvent $event): void
     {
@@ -19,34 +19,13 @@ class ModelCreatedListener extends BaseListener
             return;
         }
 
-        $model = $event->getModel();
-        $tableName = $model->getTable();
-
         $request = $event->getRequest();
-        $data = [];
-        $data['request_id'] = (string) $request->get('request_id');
+        $requestDto = RequestDto::fromRequest($request);
 
-        $valuesOld = json_encode([]);
-        if (config('footprints.model.content.values_old')) {
-            /** @var array $loggableFields */
-            $loggableFields = $model->getFootprintsFields();
-            $valuesOld = BlacklistFilter::filter($model->toArray(), $loggableFields);
-            $valuesOld = json_encode($valuesOld);
-        }
+        $props = $this->getData($event);
+        $props['log_type'] = LogType::MODEL_CREATED;
 
-        $fields = [
-            'table_name' => $tableName,
-            'model_type' => $model::class,
-            'model_id' => $model->id,
-            'log_type' => LogType::MODEL_CREATED,
-            'model_old' => $valuesOld,
-            'data' => json_encode($data),
-        ];
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
 
-        $this->logItemRepository->createLogEntry(
-            $event->getUser(),
-            $event->getRequest(),
-            $fields
-        );
     }
 }

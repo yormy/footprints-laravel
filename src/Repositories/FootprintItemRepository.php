@@ -109,10 +109,12 @@ class FootprintItemRepository
     private function queryForUser(Authenticatable $user): Builder
     {
         $userType = '';
+        /** @phpstan-ignore-next-line  */
         if ($user instanceof Member) {
             $userType = '%Member';
         }
 
+        /** @phpstan-ignore-next-line  */
         if ($user instanceof Admin) {
             $userType = '%Admin';
         }

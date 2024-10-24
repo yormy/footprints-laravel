@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Yormy\FootprintsLaravel\Observers\Listeners;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
-use Yormy\FootprintsLaravel\Repositories\LogItemRepository;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 
-class OtherListener
+class OtherListener extends BaseListener
 {
-    public function __construct(protected LogItemRepository $logItemRepository, protected Request $request)
-    {
-    }
-
     /**
      * @psalm-suppress MissingParamType
      */
@@ -24,16 +19,14 @@ class OtherListener
             return;
         }
 
-        $this->logItemRepository->createLogEntry(
-            Auth::user(),
-            $this->request,
-            [
-                'route' => '',
-                'url' => substr($this->request->fullUrl(), 0, 150),
-                'log_type' => $this->getLogType($event),
-                'data' => json_encode($event),
-            ]
-        );
+
+        $requestDto = RequestDto::fromRequest($this->request);
+
+        $props = [
+            'log_type' => $this->getLogType($event),
+        ];
+
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 
     /**

@@ -6,7 +6,9 @@ namespace Yormy\FootprintsLaravel\Observers\Listeners\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Yormy\FootprintsLaravel\DataObjects\RequestDto;
 use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Jobs\FootprintsLogJob;
 use Yormy\FootprintsLaravel\Observers\Listeners\BaseListener;
 
 class LockoutListener extends BaseListener
@@ -19,17 +21,12 @@ class LockoutListener extends BaseListener
             return;
         }
 
-        $user = $this->findUser();
-        $this->logItemRepository->createLogEntry(
-            $user,
-            $this->request,
-            ['log_type' => LogType::AUTH_LOCKEDOUT]
-        );
-    }
+        $requestDto = RequestDto::fromRequest($this->request);
 
-    private function findUser(): ?Authenticatable
-    {
-        // how to locate the locked out user ?
-        return null;
+        $props = [
+            'log_type' => LogType::AUTH_LOCKEDOUT,
+        ];
+
+        FootprintsLogJob::dispatch($requestDto->toArray(), $props);
     }
 }
