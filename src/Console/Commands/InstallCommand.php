@@ -32,7 +32,7 @@ class InstallCommand extends Command
      */
     private function runMigrations(): void
     {
-        $logModelClass = (string) config('footprints.log_model');
+        $logModelClass = (string) config('footprints.models.footprint');
 
         $table = (new $logModelClass)->getTable();
 

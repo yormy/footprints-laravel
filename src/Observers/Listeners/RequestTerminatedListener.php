@@ -47,6 +47,11 @@ class RequestTerminatedListener extends BaseListener
         /**
          * @psalm-suppress UndefinedConstant
          */
+        if (!defined('LARAVEL_START'))
+        {
+            return 0;
+        }
+
         $requestStart = (float) LARAVEL_START;
 
         $duration = 0;

@@ -53,6 +53,9 @@ class BlacklistFilter
         // prevent long inputs
         foreach ($data as $key => $value) {
 
+            if (is_array($value)) {
+                return self::truncateData($value, $size);
+            }
             $data[$key] = self::truncateField($value, $size);
         }
 

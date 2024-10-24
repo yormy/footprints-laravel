@@ -126,7 +126,7 @@ class FootprintItemRepository
 
     private function getLogItemModel(): Footprint
     {
-        $logModelClass = config('footprints.log_model');
+        $logModelClass = config('footprints.models.footprint');
 
         /** @var Footprint $model */
         $model = new $logModelClass;

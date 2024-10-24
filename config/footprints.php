@@ -1,6 +1,8 @@
 <?php
 
 use Yormy\FootprintsLaravel\Enums\LogType;
+use Yormy\FootprintsLaravel\Tests\Stubs\Models\Admin;
+use Yormy\FootprintsLaravel\Tests\Stubs\Models\Member;
 
 return [
     /*
@@ -14,12 +16,21 @@ return [
      */
     'table_name' => 'footprints',
 
+    /**
+     * Truncate size
+     */
+    'max_characters' => 200,
+
     /*
      * This model will be used to log footprints.
      * It should implement the Yormy\FootprintsLaravel\Interfaces\FootprintInterface interface
      * and extend Illuminate\Database\Eloquent\Model.
      */
-    'log_model' => Yormy\FootprintsLaravel\Models\Footprint::class,
+    'models' => [
+        'member' => Member::class,
+        'admin' => Admin::class,
+        'footprint' => Yormy\FootprintsLaravel\Models\Footprint::class,
+    ],
 
     'log_events' => [
         'model_created' => true,

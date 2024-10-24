@@ -10,33 +10,33 @@ use Yormy\FootprintsLaravel\Services\Resolvers\UserResolver;
 
 class RequestDto
 {
-    private ?string $url;
+    private ?string $url = null;
 
-    private ?string $route;
+    private ?string $route = null;
 
-    private ?string $payload;
+    private ?string $payload = null;
 
-    private ?array $data;
+    private ?array $data = null;
 
-    private ?string $requestId;
+    private ?string $requestId = null;
 
-    private ?string $sessionId;
+    private ?string $sessionId = null;
 
-    private string|int|null $impersonatorId;
+    private string|int|null $impersonatorId = null;
 
-    private ?string $browserFingerprint;
+    private ?string $browserFingerprint = null;
 
-    private ?string $ipAddress;
+    private ?string $ipAddress = null;
 
-    private ?string $userAgent;
+    private ?string $userAgent = null;
 
-    private ?string $geoLocation;
+    private ?string $geoLocation = null;
 
-    private ?string $method;
+    private ?string $method = null;
 
-    private ?Authenticatable $user;
+    private ?Authenticatable $user = null;
 
-    private ?array $customCookies;
+    private ?array $customCookies = null;
 
     private function __construct()
     {
@@ -47,15 +47,17 @@ class RequestDto
     {
         $model = new self;
 
-        $model->url = $request->fullUrl();
+        /** @var int $maxCharacters */
+        $maxCharacters = (int)config('footprints.max_characters', 200); //@phpstan-ignore-line
+        $model->url = BlacklistFilter::truncateField($request->fullUrl(), $maxCharacters);
 
         if (is_object($request->route())) {
-            $model->route = $request->route()->getName(); // @phpstan-ignore-line
+            $model->route = BlacklistFilter::truncateField($request->route()->getName(), $maxCharacters); // @phpstan-ignore-line
         }
 
         $model->ipAddress = $request->ip();
 
-        $model->userAgent = $request->userAgent();
+        $model->userAgent = BlacklistFilter::truncateField($request->userAgent(), $maxCharacters);
 
         $model->data = $model->getData($request);
 
