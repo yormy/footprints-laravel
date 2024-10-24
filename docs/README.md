@@ -20,6 +20,7 @@ You can install the package via composer:
 composer require yormy/footprints-laravel
 ```
 
+
 ### Model changes tracking
 add to your model 
 ```use Footprints;```
