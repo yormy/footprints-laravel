@@ -40,11 +40,15 @@ return new class extends Migration
             $table->string('browser_fingerprint', 50)->nullable();
             $table->json('location')->nullable();
 
-            $table->text('payload_base64')->nullable();
-            $table->text('response_base64')->nullable();
+            $table->text('payload')->nullable();
+            $table->text('response')->nullable();
+            $table->text('custom_cookies')->nullable();
+            $table->text('custom_data')->nullable();
 
+            $table->string('session_id')->index()->nullable();
             $table->string('request_id')->index()->nullable();
             $table->double('request_duration_sec')->nullable();
+            $table->double('page_visit_sec')->nullable();
 
             $table->timestamps();
         });

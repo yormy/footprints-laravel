@@ -47,4 +47,24 @@ class BlacklistFilter
 
         return $filtered;
     }
+
+    public static function truncateData(array $data, int $size): array
+    {
+        // prevent long inputs
+        foreach ($data as $key => $value) {
+
+            $data[$key] = self::truncateField($value, $size);
+        }
+
+        return $data;
+    }
+
+    public static function truncateField(?string $value, int $size): string
+    {
+        if (! $value) {
+            return '';
+        }
+
+        return substr($value, 0, $size);
+    }
 }
