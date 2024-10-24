@@ -4,10 +4,10 @@
 I love feedback from you !
 Your feedback in how you use promocode, features you need, additions or changes in code are highly appreciated.
 Both positive and negative feedback is welcome. I am a human being, so yes I also like to hear when you enjoy my work.
-* If you **LIKE** Promocodes, please Star it on github and leave a comment on why and how you like it, and tell your friends about Promocodes, write an article about how you used Promocodes or whatever to get the word out
+* If you **LIKE** Footprints, please Star it on github and leave a comment on why and how you like it, and tell your friends about Footprints, write an article about how you used Footprints or whatever to get the word out
 * If you do **NOT LIKE** it, please also let me know and why and what changes you would like to see.
 
-Only with your feedback Promocodes can grow and help more sites to be secure.
+Only with your feedback Footprints can grow and help more sites to be secure.
 
 Don't be a stranger, reach out and share your thoughts with me on github
 

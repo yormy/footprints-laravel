@@ -22,7 +22,7 @@ export default defineConfig({
       {
         text: 'Introduction',
         items: [
-          { text: 'What is Promocode', link: '/v1/introduction/what-is-footprints' },
+          { text: 'What is Footprints', link: '/v1/introduction/what-is-footprints' },
           { text: 'Definitions', link: '/v1/definitions.md' },
           { text: 'Need Support?', link: '/general/support/support-me' },
         ]
@@ -30,10 +30,13 @@ export default defineConfig({
       {
         text: 'Getting Started',
         items: [
-          { text: 'Installation', link: '/v1/guide/installation' },
-          { text: 'Basic Setup', link: '/v1/guide/basic/setup' },
-          { text: 'Basic Configuration', link: '/v1/guide/basic/configuration' },
-          { text: 'Frontend', link: '/v1//guide/basic/frontend' },
+            { text: 'Cleanup', link: '/v1/guide/cleanup' },
+            { text: 'Encryption', link: '/v1/guide/encryption' },
+            { text: 'Exceptions', link: '/v1/guide/exceptions' },
+            { text: 'Model Changes', link: '/v1/guide/model-changes' },
+          // { text: 'Basic Setup', link: '/v1/guide/basic/setup' },
+          // { text: 'Basic Configuration', link: '/v1/guide/basic/configuration' },
+          // { text: 'Frontend', link: '/v1//guide/basic/frontend' },
         ]
       },
 
