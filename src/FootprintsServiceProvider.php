@@ -31,9 +31,6 @@ class FootprintsServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerTranslations();
-
-        $this->app->register(EventServiceProvider::class);
-        $this->app->register(RouteServiceProvider::class);
     }
 
     /**
@@ -42,6 +39,9 @@ class FootprintsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(static::CONFIG_FILE, 'footprints');
+        $this->app->register(EventServiceProvider::class);
+        $this->app->register(RouteServiceProvider::class);
+
     }
 
     public function registerTranslations(): void

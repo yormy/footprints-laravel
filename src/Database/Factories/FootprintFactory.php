@@ -6,7 +6,6 @@ namespace Yormy\FootprintsLaravel\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Yormy\FootprintsLaravel\Models\Footprint;
-use Yormy\FootprintsLaravel\Models\Log;
 
 class FootprintFactory extends Factory
 {
@@ -29,8 +28,8 @@ class FootprintFactory extends Factory
             'user_agent' => $this->faker->userAgent,
             'browser_fingerprint' => '',
             'location' => $this->getLocation(),
-            'payload_base64' => '',
-            'response_base64' => '',
+            'payload' => '',
+            'response' => '',
             'request_id' => 'b466d31dba3c7654fe54c32ee0a69d70a3565953',
             'request_duration_sec' => 1,
             'created_at' => $this->faker->dateTime(),

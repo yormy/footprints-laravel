@@ -2,15 +2,15 @@
 
 namespace Yormy\FootprintsLaravel\Traits;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
-use Yormy\FootprintsLaravel\Models\Footprint;
 
 trait PackageFactoryTrait
 {
     use HasFactory;
 
-    protected static function newFactory(): Footprint
+    protected static function newFactory(): Factory
     {
         $package = Str::before(get_called_class(), 'Models\\');
         $modelName = Str::after(get_called_class(), 'Models\\');
